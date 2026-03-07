@@ -78,6 +78,7 @@ controlflow {
 <ref refid="0592c78a-197e-11f1-a43b-d312a7e902d0"/>
 <ref refid="7da2558d-197e-11f1-8e24-d312a7e902d0"/>
 <ref refid="6fefee12-1981-11f1-8744-fd96d05ff320"/>
+<ref refid="71d2c558-1a68-11f1-90bd-30560f618a5a"/>
 </reflist>
 </ownedType>
 <packagedElement>
@@ -133,6 +134,7 @@ controlflow {
 <ref refid="7da2558d-197e-11f1-8e24-d312a7e902d0"/>
 <ref refid="6fefee12-1981-11f1-8744-fd96d05ff320"/>
 <ref refid="ac1f6503-197e-11f1-801d-d312a7e902d0"/>
+<ref refid="71d2c558-1a68-11f1-90bd-30560f618a5a"/>
 </reflist>
 </packagedElement>
 </UML:Package>
@@ -600,6 +602,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="7a22c2bb-197e-11f1-809b-d312a7e902d0"/>
 <ref refid="a7014a1d-197e-11f1-9f5d-d312a7e902d0"/>
 <ref refid="6bd53144-1981-11f1-9067-fd96d05ff320"/>
+<ref refid="702c2122-1a68-11f1-90bd-30560f618a5a"/>
 </reflist>
 </ownedPresentation>
 </UML:ClassDiagram>
@@ -1157,6 +1160,11 @@ existing classes or even new classes with specific responsibilities.</val>
 <name>
 <val>MapComponent</val>
 </name>
+<ownedAttribute>
+<reflist>
+<ref refid="71d3302e-1a68-11f1-90bd-30560f618a5a"/>
+</reflist>
+</ownedAttribute>
 <owningPackage>
 <ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
 </owningPackage>
@@ -2693,7 +2701,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 1175.6590261802226, 405.5365510390523)</val>
 </matrix>
 <points>
-<val>[(-143.57694915385537, 28.86710314391388), (-58.369902645066304, 28.867103143913937)]</val>
+<val>[(-143.57694915385537, 28.86710314391388), (-58.369902645066304, 28.86710314391388)]</val>
 </points>
 <head-connection>
 <ref refid="aa0dcce9-196e-11f1-b267-d312a7e902d0"/>
@@ -4562,5 +4570,86 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>1</val>
 </value>
 </UML:LiteralUnlimitedNatural>
+<UML:AssociationItem id="702c2122-1a68-11f1-90bd-30560f618a5a">
+<diagram>
+<ref refid="c14fba62-1966-11f1-b72d-2de3767222e3"/>
+</diagram>
+<head_subject>
+<ref refid="71d32bba-1a68-11f1-90bd-30560f618a5a"/>
+</head_subject>
+<horizontal>
+<val>False</val>
+</horizontal>
+<orthogonal>
+<val>False</val>
+</orthogonal>
+<subject>
+<ref refid="71d2c558-1a68-11f1-90bd-30560f618a5a"/>
+</subject>
+<tail_subject>
+<ref refid="71d3302e-1a68-11f1-90bd-30560f618a5a"/>
+</tail_subject>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 1140.482177734375, 466.5180969238281)</val>
+</matrix>
+<points>
+<val>[(0.0, -0.6144427408618185), (-28.338134765625, 25.664492594219382), (-278.3458251953125, 25.664492594219382), (-498.47796630859375, -122.75247192382812), (-752.4974003148129, -122.75247192382824)]</val>
+</points>
+<head-connection>
+<ref refid="e37a6dac-196e-11f1-b3fc-d312a7e902d0"/>
+</head-connection>
+<tail-connection>
+<ref refid="d3ce2f82-1966-11f1-8a3b-2de3767222e3"/>
+</tail-connection>
+</UML:AssociationItem>
+<UML:Association id="71d2c558-1a68-11f1-90bd-30560f618a5a">
+<memberEnd>
+<reflist>
+<ref refid="71d32bba-1a68-11f1-90bd-30560f618a5a"/>
+<ref refid="71d3302e-1a68-11f1-90bd-30560f618a5a"/>
+</reflist>
+</memberEnd>
+<ownedEnd>
+<reflist>
+<ref refid="71d32bba-1a68-11f1-90bd-30560f618a5a"/>
+</reflist>
+</ownedEnd>
+<owningPackage>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</owningPackage>
+<package>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="702c2122-1a68-11f1-90bd-30560f618a5a"/>
+</reflist>
+</presentation>
+</UML:Association>
+<UML:Property id="71d32bba-1a68-11f1-90bd-30560f618a5a">
+<association>
+<ref refid="71d2c558-1a68-11f1-90bd-30560f618a5a"/>
+</association>
+<owningAssociation>
+<ref refid="71d2c558-1a68-11f1-90bd-30560f618a5a"/>
+</owningAssociation>
+<type>
+<ref refid="e3794430-196e-11f1-9a14-d312a7e902d0"/>
+</type>
+</UML:Property>
+<UML:Property id="71d3302e-1a68-11f1-90bd-30560f618a5a">
+<aggregation>
+<val>shared</val>
+</aggregation>
+<association>
+<ref refid="71d2c558-1a68-11f1-90bd-30560f618a5a"/>
+</association>
+<structuredClassifier>
+<ref refid="e3794430-196e-11f1-9a14-d312a7e902d0"/>
+</structuredClassifier>
+<type>
+<ref refid="d3cd1030-1966-11f1-9993-2de3767222e3"/>
+</type>
+</UML:Property>
 </model>
 </gaphor>
