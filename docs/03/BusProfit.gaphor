@@ -1258,7 +1258,7 @@
 <val>(1.0, 0.0, 0.0, 1.0, 221.39352552872595, 645.4550222198226)</val>
 </matrix>
 <points>
-<val>[(-129.39352552872592, -235.54886099968678), (-15.100588479248472, -235.54886099968678)]</val>
+<val>[(-129.39352552872592, -227.72752098702563), (-15.100588479248358, -227.72752098702563)]</val>
 </points>
 <head-connection>
 <ref refid="2fa98e0d-1ade-11f1-8cf3-c8cb9eafe21c"/>
@@ -1269,7 +1269,7 @@
 </UML:MessageItem>
 <UML:Message id="31bd4242-1ade-11f1-af2a-c8cb9eafe21c">
 <name>
-<val>pay(p)</val>
+<val>pay(p, amount)</val>
 </name>
 <presentation>
 <reflist>
@@ -1309,10 +1309,10 @@
 </UML:MessageOccurrenceSpecification>
 <UML:ExecutionSpecificationItem id="c57993a4-1b18-11f1-8f14-c8cb9eafe21c">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 46.39579547789358, 368.90616122013574)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 47.96006348042584, 376.72750123279695)</val>
 </matrix>
 <points>
-<val>[(3.6042045221064427, 15.216405262622516), (3.6042045221064427, 0.0)]</val>
+<val>[(2.0399365195741552, 15.216405262622516), (2.0399365195741552, 0.0)]</val>
 </points>
 <head-connection>
 <ref refid="015da89f-1ade-11f1-9d66-c8cb9eafe21c"/>

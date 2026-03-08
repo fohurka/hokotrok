@@ -611,7 +611,7 @@
 </UML:ExecutionOccurrenceSpecification>
 <UML:Message id="5d48823b-1adb-11f1-9dcd-c8cb9eafe21c">
 <name>
-<val>pay(p, snowAmount)</val>
+<val>pay(p, amount)</val>
 </name>
 <presentation>
 <reflist>

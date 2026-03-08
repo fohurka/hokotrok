@@ -321,7 +321,7 @@
 </UML:MessageItem>
 <UML:Message id="dc9f170a-1ad4-11f1-baf4-c8cb9eafe21c">
 <name>
-<val>buy(p, ID)</val>
+<val>buySnowplow(p)</val>
 </name>
 <presentation>
 <reflist>

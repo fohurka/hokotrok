@@ -106,7 +106,7 @@
 </reflist>
 </lifeline>
 <name>
-<val>Snowplow Purchase</val>
+<val>Equipment Purchase</val>
 </name>
 <owningPackage>
 <ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
@@ -176,7 +176,7 @@
 </UML:ExecutionOccurrenceSpecification>
 <UML:Message id="db61a57d-1ad6-11f1-b103-c8cb9eafe21c">
 <name>
-<val>buy(p, ID)</val>
+<val>buyEquipment(p, ID)</val>
 </name>
 <presentation>
 <reflist>
