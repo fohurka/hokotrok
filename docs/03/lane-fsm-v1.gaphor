@@ -511,6 +511,12 @@ existing classes or even new classes with specific responsibilities.</val>
 <diagram>
 <ref refid="457f0f5b-1a12-11f1-86dd-202b2093f90d"/>
 </diagram>
+<horizontal>
+<val>False</val>
+</horizontal>
+<orthogonal>
+<val>False</val>
+</orthogonal>
 <subject>
 <ref refid="43c98b89-1a13-11f1-9ff4-202b2093f90d"/>
 </subject>
@@ -1841,7 +1847,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="8b9317d4-1a13-11f1-8f9b-202b2093f90d">
 <name>
-<val>AddSnowLevel</val>
+<val>addSnow(n)</val>
 </name>
 <trigger_transition>
 <ref refid="ce573488-1a12-11f1-a65c-202b2093f90d"/>
@@ -1898,7 +1904,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="8dc31d3a-1a13-11f1-ad93-202b2093f90d">
 <name>
-<val>AddIceLevel</val>
+<val>addIce(n)</val>
 </name>
 <trigger_transition>
 <ref refid="43c98b89-1a13-11f1-9ff4-202b2093f90d"/>
@@ -1938,6 +1944,9 @@ existing classes or even new classes with specific responsibilities.</val>
 <guard>
 <ref refid="25d22c91-1a20-11f1-988b-202b2093f90d"/>
 </guard>
+<name>
+<val></val>
+</name>
 <presentation>
 <reflist>
 <ref refid="24ec131f-1a20-11f1-80ee-202b2093f90d"/>
@@ -1955,7 +1964,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="4d5a0ed2-1a20-11f1-ac1c-202b2093f90d">
 <name>
-<val>RemoveSnowLevel</val>
+<val>removeSnow(n)</val>
 </name>
 <trigger_transition>
 <ref refid="25cf289e-1a20-11f1-849e-202b2093f90d"/>
@@ -2121,8 +2130,8 @@ existing classes or even new classes with specific responsibilities.</val>
 </container>
 <incoming>
 <reflist>
-<ref refid="f7197aae-1a17-11f1-8b43-202b2093f90d"/>
 <ref refid="25cf289e-1a20-11f1-849e-202b2093f90d"/>
+<ref refid="f7197aae-1a17-11f1-8b43-202b2093f90d"/>
 </reflist>
 </incoming>
 <name>
@@ -2190,7 +2199,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="f96115f2-1a17-11f1-beb5-202b2093f90d">
 <name>
-<val>RemoveIceLevel</val>
+<val>removeIce(n)</val>
 </name>
 <trigger_transition>
 <ref refid="f7197aae-1a17-11f1-8b43-202b2093f90d"/>
@@ -2506,7 +2515,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="2add6144-1a24-11f1-b557-202b2093f90d">
 <name>
-<val>Salt</val>
+<val>salt()</val>
 </name>
 <trigger_transition>
 <ref refid="f2a5b824-1a23-11f1-9e34-202b2093f90d"/>
@@ -2671,7 +2680,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:LiteralString>
 <UML:Behavior id="84ecd176-1a25-11f1-8a4e-202b2093f90d">
 <name>
-<val>Passed</val>
+<val>update(v)</val>
 </name>
 <trigger_transition>
 <ref refid="76416b91-1a25-11f1-bdda-202b2093f90d"/>
@@ -2742,7 +2751,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="76416b91-1a25-11f1-bdda-202b2093f90d"/>
 </action_transition>
 <name>
-<val>AddIceLevel</val>
+<val>addIce(n)</val>
 </name>
 </UML:Behavior>
 <UML:LiteralString id="8df7263b-1a25-11f1-9feb-202b2093f90d">
@@ -2894,7 +2903,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>(1.0, 0.0, 0.0, 1.0, -5.296240326723023, 363.864067936663)</val>
 </matrix>
 <points>
-<val>[(1.1888989028881838, 1.1368683772161603e-13), (242.73782550580597, 49.44659408451594), (1.1888989028881838, 45.01965473140331)]</val>
+<val>[(1.1888989028881838, 0.0), (242.73782550580597, 49.44659408451594), (1.1888989028881838, 45.01965473140331)]</val>
 </points>
 <head-connection>
 <ref refid="e5bd6235-1a23-11f1-8bf1-202b2093f90d"/>
@@ -2935,7 +2944,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Constraint>
 <UML:Behavior id="5f502293-1a27-11f1-8917-202b2093f90d">
 <name>
-<val>Tick</val>
+<val>tick()</val>
 </name>
 <trigger_transition>
 <ref refid="5d087fd9-1a27-11f1-9f7d-202b2093f90d"/>
@@ -2946,7 +2955,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="5d087fd9-1a27-11f1-9f7d-202b2093f90d"/>
 </action_transition>
 <name>
-<val>RemoveSnowLevel, RemoveIceLevel</val>
+<val>removeSnow(n), removeIce(n)</val>
 </name>
 </UML:Behavior>
 <UML:TransitionItem id="6a8c4ef6-1a27-11f1-af92-202b2093f90d">
@@ -3010,7 +3019,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Constraint>
 <UML:Behavior id="7116aec3-1a27-11f1-95a0-202b2093f90d">
 <name>
-<val>Tick</val>
+<val>tick()</val>
 </name>
 <trigger_transition>
 <ref refid="6f0a473a-1a27-11f1-b6a0-202b2093f90d"/>
@@ -3021,7 +3030,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="6f0a473a-1a27-11f1-b6a0-202b2093f90d"/>
 </action_transition>
 <name>
-<val>AddSnowLevel</val>
+<val>addSnow(n)</val>
 </name>
 </UML:Behavior>
 <UML:State id="ca2413ea-1a27-11f1-8d33-202b2093f90d">
@@ -3221,7 +3230,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Constraint>
 <UML:Behavior id="0598ed8f-1a28-11f1-bd58-202b2093f90d">
 <name>
-<val>Crash</val>
+<val>crashHappens()</val>
 </name>
 <trigger_transition>
 <ref refid="e2891271-1a27-11f1-b124-202b2093f90d"/>
@@ -3229,7 +3238,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Behavior>
 <UML:Behavior id="0ac5fe4e-1a28-11f1-9fd9-202b2093f90d">
 <name>
-<val>Cleared</val>
+<val>clear(p,e)</val>
 </name>
 <trigger_transition>
 <ref refid="fcf3f7d8-1a27-11f1-af0e-202b2093f90d"/>

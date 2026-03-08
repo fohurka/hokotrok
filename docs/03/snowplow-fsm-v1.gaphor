@@ -1694,14 +1694,13 @@ existing classes or even new classes with specific responsibilities.</val>
 </name>
 <ownedPresentation>
 <reflist>
-<ref refid="43a07cba-1a2f-11f1-8398-202b2093f90d"/>
 <ref refid="41aed90a-1a2f-11f1-8e39-202b2093f90d"/>
+<ref refid="43a07cba-1a2f-11f1-8398-202b2093f90d"/>
 <ref refid="f5e49fb0-1a2f-11f1-9e97-202b2093f90d"/>
 <ref refid="5bb795ed-1a2f-11f1-88f7-202b2093f90d"/>
 <ref refid="5daf910e-1a2f-11f1-8a54-202b2093f90d"/>
 <ref refid="f8871411-1a2f-11f1-99b1-202b2093f90d"/>
 <ref refid="fb12fdef-1a2f-11f1-9fdc-202b2093f90d"/>
-<ref refid="1d1031b7-1a31-11f1-9037-202b2093f90d"/>
 </reflist>
 </ownedPresentation>
 </UML:StateMachineDiagram>
@@ -1779,7 +1778,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <incoming>
 <reflist>
 <ref refid="5c83a756-1a2f-11f1-9123-202b2093f90d"/>
-<ref refid="1f8a0160-1a31-11f1-b629-202b2093f90d"/>
 </reflist>
 </incoming>
 <name>
@@ -1788,7 +1786,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <outgoing>
 <reflist>
 <ref refid="5e5df11b-1a2f-11f1-b1b3-202b2093f90d"/>
-<ref refid="1f8a0160-1a31-11f1-b629-202b2093f90d"/>
 </reflist>
 </outgoing>
 <presentation>
@@ -1923,7 +1920,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Constraint id="5e6066b6-1a2f-11f1-9bc8-202b2093f90d">
 <specification>
-<ref refid="48bf3d9f-1a31-11f1-8bcc-202b2093f90d"/>
+<ref refid="8ad3a2aa-1b37-11f1-a9cf-202b2093f90d"/>
 </specification>
 <transition>
 <ref refid="5e5df11b-1a2f-11f1-b1b3-202b2093f90d"/>
@@ -1931,7 +1928,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Constraint>
 <UML:Behavior id="5fbcf3bc-1a2f-11f1-b3e2-202b2093f90d">
 <name>
-<val>ChooseDirection</val>
+<val>setLocation(l)</val>
 </name>
 <trigger_transition>
 <ref refid="5c83a756-1a2f-11f1-9123-202b2093f90d"/>
@@ -1939,7 +1936,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Behavior>
 <UML:Behavior id="62d8ab80-1a2f-11f1-8648-202b2093f90d">
 <name>
-<val>Tick</val>
+<val>setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="5e5df11b-1a2f-11f1-b1b3-202b2093f90d"/>
@@ -2041,7 +2038,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Constraint id="f9256494-1a2f-11f1-9268-202b2093f90d">
 <specification>
-<ref refid="94aeafcb-1a30-11f1-bb0d-202b2093f90d"/>
+<ref refid="b06e2adb-1b37-11f1-8f8e-202b2093f90d"/>
 </specification>
 <transition>
 <ref refid="f922c08e-1a2f-11f1-8250-202b2093f90d"/>
@@ -2105,7 +2102,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Constraint>
 <UML:Behavior id="fe59094e-1a2f-11f1-8af5-202b2093f90d">
 <name>
-<val>GoToWarehouse</val>
+<val>goToWarehouse()</val>
 </name>
 <trigger_transition>
 <ref refid="f922c08e-1a2f-11f1-8250-202b2093f90d"/>
@@ -2113,7 +2110,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Behavior>
 <UML:Behavior id="15d71a6e-1a30-11f1-93e1-202b2093f90d">
 <name>
-<val>LeaveWarehouse</val>
+<val>leaveWarehouse()</val>
 </name>
 <trigger_transition>
 <ref refid="fbf96b2b-1a2f-11f1-bfe9-202b2093f90d"/>
@@ -2465,94 +2462,16 @@ existing classes or even new classes with specific responsibilities.</val>
 </value>
 </UML:LiteralString>
 <UML:LiteralString id="94aeafcb-1a30-11f1-bb0d-202b2093f90d">
-<owningConstraint>
-<ref refid="f9256494-1a2f-11f1-9268-202b2093f90d"/>
-</owningConstraint>
 <value>
 <val>currentJunction = warehouseJunction</val>
 </value>
 </UML:LiteralString>
-<UML:TransitionItem id="1d1031b7-1a31-11f1-9037-202b2093f90d">
-<diagram>
-<ref refid="dc5ea39a-1a2e-11f1-9cd7-202b2093f90d"/>
-</diagram>
-<horizontal>
-<val>False</val>
-</horizontal>
-<orthogonal>
-<val>False</val>
-</orthogonal>
-<subject>
-<ref refid="1f8a0160-1a31-11f1-b629-202b2093f90d"/>
-</subject>
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 238.9651193095371, 192.08989802116133)</val>
-</matrix>
-<points>
-<val>[(-1.0525920360630607, 0.0), (174.16843111809294, 28.36812733185218), (-1.0525920360630607, 28.36812733185218)]</val>
-</points>
-<head-connection>
-<ref refid="43a07cba-1a2f-11f1-8398-202b2093f90d"/>
-</head-connection>
-<tail-connection>
-<ref refid="43a07cba-1a2f-11f1-8398-202b2093f90d"/>
-</tail-connection>
-</UML:TransitionItem>
-<UML:Transition id="1f8a0160-1a31-11f1-b629-202b2093f90d">
-<container>
-<ref refid="1e10d9ec-1a2f-11f1-836d-202b2093f90d"/>
-</container>
-<guard>
-<ref refid="1f8c965b-1a31-11f1-8798-202b2093f90d"/>
-</guard>
-<name>
-<val></val>
-</name>
-<presentation>
-<reflist>
-<ref refid="1d1031b7-1a31-11f1-9037-202b2093f90d"/>
-</reflist>
-</presentation>
-<source>
-<ref refid="43a03f21-1a2f-11f1-a8c5-202b2093f90d"/>
-</source>
-<target>
-<ref refid="43a03f21-1a2f-11f1-a8c5-202b2093f90d"/>
-</target>
-<trigger>
-<ref refid="3716fc4e-1a31-11f1-aa5b-202b2093f90d"/>
-</trigger>
-</UML:Transition>
-<UML:Constraint id="1f8c965b-1a31-11f1-8798-202b2093f90d">
-<specification>
-<ref refid="36007b95-1a31-11f1-bb9a-202b2093f90d"/>
-</specification>
-<transition>
-<ref refid="1f8a0160-1a31-11f1-b629-202b2093f90d"/>
-</transition>
-</UML:Constraint>
-<UML:LiteralString id="36007b95-1a31-11f1-bb9a-202b2093f90d">
-<owningConstraint>
-<ref refid="1f8c965b-1a31-11f1-8798-202b2093f90d"/>
-</owningConstraint>
-<value>
-<val>t &gt; timeToArrive</val>
-</value>
-</UML:LiteralString>
-<UML:Behavior id="3716fc4e-1a31-11f1-aa5b-202b2093f90d">
-<name>
-<val>Tick</val>
-</name>
-<trigger_transition>
-<ref refid="1f8a0160-1a31-11f1-b629-202b2093f90d"/>
-</trigger_transition>
-</UML:Behavior>
 <UML:Behavior id="3ef47b70-1a31-11f1-bbf5-202b2093f90d">
 <action_transition>
 <ref refid="5e5df11b-1a2f-11f1-b1b3-202b2093f90d"/>
 </action_transition>
 <name>
-<val>MoveToJunction</val>
+<val></val>
 </name>
 </UML:Behavior>
 <UML:LiteralString id="4122fe40-1a31-11f1-8bb0-202b2093f90d">
@@ -2731,11 +2650,79 @@ existing classes or even new classes with specific responsibilities.</val>
 </value>
 </UML:LiteralString>
 <UML:LiteralString id="48bf3d9f-1a31-11f1-8bcc-202b2093f90d">
+<value>
+<val>t &lt; timeToArrive</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="8ad3a2aa-1b37-11f1-a9cf-202b2093f90d">
 <owningConstraint>
 <ref refid="5e6066b6-1a2f-11f1-9bc8-202b2093f90d"/>
 </owningConstraint>
 <value>
-<val>t &lt; timeToArrive</val>
+<val></val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="aa58d99c-1b37-11f1-bb8b-202b2093f90d">
+<value>
+<val>current = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="aad2d462-1b37-11f1-bd10-202b2093f90d">
+<value>
+<val>currentL = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab1a88ea-1b37-11f1-9e80-202b2093f90d">
+<value>
+<val>currentLo = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab26b05d-1b37-11f1-aa79-202b2093f90d">
+<value>
+<val>currentLoc = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab313401-1b37-11f1-bd79-202b2093f90d">
+<value>
+<val>currentLoca = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab55a304-1b37-11f1-8bec-202b2093f90d">
+<value>
+<val>currentLocat = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab562e2b-1b37-11f1-b71a-202b2093f90d">
+<value>
+<val>currentLocati = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab62c92c-1b37-11f1-9eb5-202b2093f90d">
+<value>
+<val>currentLocatio = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ab6d8944-1b37-11f1-9642-202b2093f90d">
+<value>
+<val>currentLocation = warehouseJunction</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="ae4ef798-1b37-11f1-ac20-202b2093f90d">
+<value>
+<val>currentLocation = warehouse</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="b0582983-1b37-11f1-ae01-202b2093f90d">
+<value>
+<val>currentLocation = arehouse</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="b06e2adb-1b37-11f1-8f8e-202b2093f90d">
+<owningConstraint>
+<ref refid="f9256494-1a2f-11f1-9268-202b2093f90d"/>
+</owningConstraint>
+<value>
+<val>currentLocation = Warehouse</val>
 </value>
 </UML:LiteralString>
 </model>

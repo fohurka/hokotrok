@@ -788,7 +788,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="ddca8782-1a2d-11f1-8068-202b2093f90d">
 <name>
-<val>Tick</val>
+<val>tick()</val>
 </name>
 <trigger_transition>
 <ref refid="dc25d3ff-1a2d-11f1-ad1e-202b2093f90d"/>
@@ -861,10 +861,10 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="2fc57c8a-1a2e-11f1-9543-202b2093f90d"/>
 </subject>
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 829.0, 466.0)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 829.0, 464.0)</val>
 </matrix>
 <points>
-<val>[(-1.0, 0.0), (292.0, 0.0)]</val>
+<val>[(-1.0, 2.0), (292.0, 2.0)]</val>
 </points>
 <head-connection>
 <ref refid="d60d89c7-1a2d-11f1-a6b1-202b2093f90d"/>
@@ -897,7 +897,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Constraint id="2fc8073f-1a2e-11f1-afa7-202b2093f90d">
 <specification>
-<ref refid="90d9f85c-1a2e-11f1-8134-202b2093f90d"/>
+<ref refid="1cc57933-1b37-11f1-b1a8-202b2093f90d"/>
 </specification>
 <transition>
 <ref refid="2fc57c8a-1a2e-11f1-9543-202b2093f90d"/>
@@ -1009,7 +1009,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Constraint id="3708008a-1a2e-11f1-86f8-202b2093f90d">
 <specification>
-<ref refid="a36239dc-1a2e-11f1-81bf-202b2093f90d"/>
+<ref refid="1ebd2c54-1b37-11f1-84ca-202b2093f90d"/>
 </specification>
 <transition>
 <ref refid="370599ee-1a2e-11f1-93bb-202b2093f90d"/>
@@ -1087,7 +1087,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:LiteralString>
 <UML:Behavior id="4655ef09-1a2e-11f1-a465-202b2093f90d">
 <name>
-<val>Tick</val>
+<val>tick()</val>
 </name>
 <trigger_transition>
 <ref refid="347a84d6-1a2e-11f1-928c-202b2093f90d"/>
@@ -1141,7 +1141,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:LiteralString>
 <UML:Behavior id="859a949a-1a2e-11f1-973d-202b2093f90d">
 <name>
-<val>MoveToJunction</val>
+<val>Car.setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="2fc57c8a-1a2e-11f1-9543-202b2093f90d"/>
@@ -1263,16 +1263,13 @@ existing classes or even new classes with specific responsibilities.</val>
 </value>
 </UML:LiteralString>
 <UML:LiteralString id="90d9f85c-1a2e-11f1-8134-202b2093f90d">
-<owningConstraint>
-<ref refid="2fc8073f-1a2e-11f1-afa7-202b2093f90d"/>
-</owningConstraint>
 <value>
 <val>currentJunction = work</val>
 </value>
 </UML:LiteralString>
 <UML:Behavior id="987043d1-1a2e-11f1-9677-202b2093f90d">
 <name>
-<val>MoveToJunction</val>
+<val>Car.setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="370599ee-1a2e-11f1-93bb-202b2093f90d"/>
@@ -1424,11 +1421,59 @@ existing classes or even new classes with specific responsibilities.</val>
 </value>
 </UML:LiteralString>
 <UML:LiteralString id="a36239dc-1a2e-11f1-81bf-202b2093f90d">
+<value>
+<val>currentJunction = home</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1c58ea8b-1b37-11f1-b0b3-202b2093f90d">
+<value>
+<val>currentL = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1c73724d-1b37-11f1-ae88-202b2093f90d">
+<value>
+<val>currentLo = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1c7db022-1b37-11f1-a0d2-202b2093f90d">
+<value>
+<val>currentLoc = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1c87635d-1b37-11f1-8149-202b2093f90d">
+<value>
+<val>currentLoca = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1cae7a44-1b37-11f1-8fd8-202b2093f90d">
+<value>
+<val>currentLocat = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1cb18f39-1b37-11f1-a92c-202b2093f90d">
+<value>
+<val>currentLocati = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1cbc4e2e-1b37-11f1-a4c9-202b2093f90d">
+<value>
+<val>currentLocatio = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1cc57933-1b37-11f1-b1a8-202b2093f90d">
+<owningConstraint>
+<ref refid="2fc8073f-1a2e-11f1-afa7-202b2093f90d"/>
+</owningConstraint>
+<value>
+<val>currentLocation = work</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="1ebd2c54-1b37-11f1-84ca-202b2093f90d">
 <owningConstraint>
 <ref refid="3708008a-1a2e-11f1-86f8-202b2093f90d"/>
 </owningConstraint>
 <value>
-<val>currentJunction = home</val>
+<val>currentLocation = home</val>
 </value>
 </UML:LiteralString>
 </model>

@@ -449,7 +449,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="454f3c68-1a2b-11f1-ab82-202b2093f90d"/>
 <ref refid="49b1e321-1a2b-11f1-a304-202b2093f90d"/>
 <ref refid="47bee764-1a2b-11f1-9a37-202b2093f90d"/>
-<ref refid="7d9dda8e-1a2c-11f1-b019-202b2093f90d"/>
 </reflist>
 </ownedPresentation>
 </UML:StateMachineDiagram>
@@ -583,7 +582,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <incoming>
 <reflist>
 <ref refid="d48161d1-1a2a-11f1-bf88-202b2093f90d"/>
-<ref refid="808ba158-1a2c-11f1-b841-202b2093f90d"/>
 </reflist>
 </incoming>
 <name>
@@ -594,7 +592,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="dd25d94a-1a2a-11f1-abb1-202b2093f90d"/>
 <ref refid="df601522-1a2a-11f1-91e0-202b2093f90d"/>
 <ref refid="48787563-1a2b-11f1-a687-202b2093f90d"/>
-<ref refid="808ba158-1a2c-11f1-b841-202b2093f90d"/>
 </reflist>
 </outgoing>
 <presentation>
@@ -765,6 +762,9 @@ existing classes or even new classes with specific responsibilities.</val>
 <guard>
 <ref refid="c04e3aba-1a2a-11f1-b2fb-202b2093f90d"/>
 </guard>
+<name>
+<val></val>
+</name>
 <presentation>
 <reflist>
 <ref refid="bf57688a-1a2a-11f1-804c-202b2093f90d"/>
@@ -1002,6 +1002,9 @@ existing classes or even new classes with specific responsibilities.</val>
 <target>
 <ref refid="a212f935-1a2a-11f1-80a7-202b2093f90d"/>
 </target>
+<trigger>
+<ref refid="0b130e70-1b36-11f1-b992-202b2093f90d"/>
+</trigger>
 </UML:Transition>
 <UML:Constraint id="dd286b71-1a2a-11f1-856a-202b2093f90d">
 <transition>
@@ -1052,6 +1055,9 @@ existing classes or even new classes with specific responsibilities.</val>
 <target>
 <ref refid="9ffc6900-1a2a-11f1-899c-202b2093f90d"/>
 </target>
+<trigger>
+<ref refid="f8f328cf-1b35-11f1-a4ad-202b2093f90d"/>
+</trigger>
 </UML:Transition>
 <UML:Constraint id="df62c917-1a2a-11f1-875c-202b2093f90d">
 <transition>
@@ -1271,7 +1277,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Constraint>
 <UML:Behavior id="e892bc48-1a2b-11f1-a579-202b2093f90d">
 <name>
-<val>ChooseDirection</val>
+<val>chooseLane(ls)</val>
 </name>
 <trigger_transition>
 <ref refid="c04c204f-1a2a-11f1-94ed-202b2093f90d"/>
@@ -1279,7 +1285,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Behavior>
 <UML:Behavior id="fa824176-1a2b-11f1-b0c4-202b2093f90d">
 <name>
-<val>MoveToJunction</val>
+<val>setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="ea8f4c16-1a2a-11f1-976f-202b2093f90d"/>
@@ -1287,7 +1293,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Behavior>
 <UML:Behavior id="0820d401-1a2c-11f1-9c78-202b2093f90d">
 <name>
-<val>Recovered</val>
+<val>setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="4a2e2c13-1a2b-11f1-96a4-202b2093f90d"/>
@@ -1298,12 +1304,12 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="4a2e2c13-1a2b-11f1-96a4-202b2093f90d"/>
 </action_transition>
 <name>
-<val>MoveToJunction</val>
+<val></val>
 </name>
 </UML:Behavior>
 <UML:Behavior id="11dc1938-1a2c-11f1-923a-202b2093f90d">
 <name>
-<val>Pushed</val>
+<val>setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="462a0000-1a2b-11f1-802f-202b2093f90d"/>
@@ -1314,7 +1320,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="462a0000-1a2b-11f1-802f-202b2093f90d"/>
 </action_transition>
 <name>
-<val>MoveToJunction</val>
+<val></val>
 </name>
 </UML:Behavior>
 <UML:LiteralString id="1e2ed660-1a2c-11f1-9c2f-202b2093f90d">
@@ -1455,7 +1461,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Transition>
 <UML:Behavior id="34631ea8-1a2c-11f1-8418-202b2093f90d">
 <name>
-<val>Tick</val>
+<val>setLocation(j)</val>
 </name>
 <trigger_transition>
 <ref refid="48787563-1a2b-11f1-a687-202b2093f90d"/>
@@ -1463,7 +1469,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:Behavior>
 <UML:Constraint id="487b0fb8-1a2b-11f1-8010-202b2093f90d">
 <specification>
-<ref refid="a559377b-1a2c-11f1-87ee-202b2093f90d"/>
+<ref refid="0aa6742d-1b35-11f1-9024-202b2093f90d"/>
 </specification>
 <transition>
 <ref refid="48787563-1a2b-11f1-a687-202b2093f90d"/>
@@ -1479,7 +1485,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="48787563-1a2b-11f1-a687-202b2093f90d"/>
 </action_transition>
 <name>
-<val>MoveToJunction</val>
+<val></val>
 </name>
 </UML:Behavior>
 <UML:LiteralString id="75af2e97-1a2c-11f1-9d67-202b2093f90d">
@@ -1492,76 +1498,6 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>t &lt; timeToArrive</val>
 </value>
 </UML:LiteralString>
-<UML:TransitionItem id="7d9dda8e-1a2c-11f1-b019-202b2093f90d">
-<diagram>
-<ref refid="4b4f1390-1a2a-11f1-aca3-202b2093f90d"/>
-</diagram>
-<horizontal>
-<val>False</val>
-</horizontal>
-<orthogonal>
-<val>False</val>
-</orthogonal>
-<subject>
-<ref refid="808ba158-1a2c-11f1-b841-202b2093f90d"/>
-</subject>
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 357.43783212270165, 95.81727893400237)</val>
-</matrix>
-<points>
-<val>[(101.76617540766568, -2.0), (-60.185211397428475, 0.0), (101.76617540766568, -25.440556017945823)]</val>
-</points>
-<head-connection>
-<ref refid="9f0a23f2-1a2a-11f1-9cd0-202b2093f90d"/>
-</head-connection>
-<tail-connection>
-<ref refid="9f0a23f2-1a2a-11f1-9cd0-202b2093f90d"/>
-</tail-connection>
-</UML:TransitionItem>
-<UML:Transition id="808ba158-1a2c-11f1-b841-202b2093f90d">
-<action>
-<ref refid="9c7f6bf7-1a2c-11f1-ac7e-202b2093f90d"/>
-</action>
-<container>
-<ref refid="9f0b0c91-1a2a-11f1-b4bf-202b2093f90d"/>
-</container>
-<guard>
-<ref refid="808f2f1b-1a2c-11f1-ae92-202b2093f90d"/>
-</guard>
-<name>
-<val></val>
-</name>
-<presentation>
-<reflist>
-<ref refid="7d9dda8e-1a2c-11f1-b019-202b2093f90d"/>
-</reflist>
-</presentation>
-<source>
-<ref refid="9f09e352-1a2a-11f1-bbad-202b2093f90d"/>
-</source>
-<target>
-<ref refid="9f09e352-1a2a-11f1-bbad-202b2093f90d"/>
-</target>
-<trigger>
-<ref refid="832f15ab-1a2c-11f1-b9ae-202b2093f90d"/>
-</trigger>
-</UML:Transition>
-<UML:Constraint id="808f2f1b-1a2c-11f1-ae92-202b2093f90d">
-<specification>
-<ref refid="a30b8eb6-1a2c-11f1-a00b-202b2093f90d"/>
-</specification>
-<transition>
-<ref refid="808ba158-1a2c-11f1-b841-202b2093f90d"/>
-</transition>
-</UML:Constraint>
-<UML:Behavior id="832f15ab-1a2c-11f1-b9ae-202b2093f90d">
-<name>
-<val>Tick</val>
-</name>
-<trigger_transition>
-<ref refid="808ba158-1a2c-11f1-b841-202b2093f90d"/>
-</trigger_transition>
-</UML:Behavior>
 <UML:LiteralString id="85a011c1-1a2c-11f1-aeb4-202b2093f90d">
 <value>
 <val>t</val>
@@ -1642,33 +1578,48 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>t&lt;timeToArrive</val>
 </value>
 </UML:LiteralString>
-<UML:Behavior id="9c7f6bf7-1a2c-11f1-ac7e-202b2093f90d">
-<action_transition>
-<ref refid="808ba158-1a2c-11f1-b841-202b2093f90d"/>
-</action_transition>
-<name>
-<val>t++</val>
-</name>
-</UML:Behavior>
 <UML:LiteralString id="a22a9949-1a2c-11f1-855a-202b2093f90d">
 <value>
 <val>t&lt; timeToArrive</val>
 </value>
 </UML:LiteralString>
 <UML:LiteralString id="a30b8eb6-1a2c-11f1-a00b-202b2093f90d">
-<owningConstraint>
-<ref refid="808f2f1b-1a2c-11f1-ae92-202b2093f90d"/>
-</owningConstraint>
 <value>
 <val>t &lt; timeToArrive</val>
 </value>
 </UML:LiteralString>
 <UML:LiteralString id="a559377b-1a2c-11f1-87ee-202b2093f90d">
+<value>
+<val>t &gt; timeToArrive</val>
+</value>
+</UML:LiteralString>
+<UML:LiteralString id="0aa6742d-1b35-11f1-9024-202b2093f90d">
 <owningConstraint>
 <ref refid="487b0fb8-1a2b-11f1-8010-202b2093f90d"/>
 </owningConstraint>
 <value>
-<val>t &gt; timeToArrive</val>
+<val></val>
+</value>
+</UML:LiteralString>
+<UML:Behavior id="f8f328cf-1b35-11f1-a4ad-202b2093f90d">
+<name>
+<val>setCrashed()</val>
+</name>
+<trigger_transition>
+<ref refid="df601522-1a2a-11f1-91e0-202b2093f90d"/>
+</trigger_transition>
+</UML:Behavior>
+<UML:Behavior id="0b130e70-1b36-11f1-b992-202b2093f90d">
+<name>
+<val>setStuck()</val>
+</name>
+<trigger_transition>
+<ref refid="dd25d94a-1a2a-11f1-abb1-202b2093f90d"/>
+</trigger_transition>
+</UML:Behavior>
+<UML:LiteralString id="10ee55e1-1b36-11f1-b466-202b2093f90d">
+<value>
+<val>t &lt;</val>
 </value>
 </UML:LiteralString>
 </model>
