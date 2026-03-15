@@ -428,7 +428,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </UML:CommentItem>
 <UML:StateMachineDiagram id="457f0f5b-1a12-11f1-86dd-202b2093f90d">
 <name>
-<val>LaneBehavior</val>
+<val>LaneSurfaceBehavior</val>
 </name>
 <ownedPresentation>
 <reflist>
