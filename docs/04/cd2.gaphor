@@ -5768,7 +5768,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="f9ffdfd0-1b38-11f1-9ade-30560f618a5a"/>
 </ownerFormalParam>
 <typeValue>
-<val>RoadSegment</val>
+<val>Lane</val>
 </typeValue>
 </UML:Parameter>
 <UML:Parameter id="fe974830-1b38-11f1-9ade-30560f618a5a">
