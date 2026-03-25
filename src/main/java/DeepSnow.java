@@ -1,5 +1,5 @@
 public class DeepSnow extends Surface {
-    private Skeleton s;
+    private final Skeleton s;
     public DeepSnow(Skeleton skeleton) {
         this.s = skeleton;
     }
