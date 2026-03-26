@@ -1,10 +1,14 @@
 public class SmallSnow extends Surface {
-    private final Skeleton s;
-    public SmallSnow(Skeleton skeleton) {
-        this.s = skeleton;
+    public SmallSnow(Skeleton skeleton, Lane lane) {
+        super(skeleton, lane);
     }
     @Override
     public int calculateProgress(CivilVehicle cv) {
         return 1;
+    }
+
+    @Override
+    public boolean enterable() {
+        return true;
     }
 }
