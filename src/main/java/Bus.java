@@ -1,10 +1,12 @@
 public class Bus extends CivilVehicle {
-    public Bus(Skeleton s) {
-        super(s);
+    public Bus(MapComponent loc) {
+        super(loc);
     }
 
     public void tick() {
+        Skeleton.printFunctionCall("Bus.tick");
         getLocation().progress(this);
+        Skeleton.printReturn();
     }
 
     public boolean pushable() {
@@ -12,7 +14,8 @@ public class Bus extends CivilVehicle {
     }
 
     @Override
-    public void stuckInCurrentLane(Lane lane) {}
+    public void stuckInCurrentLane(Lane lane) {
+    }
 
     @Override
     public void slip(Lane lane) {
@@ -24,5 +27,6 @@ public class Bus extends CivilVehicle {
     }
 
     @Override
-    public void crash() {}
+    public void crash() {
+    }
 }

@@ -8,8 +8,8 @@ public class Lane extends MapComponent {
     private Lane rightNeighbor;
     private Lane leftNeighbor;
 
-    public Lane(Skeleton skeleton, Junction start, Junction end) {
-        super(skeleton);
+    public Lane(Junction start, Junction end) {
+        super();
         this.start = start;
         this.end = end;
     }
@@ -36,21 +36,26 @@ public class Lane extends MapComponent {
     }
 
     public void progress(CivilVehicle cv) {
+        Skeleton.printFunctionCall("Lane.progress");
         int prog = surface.calculateProgress(cv);
         if (prog > 0) {
-            boolean ending = s.askBool("Did the vehicle reach the end of the lane?");
+
+            boolean ending = Skeleton.askBool("Did the vehicle reach the end of the lane?");
             if (ending) {
                 cv.setLocation(end);
             }
         }
+        Skeleton.printReturn();
     }
 
     public void progress(Snowplow sn) {
+        Skeleton.printFunctionCall("Lane.progress");
         int prog = surface.calculateProgress(sn);
-        boolean ending = s.askBool("Did the snowplow reach the end of the lane?");
+        boolean ending = Skeleton.askBool("Did the snowplow reach the end of the lane?");
         if (ending) {
             sn.laneCleared(this, end);
         }
+        Skeleton.printReturn();
     }
 
     public List<Vehicle> getPushableCars() {
@@ -70,11 +75,13 @@ public class Lane extends MapComponent {
 
     public Vehicle getNearest(CivilVehicle cv) {
         for (Vehicle v : getVehicles()) {
-            if (v != cv) return v;
+            if (v != cv)
+                return v;
         }
 
         return null;
     }
 
-    public void crashHappened() {}
+    public void crashHappened() {
+    }
 }

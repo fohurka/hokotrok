@@ -1,8 +1,8 @@
 public class Car extends CivilVehicle {
     private Recoverer rec;
 
-    public Car(Skeleton s) {
-        super(s);
+    public Car(MapComponent loc) {
+        super(loc);
     }
 
     public void setRecoverer(Recoverer r) {
@@ -10,7 +10,9 @@ public class Car extends CivilVehicle {
     }
 
     public void tick() {
+        Skeleton.printFunctionCall("Car.tick");
         getLocation().progress(this);
+        Skeleton.printReturn();
     }
 
     public boolean pushable() {

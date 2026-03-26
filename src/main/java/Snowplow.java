@@ -3,8 +3,8 @@ import java.util.List;
 public class Snowplow extends Vehicle {
     private Equipment eq;
 
-    public Snowplow(Skeleton s) {
-        super(s);
+    public Snowplow(MapComponent loc) {
+        super(loc);
     }
 
     public void setEquipment(Equipment eq) {
@@ -13,7 +13,9 @@ public class Snowplow extends Vehicle {
 
     @Override
     public void tick() {
+        Skeleton.printFunctionCall("Snowplow.tick");
         getLocation().progress(this);
+        Skeleton.printReturn();
     }
 
     @Override
@@ -30,5 +32,6 @@ public class Snowplow extends Vehicle {
         setLocation(end);
     }
 
-    public void crash() {}
+    public void crash() {
+    }
 }

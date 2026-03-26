@@ -1,6 +1,6 @@
 public class Building extends MapComponent {
-    public Building(Skeleton s) {
-        super(s);
+    public Building() {
+        super();
     }
 
     @Override
