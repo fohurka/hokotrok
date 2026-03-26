@@ -1,6 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Junction extends MapComponent {
+    private List<Lane> starting;
+    private List<Lane> ending;
 
     public Junction() {
+        starting = new ArrayList<Lane>();
+        ending = new ArrayList<Lane>();
     }
 
     /**
@@ -25,5 +32,13 @@ public class Junction extends MapComponent {
     public void progress(CivilVehicle cv) {
         Skeleton.printFunctionCall("Junction.progress");
         Skeleton.printReturn();
+    }
+
+    public void addEnding(Lane lane) {
+        ending.add(lane);
+    }
+
+    public void addStarting(Lane lane) {
+        starting.add(lane);
     }
 }

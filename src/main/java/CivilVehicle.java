@@ -8,8 +8,4 @@ public abstract class CivilVehicle extends Vehicle {
     public abstract void tick();
 
     public abstract boolean pushable();
-
-    public CivilVehicle(MapComponent loc) {
-        super(loc);
-    }
 }

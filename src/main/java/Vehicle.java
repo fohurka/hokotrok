@@ -7,14 +7,11 @@ public abstract class Vehicle {
 
     public abstract boolean pushable();
 
-    public Vehicle(MapComponent loc) {
-        this.loc = loc;
-    }
-
     public void setLocation(MapComponent dest) {
         Skeleton.printFunctionCall("Vehicle.setLocation");
-        loc.remove(this);
+        if (loc != null) loc.remove(this);
         dest.arrived(this);
+        loc = dest;
         Skeleton.printReturn();
     }
 

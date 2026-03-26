@@ -3,10 +3,6 @@ import java.util.List;
 public class Snowplow extends Vehicle {
     private Equipment eq;
 
-    public Snowplow(MapComponent loc) {
-        super(loc);
-    }
-
     public void setEquipment(Equipment eq) {
         this.eq = eq;
     }

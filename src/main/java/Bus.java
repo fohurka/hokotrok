@@ -1,7 +1,4 @@
 public class Bus extends CivilVehicle {
-    public Bus(MapComponent loc) {
-        super(loc);
-    }
 
     public void tick() {
         Skeleton.printFunctionCall("Bus.tick");

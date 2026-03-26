@@ -1,10 +1,6 @@
 public class Car extends CivilVehicle {
     private Recoverer rec;
 
-    public Car(MapComponent loc) {
-        super(loc);
-    }
-
     public void setRecoverer(Recoverer r) {
         rec = r;
     }
