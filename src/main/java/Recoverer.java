@@ -3,10 +3,8 @@ import java.util.List;
 
 public class Recoverer {
     private List<Car> recoveryQueue;
-    private final Skeleton s;
 
-    public Recoverer(Skeleton s) {
-        this.s = s;
+    public Recoverer() {
         recoveryQueue = new ArrayList<>();
     }
 

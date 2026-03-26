@@ -1,6 +1,6 @@
 public class DeepSnow extends Surface {
-    public DeepSnow(Skeleton skeleton, Lane lane) {
-        super(skeleton, lane);
+    public DeepSnow(Lane lane) {
+        super(lane);
     }
     @Override
     public int calculateProgress(CivilVehicle cv) {

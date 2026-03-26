@@ -1,7 +1,5 @@
 public class Building extends MapComponent {
-    public Building() {
-        super();
-    }
+    public Building() {}
 
     @Override
     public void progress(Snowplow sp) {

@@ -1,8 +1,6 @@
 public class Junction extends MapComponent {
 
-    public Junction() {
-        super();
-    }
+    public Junction() {}
 
     @Override
     public void progress(Snowplow sp) {

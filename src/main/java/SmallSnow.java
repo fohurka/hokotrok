@@ -1,6 +1,6 @@
 public class SmallSnow extends Surface {
-    public SmallSnow(Skeleton skeleton, Lane lane) {
-        super(skeleton, lane);
+    public SmallSnow(Lane lane) {
+        super(lane);
     }
     @Override
     public int calculateProgress(CivilVehicle cv) {

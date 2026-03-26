@@ -1,13 +1,13 @@
 public class Ice extends Surface {
-    public Ice(Skeleton skeleton, Lane lane) {
-        super(skeleton, lane);
+    public Ice(Lane lane) {
+        super(lane);
     }
 
     @Override
     public int calculateProgress(CivilVehicle cv) {
-        boolean slip = s.askBool("Does the vehicle slip?");
+        boolean slip = Skeleton.askBool("Does the vehicle slip?");
         if (slip) {
-            cv.slip();
+            cv.slip(getLane());
             return 0;
         }
         return 1;
