@@ -25,7 +25,7 @@ public class Skeleton {
      * @param functionName The name of the function being called.
      */
     public static void printFunctionCall(String functionName) {
-        System.out.println(getIndent() + functionName);
+        System.out.println(getIndent() + "---->" + functionName + "()");
         indentLevel++;
     }
 
@@ -35,7 +35,7 @@ public class Skeleton {
      */
     public static void printReturn() {
         indentLevel--;
-        System.out.println(getIndent() + "return");
+        System.out.println(getIndent() + "<----return");
     }
 
     public static boolean askBool(String question) {

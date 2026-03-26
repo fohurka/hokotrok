@@ -9,6 +9,8 @@ public class Recoverer {
     }
 
     public void addToRecoveryQueue(Car c) {
+        Skeleton.printFunctionCall("Recoverer.addToRecoveryQueue");
         recoveryQueue.add(c);
+        Skeleton.printReturn();
     }
 }

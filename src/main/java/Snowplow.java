@@ -24,12 +24,14 @@ public class Snowplow extends Vehicle {
     }
 
     public void laneCleared(Lane lane, MapComponent end) {
+        Skeleton.printFunctionCall("Snowplow.laneCleared");
         List<Vehicle> pushables = lane.getPushableCars();
         for (Vehicle v : pushables) {
             v.setLocation(end);
         }
         eq.use(lane);
         setLocation(end);
+        Skeleton.printReturn();
     }
 
     public void crash() {

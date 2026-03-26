@@ -10,6 +10,8 @@ public abstract class Surface {
     }
 
     public int calculateProgress(Snowplow sn) {
+        Skeleton.printFunctionCall("Surface.calculateProgress");
+        Skeleton.printReturn();
         return 1;
     }
 

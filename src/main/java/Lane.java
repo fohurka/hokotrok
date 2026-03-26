@@ -24,14 +24,20 @@ public class Lane extends MapComponent {
     }
 
     public Lane getLeftNeighbor() {
+        Skeleton.printFunctionCall("Lane.getLeftNeighbor");
+        Skeleton.printReturn();
         return leftNeighbor;
     }
 
     public Lane getRightNeighbor() {
+        Skeleton.printFunctionCall("Lane.getRightNeighbor");
+        Skeleton.printReturn();
         return rightNeighbor;
     }
 
     public boolean enterable() {
+        Skeleton.printFunctionCall("Lane.enterable");
+        Skeleton.printReturn();
         return surface.enterable();
     }
 
@@ -59,9 +65,11 @@ public class Lane extends MapComponent {
     }
 
     public List<Vehicle> getPushableCars() {
+        Skeleton.printFunctionCall("Lane.getPushableCars");
         List<Vehicle> pushables = new ArrayList<>();
 
         if (surface.enterable()) {
+            Skeleton.printReturn();
             return pushables;
         }
 
@@ -70,18 +78,24 @@ public class Lane extends MapComponent {
                 pushables.add(v);
             }
         }
+        Skeleton.printReturn();
         return pushables;
     }
 
     public Vehicle getNearest(CivilVehicle cv) {
+        Skeleton.printFunctionCall("Lane.getNearest");
         for (Vehicle v : getVehicles()) {
-            if (v != cv)
+            if (v != cv) {
+                Skeleton.printReturn();
                 return v;
+            }
         }
-
+        Skeleton.printReturn();
         return null;
     }
 
     public void crashHappened() {
+        Skeleton.printFunctionCall("Lane.crashHappened");
+        Skeleton.printReturn();
     }
 }
