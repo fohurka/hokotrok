@@ -1,5 +1,8 @@
+import java.util.Scanner;
+
 public class Skeleton {
     private static int indentLevel = 0;
+    private static final Scanner scanner = new Scanner(System.in);
 
     private Skeleton() {
     }
@@ -39,10 +42,30 @@ public class Skeleton {
     }
 
     public static boolean askBool(String question) {
-        return true; // TODO
+        System.out.print(question + " (true/false): ");
+        while (true) {
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("true") || input.equals("t") || input.equals("igen") || input.equals("y")
+                    || input.equals("yes")) {
+                return true;
+            } else if (input.equals("false") || input.equals("f") || input.equals("nem") || input.equals("n")
+                    || input.equals("no")) {
+                return false;
+            } else {
+                System.out.print("Érvénytelen bemenet! " + question + " (true/false): ");
+            }
+        }
     }
 
     public static int askInt(String question) {
-        return 0; // TODO
+        System.out.print(question);
+        while (true) {
+            String input = scanner.nextLine().trim();
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.print("Kérlek érvényes számot adj meg! " + question);
+            }
+        }
     }
 }
