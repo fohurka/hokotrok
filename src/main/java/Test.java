@@ -157,6 +157,7 @@ public class Test {
         }
     }
 
+    //5.3.7
     public class CarProgressSmallSnow extends TestCase {
         private Car c;
         private Junction end;
@@ -184,6 +185,7 @@ public class Test {
         }
     }
 
+    //5.3.8
     public class CarProgressDeepSnowStuck extends TestCase {
         private Car c;
         private Junction end;
@@ -217,6 +219,7 @@ public class Test {
         }
     }
 
+    //5.3.9
     public class CarProgressDeepSnowSwitch extends TestCase {
         private Car c;
         private Junction end;
@@ -250,6 +253,7 @@ public class Test {
         }
     }
 
+    //5.3.10
     public class CarProgressIce extends TestCase {
         private Car c;
         private Junction end;
@@ -283,6 +287,7 @@ public class Test {
         }
     }
 
+    //5.3.11
     public class BusProgressSmallSnow extends TestCase {
         private Bus b;
         private Junction end;
@@ -310,6 +315,7 @@ public class Test {
         }
     }
 
+    //5.3.12
     public class BusProgressDeepSnow extends TestCase {
         private Bus b;
         private Junction end;
@@ -337,6 +343,7 @@ public class Test {
         }
     }
 
+    //5.3.13
     public class BusProgressIce extends TestCase {
         private Car c;
         private Junction end;
@@ -370,6 +377,7 @@ public class Test {
         }
     }
 
+    //5.3.14
     public class SnowplowProgressDeepSnow extends TestCase {
         private Car c;
         private Junction end;
@@ -403,6 +411,7 @@ public class Test {
         }
     }
 
+    //5.3.15
     public class SnowplowProgressNonDeepSnow extends TestCase {
         private Junction end;
         private Lane loc;

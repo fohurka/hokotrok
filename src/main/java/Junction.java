@@ -34,10 +34,20 @@ public class Junction extends MapComponent {
         Skeleton.printReturn();
     }
 
+    /**
+     * Adds a Lane to the list of Lanes that are ending in this Junction
+     *
+     * @param lane the Lane to be added
+     */
     public void addEnding(Lane lane) {
         ending.add(lane);
     }
 
+    /**
+     * Adds a Lane to the list of Lanes that are starting in this Junction
+     *
+     * @param lane the Lane to be added
+     */
     public void addStarting(Lane lane) {
         starting.add(lane);
     }

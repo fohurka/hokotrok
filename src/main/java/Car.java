@@ -5,16 +5,27 @@ public class Car extends CivilVehicle {
         rec = r;
     }
 
+    /**
+     * Tries to progress at the current location
+     */
     public void tick() {
         Skeleton.printFunctionCall("Car.tick");
         getLocation().progress(this);
         Skeleton.printReturn();
     }
 
+    /**
+     * @return whether this vehicle is pushable
+     */
     public boolean pushable() {
         return true;
     }
 
+    /**
+     * Handles the logic when the Bus is stuck in the current Lane
+     * Checks if the Lane's neighbor is enterable, and switches if it is
+     * @param lane the current Lane
+     */
     @Override
     public void stuckInCurrentLane(Lane lane) {
         Skeleton.printFunctionCall("Car.stuckInCurrentLane");
@@ -26,6 +37,10 @@ public class Car extends CivilVehicle {
         Skeleton.printReturn();
     }
 
+    /**
+     * Slips the vehicle and searches the Lane for another Vehicle to crash into
+     * @param lane the current Lane
+     */
     @Override
     public void slip(Lane lane) {
         Skeleton.printFunctionCall("Car.slip");
@@ -38,6 +53,9 @@ public class Car extends CivilVehicle {
         Skeleton.printReturn();
     }
 
+    /**
+     * Crashes the vehicle and adds it to the recovery queue of the Recoverer
+     */
     @Override
     public void crash() {
         Skeleton.printFunctionCall("Car.crash");

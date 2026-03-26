@@ -3,6 +3,11 @@ public class Ice extends Surface {
         super(lane);
     }
 
+    /**
+     * Calculates the progress of a CivilVehicle
+     * @param cv the CivilVehicle that progresses
+     * @return the amount of progress the CivilVehicle made
+     */
     @Override
     public int calculateProgress(CivilVehicle cv) {
         Skeleton.printFunctionCall("Ice.calculateProgress");
@@ -16,6 +21,9 @@ public class Ice extends Surface {
         return 1;
     }
 
+    /**
+     * @return whether the surface makes the Lane enterable
+     */
     @Override
     public boolean enterable() {
         Skeleton.printFunctionCall("Ice.enterable");
