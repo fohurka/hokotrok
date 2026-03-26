@@ -5,13 +5,13 @@ public class Building extends MapComponent {
 
     @Override
     public void progress(Snowplow sp) {
-        Skeleton.printFunctionCall("Building.progress(Snowplow)");
+        Skeleton.printFunctionCall("Building.progress");
         Skeleton.printReturn();
     }
 
     @Override
     public void progress(CivilVehicle cv) {
-        Skeleton.printFunctionCall("Building.progress(CivilVehicle)");
+        Skeleton.printFunctionCall("Building.progress");
         Skeleton.printReturn();
     }
 }
