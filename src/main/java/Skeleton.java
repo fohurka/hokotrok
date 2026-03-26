@@ -1,11 +1,7 @@
 public class Skeleton {
-    private int indentLevel;
+    private static int indentLevel = 0;
 
-    /**
-     * Initializes a new Skeleton instance with an indentation level of 0.
-     */
-    public Skeleton() {
-        indentLevel = 0;
+    private Skeleton() {
     }
 
     /**
@@ -14,7 +10,7 @@ public class Skeleton {
      *
      * @return A string containing the appropriate number of tabs.
      */
-    private String getIndent() {
+    private static String getIndent() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < indentLevel; i++) {
             sb.append("\t");
@@ -28,7 +24,7 @@ public class Skeleton {
      *
      * @param functionName The name of the function being called.
      */
-    public void printFunctionCall(String functionName) {
+    public static void printFunctionCall(String functionName) {
         System.out.println(getIndent() + functionName);
         indentLevel++;
     }
@@ -37,12 +33,12 @@ public class Skeleton {
      * Decrements the indentation level and prints a formatted return message
      * matching the previous function call's indentation.
      */
-    public void printReturn() {
+    public static void printReturn() {
         indentLevel--;
         System.out.println(getIndent() + "return");
     }
 
-    public boolean askBool(String question) {
+    public static boolean askBool(String question) {
         return true; // TODO
     }
 }
