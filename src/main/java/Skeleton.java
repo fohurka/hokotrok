@@ -41,4 +41,8 @@ public class Skeleton {
     public static boolean askBool(String question) {
         return true; // TODO
     }
+
+    public static int askInt(String question) {
+        return 0; // TODO
+    }
 }
