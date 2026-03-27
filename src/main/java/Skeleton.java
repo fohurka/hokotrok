@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Skeleton {
     private static int indentLevel = 0;
     private static final Scanner scanner = new Scanner(System.in);
+    public static Boolean init;
 
     private Skeleton() {
     }
@@ -28,8 +29,12 @@ public class Skeleton {
      * @param functionName The name of the function being called.
      */
     public static void printFunctionCall(String functionName) {
-        System.out.println(getIndent() + "---->" + functionName + "()");
-        indentLevel++;
+        if (!init)
+        {
+            System.out.println(getIndent() + "---->" + functionName + "()");
+
+            indentLevel++;
+        }
     }
 
     /**
@@ -37,8 +42,12 @@ public class Skeleton {
      * matching the previous function call's indentation.
      */
     public static void printReturn() {
-        indentLevel--;
-        System.out.println(getIndent() + "<----return");
+        if (!init)
+        {
+            indentLevel--;
+            
+            System.out.println(getIndent() + "<----return");
+        }
     }
 
     public static boolean askBool(String question) {

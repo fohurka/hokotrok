@@ -47,9 +47,12 @@ public class Main {
             if (choice > 0 && choice <= tests.size()) {
                 Test.TestCase selectedTest = tests.get(choice - 1);
                 System.out.println("\n--- [" + choice + "] " + selectedTest.getName() + " ---");
-                System.out.println(">>> Teszt inicializálása (setup)...");
-                selectedTest.setup();
-                System.out.println(">>> Teszt futtatása (execute)...");
+
+                Skeleton.init = true;
+                    selectedTest.setup();
+                Skeleton.init = false;
+
+                System.out.println(">>> Teszt futtatása");
                 selectedTest.execute();
                 System.out.println("-------------------------------------");
             } else {
