@@ -1,4 +1,8 @@
 public class Impeller extends Equipment {
+    public Impeller(SnowplowPlayer owner) {
+        super(owner);
+    }
+
     @Override
     public void use(Lane lane) {
         Skeleton.printFunctionCall("Impeller.use");

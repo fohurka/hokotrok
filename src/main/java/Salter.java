@@ -1,4 +1,8 @@
 public class Salter extends Equipment {
+    public Salter(SnowplowPlayer owner) {
+        super(owner);
+    }
+
     @Override
     public void use(Lane lane) {
         Skeleton.printFunctionCall("Salter.use");

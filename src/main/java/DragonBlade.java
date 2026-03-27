@@ -1,4 +1,8 @@
 public class DragonBlade extends Equipment {
+    public DragonBlade(SnowplowPlayer owner) {
+        super(owner);
+    }
+
     @Override
     public void use(Lane lane) {
         Skeleton.printFunctionCall("DragonBlade.use");
