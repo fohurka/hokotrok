@@ -441,4 +441,131 @@ public class Test {
             sn.tick();
         }
     }
+    // 5.3.33
+    public class BuyEquipment extends TestCase {
+        private Bank b;
+        private Warehouse w;
+        private SnowplowPlayer p;
+
+        @Override
+        public String getName() {
+            return "Kotrófej vásárlás";
+        }
+
+        @Override
+        public void setup() {
+            b = new Bank();
+            w = new Warehouse(new Junction());
+            p = new SnowplowPlayer(new Junction());
+
+            w.setBank(b);
+            b.setWarehouse(w);
+            p.setWarehouse(w);
+        }
+
+        @Override
+        public void execute() {
+            int id = Skeleton.askInt("Milyen ID-ju eszkozt vasaroljon? ");
+            p.buyEquipment(id);
+        }
+    }
+
+    // 5.3.34
+    public class BuySnowplow extends TestCase {
+        private Bank b;
+        private Warehouse w;
+        private SnowplowPlayer p;
+
+        @Override
+        public String getName() {
+            return "Új hókotró vásárlása";
+        }
+
+        @Override
+        public void setup() {
+            b = new Bank();
+            w = new Warehouse(new Junction());
+            p = new SnowplowPlayer(new Junction());
+
+            w.setBank(b);
+            b.setWarehouse(w);
+            p.setWarehouse(w);
+        }
+
+        @Override
+        public void execute() {
+            p.buySnowplow();
+        }
+    }
+
+    // 5.3.35
+    public class RewardForClearing extends TestCase {
+        private Bank b;
+        private RoadNetwork rn;
+        private Lane l;
+        private SnowplowPlayer p;
+
+        @Override
+        public String getName() {
+            return "Takarításért járó jutalom jóváírása";
+        }
+
+        @Override
+        public void setup() {
+            b = new Bank();
+
+            rn = new RoadNetwork();
+            rn.setBank(b);
+
+            l = new Lane(null, null);
+            l.setRoadNetwork(rn);
+
+            p = new SnowplowPlayer(new Junction());
+        }
+
+        @Override
+        public void execute() {
+            l.cleared(p);
+        }
+    }
+
+    // 5.3.36
+    public class BusRoundComplete extends TestCase {
+        private Bank b;
+        private RoadNetwork rn;
+        private Junction j;
+        private Building bs;
+        private BusPlayer bp;
+        private Bus bus;
+
+        @Override
+        public String getName() {
+            return "Buszforduló teljesítése utáni jutalom";
+        }
+
+        @Override
+        public void setup() {
+            b = new Bank();
+            rn = new RoadNetwork();
+            rn.setBank(b);
+
+            j = new Junction();
+            j.setRoadNetwork(rn);
+
+            bs = new Building(j);
+            j.addBuilding(bs);
+
+            bp = new BusPlayer(j);
+
+            bus = new Bus();
+            bus.setLocation(j);
+            bus.setOwner(bp);
+            bp.setBus(bus);
+        }
+
+        @Override
+        public void execute() {
+            j.arrived(bus);
+        }
+    }
 }

@@ -1,5 +1,24 @@
 public class Bus extends CivilVehicle {
+    private BusPlayer owner;
+    /**
+     * Gets the player who owns and controls this vehicle.
+     *
+     * @return The owner Player (e.g., BusPlayer).
+     */
+    public BusPlayer getOwner() {
+        Skeleton.printFunctionCall("Bus.getOwner");
+        Skeleton.printReturn();
+        return owner;
+    }
 
+    /**
+     * Sets the player who owns this vehicle.
+     *
+     * @param owner The player to be set as the owner.
+     */
+    public void setOwner(BusPlayer owner) {
+        this.owner = owner;
+    }
     /**
      * Tries to progress at the current location
      */
