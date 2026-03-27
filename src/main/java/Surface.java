@@ -1,5 +1,6 @@
 public abstract class Surface {
     private Lane lane;
+    private Modifier modifier;
 
     protected Lane getLane() {
         return lane;
@@ -13,6 +14,16 @@ public abstract class Surface {
         Skeleton.printFunctionCall("Surface.calculateProgress");
         Skeleton.printReturn();
         return 1;
+    }
+
+    public void removeSnow(int amount) {
+        Skeleton.printFunctionCall("Surface.removeSnow");
+        Skeleton.printReturn();
+    }
+
+    public void removeIce(int amount) {
+        Skeleton.printFunctionCall("Surface.removeIce");
+        Skeleton.printReturn();
     }
 
     public int clearSnow() {
