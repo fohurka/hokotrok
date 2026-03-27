@@ -172,4 +172,16 @@ public class Lane extends MapComponent {
         Skeleton.printReturn();
         return surface.clearIce();
     }
+
+    public void salt() {
+        Skeleton.printFunctionCall("Lane.salt");
+        surface.setSalted();
+        Skeleton.printReturn();
+    }
+
+    public void addSnow(int amount) {
+        Skeleton.printFunctionCall("Lane.addSnow");
+        surface.addSnow(amount);
+        Skeleton.printReturn();
+    }
 }
