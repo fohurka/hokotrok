@@ -1,6 +1,8 @@
 public class IceBreaker extends Equipment {
     public IceBreaker(SnowplowPlayer owner) {
+        Skeleton.printFunctionCall("IceBreaker.ctor");
         super(owner);
+        Skeleton.printReturn();
     }
 
     @Override

@@ -1,7 +1,9 @@
 public class Sweeper extends Equipment {
 
     public Sweeper(SnowplowPlayer owner) {
+        Skeleton.printFunctionCall("Sweeper.ctor");
         super(owner);
+        Skeleton.printReturn();
     }
 
     @Override
