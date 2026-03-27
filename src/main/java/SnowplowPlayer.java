@@ -7,7 +7,7 @@ import java.util.List;
 public class SnowplowPlayer extends Player {
 
     private List<Snowplow> snowplows;
-
+    private Warehouse warehouse;
     /**
      * Constructs a new SnowplowPlayer and initializes a snowplow at the given
      * junction.
@@ -49,6 +49,45 @@ public class SnowplowPlayer extends Player {
             throw new IllegalArgumentException("Invalid snowplow index");
         }
         snowplows.get(index).setLocation(dest);
+        Skeleton.printReturn();
+    }
+    /**
+     * Sets the warehouse associated with the player, from which they can purchase items.
+     *
+     * @param warehouse The warehouse object to be set.
+     */
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+    /**
+     * The player attempts to buy a new snowplow equipment (blade) from the warehouse.
+     * In the skeleton, it forwards the call to the warehouse's respective buying method.
+     *
+     * @param id The ID of the equipment to be purchased.
+     */
+    public void buyEquipment(int id) {
+        Skeleton.printFunctionCall("SnowplowPlayer.buyEquipment");
+        if (warehouse != null) {
+            Equipment newEq = warehouse.buyEquipment(this, id);
+            if (newEq != null) {
+                // Successful purchase
+            }
+        }
+        Skeleton.printReturn();
+    }
+
+    /**
+     * The player attempts to buy a new snowplow vehicle from the warehouse.
+     * In the skeleton, it forwards the call to the warehouse's respective buying method.
+     */
+    public void buySnowplow() {
+        Skeleton.printFunctionCall("SnowplowPlayer.buySnowplow");
+        if (warehouse != null) {
+            Snowplow newPlow = warehouse.buySnowplow(this);
+            if (newPlow != null) {
+                // Successful purchase
+            }
+        }
         Skeleton.printReturn();
     }
 }

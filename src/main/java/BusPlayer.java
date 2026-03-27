@@ -24,6 +24,15 @@ public class BusPlayer extends Player {
         Skeleton.printReturn();
         return bus;
     }
+    /**
+     * Sets the single bus controlled by this player.
+     * Used mainly during the skeleton test setup phase to inject a specific bus.
+     *
+     * @param bus The bus to be assigned to the player.
+     */
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
 
     /**
      * Chooses the next direction(Lane or Building) for the bus to take.

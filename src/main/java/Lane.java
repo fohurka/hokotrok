@@ -7,6 +7,7 @@ public class Lane extends MapComponent {
     private final Junction end;
     private Lane rightNeighbor;
     private Lane leftNeighbor;
+    private RoadNetwork rn;
 
     public Lane(Junction start, Junction end) {
         super();
@@ -21,7 +22,32 @@ public class Lane extends MapComponent {
     public void setSurface(Surface surface) {
         this.surface = surface;
     }
+    /**
+     * Sets the road network for the lane, enabling it to send notifications
+     * (e.g., for processing rewards after clearing snow).
+     *
+     * @param rn The road network to be set.
+     */
+    public void setRoadNetwork(RoadNetwork rn) {
+        this.rn = rn;
+    }
+    /**
+     * A snowplow clears the snow from the lane. During the skeleton testing phase,
+     * this method asks the tester for the amount of snow cleared, then forwards
+     * this information to the road network to credit the reward.
+     *
+     * @param p The snowplow player who performs the clearing and receives the reward.
+     */
+    public void cleared(SnowplowPlayer p) {
+        Skeleton.printFunctionCall("Lane.clearSnow");
 
+        int snowAmount = Skeleton.askInt("How much snow did the machine clear? ");
+
+        if (rn != null) {
+            rn.laneCleared(p, snowAmount);
+        }
+        Skeleton.printReturn();
+    }
     /**
      * Sets the neighbors of the Lane
      * @param leftNeighbor
