@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MapComponent {
-    private List<Vehicle> vehicles;
+    protected List<Vehicle> vehicles;
 
     protected List<Vehicle> getVehicles() {
         return vehicles;
@@ -27,4 +27,6 @@ public abstract class MapComponent {
     public abstract void progress(CivilVehicle cv);
 
     public abstract void progress(Snowplow sp);
+
+    public void crashRecovered() {}
 }

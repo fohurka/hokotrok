@@ -1,10 +1,14 @@
 public class Salted extends Modifier {
 
+
+    /**
+     * Applies the modifiers weather effect to the surface
+     */
     @Override
-    public void applyWeather(Surface surf) {
+    protected void applyWeather(Surface s) {
         Skeleton.printFunctionCall("Salted.applyWeather");
-        surf.removeSnow(Skeleton.askInt("Salted.applyWeather: amount of snow to remove"));
-        surf.removeIce(Skeleton.askInt("Salted.applyWeather: amount of ice to remove"));
+        s.removeIce(1);
+        s.removeSnow(1);
         Skeleton.printReturn();
     }
 }

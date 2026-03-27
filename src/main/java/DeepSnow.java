@@ -1,7 +1,17 @@
 public class DeepSnow extends Surface {
-    public DeepSnow(Lane lane) {
+    
+    public DeepSnow(Lane lane)
+    {
         super(lane);
     }
+    
+    public DeepSnow(Lane lane, Modifier mod) {
+        Skeleton.printFunctionCall("DeepSnow.constructor");
+        super(lane);
+        modifier = mod;
+        Skeleton.printReturn();
+    }
+    
     /**
      * Calculates the progress of a CivilVehicle
      * @param cv the CivilVehicle that progresses
@@ -23,5 +33,29 @@ public class DeepSnow extends Surface {
         Skeleton.printFunctionCall("DeepSnow.enterable");
         Skeleton.printReturn();
         return false;
+    }
+
+    /**
+     * Applies its Modifer and tries to set the new surface to SmallSnow
+     */
+    @Override
+    public void tick() {
+        Skeleton.printFunctionCall("DeepSnow.tick");
+        modifier.applyWeather(this);
+
+        if (Skeleton.askBool("Does the snow amount get below the threshold of the DeepSnow state ?"))
+            lane.setSurface(new SmallSnow(lane, modifier));
+        Skeleton.printReturn();
+    }
+
+    /**
+     * Tries to add ice
+     */
+    @Override
+    protected void carPassed() {
+        Skeleton.printFunctionCall("DeepSnow.carPassed");
+        if (Skeleton.askBool("Is there any snow on the lane?"))
+            addIce(1);
+        Skeleton.printReturn();
     }
 }

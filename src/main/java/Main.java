@@ -21,6 +21,14 @@ public class Main {
         tests.add(test.new BusProgressIce());
         tests.add(test.new SnowplowProgressDeepSnow());
         tests.add(test.new SnowplowProgressNonDeepSnow());
+        tests.add(test.new SnowingOnSmallSnowWithSalt());
+        tests.add(test.new SnowingNotOnSmallSnowWithNoSalt());
+        tests.add(test.new SnowingOnIceWithSalt());
+        tests.add(test.new SnowingOnDeepSnowWithSalt());
+        tests.add(test.new AddingIceNotToSmallSnow());
+        tests.add(test.new AddingIceToSmallSnow());
+        tests.add(test.new CarRecovery());
+        tests.add(test.new BusTriesRecoveringItself());
 
         while (true) {
             System.out.println("\n=== Menü ===");

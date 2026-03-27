@@ -19,7 +19,7 @@ public class CarPlayer extends Player {
     public CarPlayer(Building home, Building work) {
         this.home = home;
         this.work = work;
-        this.car = new Car(home);
+        this.car = new Car(this);
     }
 
     /**
@@ -48,6 +48,15 @@ public class CarPlayer extends Player {
             throw new IllegalArgumentException("Car player can only control one car");
         }
         car.setLocation(dest);
+        Skeleton.printReturn();
+    }
+
+    /**
+     * Brings the car home
+     */
+    public void goHome() {
+        Skeleton.printFunctionCall("CarPlayer.goHome");
+        car.setLocation(home);
         Skeleton.printReturn();
     }
 }

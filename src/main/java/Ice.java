@@ -1,6 +1,14 @@
 public class Ice extends Surface {
+
     public Ice(Lane lane) {
         super(lane);
+    }
+
+    public Ice(Lane lane, Modifier mod) {
+        Skeleton.printFunctionCall("Ice.constructor");
+        super(lane);
+        modifier = mod;
+        Skeleton.printReturn();
     }
 
     /**
@@ -29,5 +37,29 @@ public class Ice extends Surface {
         Skeleton.printFunctionCall("Ice.enterable");
         Skeleton.printReturn();
         return true;
+    }
+
+    /**
+     * Applies its Modifer and tries to set the new surface to SmallSnow
+     */
+    @Override
+    public void tick() {
+        Skeleton.printFunctionCall("Ice.tick");
+        modifier.applyWeather(this);
+
+        if (Skeleton.askBool("Does the ice amount get below the threshold of the Ice state ?"))
+            lane.setSurface(new SmallSnow(lane, modifier));
+        Skeleton.printReturn();
+    }
+
+    /**
+     * Tries to add ice
+     */
+    @Override
+    protected void carPassed() {
+        Skeleton.printFunctionCall("Ice.carPassed");
+        if (Skeleton.askBool("Is there any snow on the lane?"))
+            addIce(1);
+        Skeleton.printReturn();
     }
 }

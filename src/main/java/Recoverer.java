@@ -13,4 +13,18 @@ public class Recoverer {
         recoveryQueue.add(c);
         Skeleton.printReturn();
     }
+
+    /**
+     * Tries to recover crashed cars
+     */
+    public void tick() {
+        Skeleton.printFunctionCall("Recoverer.tick");
+        if (Skeleton.askBool("Are there any crashed cars?"))
+        {
+            for (Car c : recoveryQueue) {
+                c.recover();
+            }
+        }
+        Skeleton.printReturn();
+    }
 }

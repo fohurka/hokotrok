@@ -1,5 +1,11 @@
 public class Car extends CivilVehicle {
     private Recoverer rec;
+    private CarPlayer owner;
+
+    public Car(CarPlayer owner) {
+        this.owner = owner;
+    }
+
 
     public void setRecoverer(Recoverer r) {
         rec = r;
@@ -60,6 +66,16 @@ public class Car extends CivilVehicle {
     public void crash() {
         Skeleton.printFunctionCall("Car.crash");
         rec.addToRecoveryQueue(this);
+        Skeleton.printReturn();
+    }
+
+    /**
+     * Gets recovered by the Recoverer
+     */
+    public void recover() {
+        Skeleton.printFunctionCall("Car.recover");
+        loc.crashRecovered();
+        owner.goHome();
         Skeleton.printReturn();
     }
 }

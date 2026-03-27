@@ -1,5 +1,5 @@
 public abstract class Vehicle {
-    private MapComponent loc;
+    protected MapComponent loc;
 
     public abstract void crash();
 

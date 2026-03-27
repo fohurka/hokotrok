@@ -20,7 +20,7 @@ public class Test {
         @Override
         public void setup() {
             loc = new Junction();
-            c = new Car();
+            c = new Car(null);
             c.setLocation(loc);
         }
 
@@ -171,7 +171,7 @@ public class Test {
 
         @java.lang.Override
         public void setup() {
-            c = new Car();
+            c = new Car(null);
             end = new Junction();
             loc = new Lane(null, end);
             surf = new SmallSnow(loc);
@@ -201,7 +201,7 @@ public class Test {
 
         @java.lang.Override
         public void setup() {
-            c = new Car();
+            c = new Car(null);
             end = new Junction();
             loc = new Lane(null, end);
             surf = new DeepSnow(loc);
@@ -235,7 +235,7 @@ public class Test {
 
         @java.lang.Override
         public void setup() {
-            c = new Car();
+            c = new Car(null);
             end = new Junction();
             loc = new Lane(null, end);
             surf = new DeepSnow(loc);
@@ -269,7 +269,7 @@ public class Test {
 
         @java.lang.Override
         public void setup() {
-            c = new Car();
+            c = new Car(null);
             end = new Junction();
             loc = new Lane(null, end);
             surf = new Ice(loc);
@@ -359,7 +359,7 @@ public class Test {
 
         @java.lang.Override
         public void setup() {
-            c = new Car();
+            c = new Car(null);
             end = new Junction();
             loc = new Lane(null, end);
             surf = new Ice(loc);
@@ -393,7 +393,7 @@ public class Test {
 
         @java.lang.Override
         public void setup() {
-            c = new Car();
+            c = new Car(null);
             end = new Junction();
             loc = new Lane(null, end);
             surf = new DeepSnow(loc);
@@ -441,6 +441,236 @@ public class Test {
             sn.tick();
         }
     }
+
+    //5.3.16
+    public class SnowingOnSmallSnowWithNoSalt extends TestCase
+    {
+        private Lane l;
+        private SmallSnow surf;
+
+        @Override
+        public String getName() {
+            return "SnowingOnSmallSnowWithNoSalt";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null,null);
+            surf = new SmallSnow(l);
+            l.setSurface(surf);
+        }
+
+        @Override
+        public void execute() {
+            l.tick();
+        }
+    }
+    //5.3.17
+    public class SnowingOnSmallSnowWithSalt extends TestCase
+    {
+        private Lane l;
+        private SmallSnow surf;
+
+        @Override
+        public String getName() {
+            return "SnowingOnSmallSnowWithSalt";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null,null);
+            surf = new SmallSnow(l);
+            l.setSurface(surf);
+            l.salt();
+        }
+
+        @Override
+        public void execute() {
+            l.tick();
+        }
+    }
+    //5.3.18
+    public class SnowingNotOnSmallSnowWithNoSalt extends TestCase
+    {
+        private Lane l;
+        private DeepSnow surf;
+
+        @Override
+        public String getName() {
+            return "SnowingNotOnSmallSnowWithNoSalt";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null,null);
+            surf = new DeepSnow(l);
+            l.setSurface(surf);
+        }
+
+        @Override
+        public void execute() {
+            l.tick();
+        }
+    }
+    //5.3.19
+    public class SnowingOnIceWithSalt extends TestCase
+    {
+        private Lane l;
+        private Ice surf;
+
+        @Override
+        public String getName() {
+            return "SnowingOnIceWithSalt";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null,null);
+            surf = new Ice(l);
+            l.setSurface(surf);
+            l.salt();
+        }
+
+        @Override
+        public void execute() {
+            l.tick();
+        }
+    }
+    //5.3.20
+    public class SnowingOnDeepSnowWithSalt extends TestCase
+    {
+        private Lane l;
+        private DeepSnow surf;
+
+        @Override
+        public String getName() {
+            return "SnowingOnDeepSnowWithSalt";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null, null);
+            surf = new DeepSnow(l);
+            l.setSurface(surf);
+            l.salt();
+        }
+
+        @Override
+        public void execute() {
+            l.tick();
+        }
+    }
+
+    //5.3.21
+    public class AddingIceNotToSmallSnow extends TestCase
+    {
+        private Car c;
+        private Lane l;
+        private Ice surf;
+
+        @Override
+        public String getName() {
+            return "AddingIceNotToSmallSnow";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null, null);
+            surf = new Ice(l);
+            c = new Car(null);
+            c.setLocation(l);
+            l.setSurface(surf);
+        }
+
+        @Override
+        public void execute() {
+            l.remove(c);
+        }
+    }
+    //5.3.22
+    public class AddingIceToSmallSnow extends TestCase
+    {
+        private Car c;
+        private Lane l;
+        private SmallSnow surf;
+
+        @Override
+        public String getName() {
+            return "AddingIceToSmallSnow";
+        }
+
+        @Override
+        public void setup() {
+            l = new Lane(null, null);
+            surf = new SmallSnow(l);
+            l.setSurface(surf);
+            c = new Car(null);
+            c.setLocation(l);
+        }
+
+        @Override
+        public void execute() {
+            l.remove(c);
+        }
+    }
+
+    //5.3.23
+    public class CarRecovery extends TestCase
+    {
+        private Building home;
+        private CarPlayer owner;
+        private Car c;
+        private Lane loc;
+        private Recoverer rec;
+
+        @Override
+        public String getName() {
+            return "CarRecovery";
+        }
+
+        @Override
+        public void setup() {
+            loc = new Lane(null, null);
+            loc.setSurface(new SmallSnow(loc));
+            home = new Building(new Junction());
+            owner = new CarPlayer(home, null);
+            c = owner.getCar();
+            rec = new Recoverer();
+            rec.addToRecoveryQueue(c);
+            c.setLocation(loc);
+        }
+
+        @Override
+        public void execute() {
+            rec.tick();
+        }
+    }
+
+    //5.3.24
+    public class BusTriesRecoveringItself extends TestCase
+    {
+        private Bus b;
+        private Lane loc;
+
+        @Override
+        public String getName() {
+            return "BusTriesRecoveringItself";
+        }
+
+        @Override
+        public void setup() {
+            loc = new Lane(null, null);
+            b = new Bus();
+            b.setLocation(loc);
+            b.crash();
+        }
+
+        @Override
+        public void execute() {
+            b.tick();    
+        }
+    }
+
     // 5.3.33
     public class BuyEquipment extends TestCase {
         private Bank b;

@@ -173,9 +173,43 @@ public class Lane extends MapComponent {
         return surface.clearIce();
     }
 
+    /**
+     * Changes its Surfaces modifier to Salted indirectly
+     */
     public void salt() {
         Skeleton.printFunctionCall("Lane.salt");
-        surface.setSalted();
+        surface.salt();
+        Skeleton.printReturn();
+    }
+
+    /**
+     * Notifies the Surface of a tick of time passing
+     */
+    public void tick() {
+        Skeleton.printFunctionCall("Lane.tick");
+        surface.tick();
+        Skeleton.printReturn();
+    }
+
+    /**
+     * Removes a Vehicle from the Lane and notifies the Surface of a Vehicle passing through
+     * @param vehicle
+     */
+    @Override
+    public void remove(Vehicle vehicle)
+    {
+        Skeleton.printFunctionCall("Lane.remove");
+        vehicles.remove(vehicle);
+        surface.carPassed();
+        Skeleton.printReturn();
+    }
+
+    /**
+     * If the lane was blocked from a crash it is set back to normal functionality
+     */
+    public void crashRecovered()
+    {
+        Skeleton.printFunctionCall("Lane.crashRecovered");
         Skeleton.printReturn();
     }
 

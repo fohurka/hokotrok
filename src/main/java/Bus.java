@@ -19,12 +19,23 @@ public class Bus extends CivilVehicle {
     public void setOwner(BusPlayer owner) {
         this.owner = owner;
     }
+
     /**
-     * Tries to progress at the current location
+     * Tries to progress at the current location or recover itself
      */
     public void tick() {
         Skeleton.printFunctionCall("Bus.tick");
-        getLocation().progress(this);
+        if (Skeleton.askBool("Is the bus crashed?"))
+        {
+            if (Skeleton.askBool("Does the Bus recover successfully?"))
+            {
+                loc.crashRecovered();
+            }   
+        }
+        else
+        {
+            getLocation().progress(this);
+        }
         Skeleton.printReturn();
     }
 
