@@ -9,9 +9,8 @@ public class IceBreaker extends Equipment {
     public void use(Lane lane) {
         Skeleton.printFunctionCall("IceBreaker.use");
 
-        int amount = 0;
         int iceAmount = lane.clearIce();
-        lane.cleared(owner, amount);
+        lane.cleared(owner);
         
         Skeleton.printReturn();
     }

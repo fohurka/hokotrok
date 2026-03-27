@@ -10,11 +10,10 @@ public class Sweeper extends Equipment {
     public void use(Lane lane) {
         Skeleton.printFunctionCall("Sweeper.use");
 
-        int amount = 0;
         int snowAmount = lane.clearSnow();
         Lane lane2 = lane.getRightNeighbor();
         lane2.addSnow(snowAmount);
-        lane.cleared(owner, amount);
+        lane.cleared(owner);
         
         Skeleton.printReturn();
     }

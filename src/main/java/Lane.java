@@ -160,4 +160,16 @@ public class Lane extends MapComponent {
         Skeleton.printFunctionCall("Lane.crashHappened");
         Skeleton.printReturn();
     }
+
+    public int clearSnow() {
+        Skeleton.printFunctionCall("Lane.clearSnow");
+        Skeleton.printReturn();
+        return surface.clearSnow();
+    }
+
+    public int clearIce() {
+        Skeleton.printFunctionCall("Lane.clearIce");
+        Skeleton.printReturn();
+        return surface.clearIce();
+    }
 }
