@@ -21,6 +21,7 @@ public class Main {
         tests.add(test.new BusProgressIce());
         tests.add(test.new SnowplowProgressDeepSnow());
         tests.add(test.new SnowplowProgressNonDeepSnow());
+        tests.add(test.new SnowingOnSmallSnowWithNoSalt());
         tests.add(test.new SnowingOnSmallSnowWithSalt());
         tests.add(test.new SnowingNotOnSmallSnowWithNoSalt());
         tests.add(test.new SnowingOnIceWithSalt());
