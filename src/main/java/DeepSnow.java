@@ -54,7 +54,8 @@ public class DeepSnow extends Surface {
     @Override
     protected void carPassed() {
         Skeleton.printFunctionCall("DeepSnow.carPassed");
-        addIce(1);
+        if (Skeleton.askBool("Van hó a felületen?"))
+            addIce(1);
         Skeleton.printReturn();
     }
 }
