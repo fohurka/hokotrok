@@ -944,8 +944,7 @@ public class Test {
 
         @Override
         public void execute() {
-            int id = Skeleton.askInt("Milyen ID-ju eszkozt vasaroljon? ");
-            p.buyEquipment(id);
+            p.buyEquipment(5);
         }
     }
 
