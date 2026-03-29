@@ -458,7 +458,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SnowingOnSmallSnowWithNoSalt";
+            return "Havazás vékony hóra só nélkül";
         }
 
         @Override
@@ -481,7 +481,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SnowingOnSmallSnowWithSalt";
+            return "Havazás vékony hóra sóval";
         }
 
         @Override
@@ -505,7 +505,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SnowingNotOnSmallSnowWithNoSalt";
+            return "Havazás nem vékony hóra só nélkül";
         }
 
         @Override
@@ -528,7 +528,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SnowingOnIceWithSalt";
+            return "Havazás jégre sóval";
         }
 
         @Override
@@ -552,7 +552,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SnowingOnDeepSnowWithSalt";
+            return "Havazás mély hóra sóval";
         }
 
         @Override
@@ -578,7 +578,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "AddingIceNotToSmallSnow";
+            return "Jegesedés nem vékony hónál";
         }
 
         @Override
@@ -604,7 +604,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "AddingIceToSmallSnow";
+            return "Jegesedés vékony hónál";
         }
 
         @Override
@@ -633,7 +633,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "CarRecovery";
+            return "Autómentő működése";
         }
 
         @Override
@@ -662,7 +662,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "BusTriesRecoveringItself";
+            return "Busz helyreállása";
         }
 
         @Override
