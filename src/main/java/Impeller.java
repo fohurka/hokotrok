@@ -1,7 +1,7 @@
 public class Impeller extends Equipment {
     public Impeller(SnowplowPlayer owner) {
-        Skeleton.printFunctionCall("Impeller.ctor");
         super(owner);
+        Skeleton.printFunctionCall("Impeller.ctor");
         Skeleton.printReturn();
     }
 

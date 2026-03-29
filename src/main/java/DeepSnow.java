@@ -6,8 +6,8 @@ public class DeepSnow extends Surface {
     }
     
     public DeepSnow(Lane lane, Modifier mod) {
-        Skeleton.printFunctionCall("DeepSnow.constructor");
         super(lane);
+        Skeleton.printFunctionCall("DeepSnow.constructor");
         modifier = mod;
         Skeleton.printReturn();
     }

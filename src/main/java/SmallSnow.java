@@ -6,8 +6,8 @@ public class SmallSnow extends Surface {
     }
 
     public SmallSnow(Lane lane, Modifier mod) {
-        Skeleton.printFunctionCall("SmallSnow.constructor");
         super(lane);
+        Skeleton.printFunctionCall("SmallSnow.constructor");
         modifier = mod;
         Skeleton.printReturn();
     }

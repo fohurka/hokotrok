@@ -1,7 +1,7 @@
 public class Salter extends Equipment {
     public Salter(SnowplowPlayer owner) {
-        Skeleton.printFunctionCall("Salter.ctor");
         super(owner);
+        Skeleton.printFunctionCall("Salter.ctor");
         Skeleton.printReturn();
     }
 

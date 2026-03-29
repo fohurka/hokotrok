@@ -5,8 +5,8 @@ public class Ice extends Surface {
     }
 
     public Ice(Lane lane, Modifier mod) {
-        Skeleton.printFunctionCall("Ice.constructor");
         super(lane);
+        Skeleton.printFunctionCall("Ice.constructor");
         modifier = mod;
         Skeleton.printReturn();
     }
