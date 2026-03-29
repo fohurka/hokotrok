@@ -27,8 +27,6 @@ public abstract class Vehicle {
      * * @return The MapComponent (e.g., Lane or Junction) currently holding this vehicle.
      */
     protected MapComponent getLocation() {
-        Skeleton.printFunctionCall("Vehicle.getLocation");
-        Skeleton.printReturn();
         return loc;
     }
 }
