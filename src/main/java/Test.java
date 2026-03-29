@@ -387,6 +387,7 @@ public class Test {
         private Equipment eq;
         private SnowplowPlayer sp;
         private Junction jun;
+        private Lane leftNeighbor;
 
         @java.lang.Override
         public String getName() {
@@ -408,6 +409,9 @@ public class Test {
             sp = new SnowplowPlayer(jun);
             eq = new Sweeper(sp);
             sn.setEquipment(eq);
+            leftNeighbor = new Lane(null, null);
+            leftNeighbor.setSurface(new SmallSnow(leftNeighbor));
+            loc.addNeighbors(null, leftNeighbor);
         }
 
         public void execute() {
@@ -424,6 +428,7 @@ public class Test {
         private Equipment eq;
         private SnowplowPlayer sp;
         private Junction jun;
+        private Lane leftNeighbor;
 
         @java.lang.Override
         public String getName() {
@@ -443,6 +448,9 @@ public class Test {
             sp = new SnowplowPlayer(jun);
             eq = new Sweeper(sp);
             sn.setEquipment(eq);
+            leftNeighbor = new Lane(null, null);
+            leftNeighbor.setSurface(new SmallSnow(leftNeighbor));
+            loc.addNeighbors(null, leftNeighbor);
         }
 
         public void execute() {
