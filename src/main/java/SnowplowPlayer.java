@@ -16,7 +16,7 @@ public class SnowplowPlayer extends Player {
      */
     public SnowplowPlayer(Junction starter) {
         this.snowplows = new ArrayList<>();
-        snowplows.add(new Snowplow(starter));
+        snowplows.add(new Snowplow());
     }
 
     /**
