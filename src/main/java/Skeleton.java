@@ -29,8 +29,7 @@ public class Skeleton {
      * @param functionName The name of the function being called.
      */
     public static void printFunctionCall(String functionName) {
-        if (!init)
-        {
+        if (!init) {
             System.out.println(getIndent() + "---->" + functionName + "()");
 
             indentLevel++;
@@ -42,16 +41,15 @@ public class Skeleton {
      * matching the previous function call's indentation.
      */
     public static void printReturn() {
-        if (!init)
-        {
+        if (!init) {
             indentLevel--;
-            
+
             System.out.println(getIndent() + "<----return");
         }
     }
 
     public static boolean askBool(String question) {
-        System.out.print(question + " (true/false): ");
+        System.out.print(question + " (true/false):\t");
         while (true) {
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.equals("true") || input.equals("t") || input.equals("igen") || input.equals("y")
@@ -73,7 +71,7 @@ public class Skeleton {
             try {
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.print("Kérlek érvényes számot adj meg! " + question);
+                System.out.print("Kérlek érvényes számot adj meg! " + question + "\t");
             }
         }
     }
