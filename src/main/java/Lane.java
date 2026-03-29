@@ -88,6 +88,10 @@ public class Lane extends MapComponent {
      */
     public void progress(CivilVehicle cv) {
         Skeleton.printFunctionCall("Lane.progress");
+        if(surface == null) {
+            Skeleton.printReturn();
+            return;
+        }
         int prog = surface.calculateProgress(cv);
         if (prog > 0) {
 
@@ -106,6 +110,10 @@ public class Lane extends MapComponent {
      */
     public void progress(Snowplow sn) {
         Skeleton.printFunctionCall("Lane.progress");
+        if(surface == null) {
+            Skeleton.printReturn();
+            return;
+        }
         int prog = surface.calculateProgress(sn);
         boolean ending = Skeleton.askBool("A hókotró elérte a sáv végét?");
         if (ending) {
