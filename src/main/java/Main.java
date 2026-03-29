@@ -29,6 +29,16 @@ public class Main {
         tests.add(test.new AddingIceToSmallSnow());
         tests.add(test.new CarRecovery());
         tests.add(test.new BusTriesRecoveringItself());
+        tests.add(test.new ChangeEquipment());
+        tests.add(test.new SweeperClearsSnow());
+        tests.add(test.new SweeperClearsIce());
+        tests.add(test.new ImpellerClearsSnow());
+        tests.add(test.new ImpellerClearsIce());
+        tests.add(test.new IceBreakerClearsSnow());
+        tests.add(test.new IceBreakerClearsIce());
+        tests.add(test.new SalterClearsLane());
+        tests.add(test.new DragonBladeClearsSnow());
+        tests.add(test.new DragonBladeClearsIce());
 
         while (true) {
             System.out.println("\n=== Menü ===");
