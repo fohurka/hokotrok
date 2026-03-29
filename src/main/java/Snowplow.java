@@ -3,6 +3,12 @@ import java.util.List;
 public class Snowplow extends Vehicle {
     private Equipment eq;
 
+    public Snowplow()
+    {
+        Skeleton.printFunctionCall("Snowplow.constructor");
+        Skeleton.printReturn();
+    }
+
     /**
      * Sets the equipment of the snowplow
      * @param eq the Equipment to equip
