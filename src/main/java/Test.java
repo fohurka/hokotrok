@@ -166,7 +166,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressSmallSnow";
+            return "Vékony hóban autózás";
         }
 
         @java.lang.Override
@@ -196,7 +196,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressDeepSnowStuck";
+            return "Vastag hóban autózás elakadással";
         }
 
         @java.lang.Override
@@ -230,7 +230,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressDeepSnowSwitch";
+            return "Vastag hóban autózás sávváltással";
         }
 
         @java.lang.Override
@@ -264,7 +264,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressIce";
+            return "Autózás jégen";
         }
 
         @java.lang.Override
@@ -296,7 +296,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "BusProgressSmallSnow";
+            return "Vékony hóban buszozás";
         }
 
         @java.lang.Override
@@ -324,7 +324,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "BusProgressDeepSnow";
+            return "Vastag hóban buszozás elakadással";
         }
 
         @java.lang.Override
@@ -354,7 +354,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "BusProgressIce";
+            return "Buszozás jégen";
         }
 
         @java.lang.Override
@@ -390,7 +390,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "SnowplowProgressDeepSnow";
+            return "Hókotró haladása vastag hóban";
         }
 
         @java.lang.Override
@@ -427,7 +427,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "SnowplowProgressNonDeepSnow";
+            return "Hókotró haladása nem vastag hóban";
         }
 
         @java.lang.Override
