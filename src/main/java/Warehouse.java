@@ -19,14 +19,32 @@ public class Warehouse extends Building {
      * @param id The ID of the equipment to buy.
      * @return The purchased Equipment object, or null if the purchase failed.
      */
-    public Equipment buyEquipment(Player p, int id) {
+    public Equipment buyEquipment(SnowplowPlayer p, int id) {
         Skeleton.printFunctionCall("Warehouse.buyEquipment");
         Equipment boughtEquipment = null;
+        
         if (bank != null) {
             int price = 50; // Dummy price for skeleton
             boolean success = bank.hasEnoughMoney(p, price);
             if (success) {
                 // Here the equipment is created and given to the player (true branch)
+                switch (id) {
+                case 1:
+                    boughtEquipment = new Sweeper(p);
+                    break;
+                case 2:
+                    boughtEquipment = new Impeller(p);
+                    break;
+                case 3:
+                    boughtEquipment = new Salter(p);
+                    break;
+                case 4:
+                    boughtEquipment = new IceBreaker(p);
+                    break;
+                default:
+                    boughtEquipment = new DragonBlade(p);
+                    break;
+            }
             } else {
                 // Purchase failed (false branch)
             }
@@ -50,6 +68,7 @@ public class Warehouse extends Building {
             boolean success = bank.hasEnoughMoney(p, price);
             if (success) {
                 // Here the snowplow is created and given to the player (true branch)
+                boughtSnowplow = new Snowplow();
             } else {
                 // Purchase failed (false branch)
             }
