@@ -34,7 +34,10 @@ public class Bus extends CivilVehicle {
         }
         else
         {
-            getLocation().progress(this);
+            if(getLocation() != null)
+            {
+                getLocation().progress(this);
+            }
         }
         Skeleton.printReturn();
     }
