@@ -218,4 +218,16 @@ public class Lane extends MapComponent {
         surface.addSnow(amount);
         Skeleton.printReturn();
     }
+
+    public void setRightNeighbor(Lane l2) {
+        Skeleton.printFunctionCall("Lane.setRightNeighbor");
+        this.rightNeighbor = l2;
+        Skeleton.printReturn();
+    }
+    
+    public void setLeftNeighbor(Lane l2) {
+        Skeleton.printFunctionCall("Lane.setLeftNeighbor");
+        this.leftNeighbor = l2;
+        Skeleton.printReturn();
+    }
 }
