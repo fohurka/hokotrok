@@ -38,13 +38,13 @@ public abstract class Surface {
     public int clearSnow() {
         Skeleton.printFunctionCall("Surface.clearSnow");
         Skeleton.printReturn();
-        return Skeleton.askInt("Surface.clearSnow return value: ");
+        return 1;
     }
     
     public int clearIce() {
         Skeleton.printFunctionCall("Surface.clearIce");
         Skeleton.printReturn();
-        return Skeleton.askInt("Surface.clearIce return value: ");
+        return 1;
     }
 
     /**
