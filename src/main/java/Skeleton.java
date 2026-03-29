@@ -48,6 +48,16 @@ public class Skeleton {
         }
     }
 
+    /**
+     * Asks the user a boolean question via standard input and returns the parsed
+     * answer.
+     * Continuously prompts until a valid boolean-like string (true, t, igen, y, yes
+     * / false, f, nem, n, no) is provided.
+     *
+     * @param question The question to display to the user.
+     * @return True if the user inputs a positive response, false for a negative
+     *         response.
+     */
     public static boolean askBool(String question) {
         System.out.print(question + " (true/false):\t");
         while (true) {
@@ -64,6 +74,14 @@ public class Skeleton {
         }
     }
 
+    /**
+     * Asks the user a question expecting an integer answer via standard input.
+     * Continuously prompts until an input that can be parsed as an integer is
+     * provided.
+     *
+     * @param question The question to display to the user.
+     * @return The integer value parsed from the user's input.
+     */
     public static int askInt(String question) {
         System.out.print(question);
         while (true) {
