@@ -690,7 +690,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "ChangeEquipment";
+            return "Kotrófej váltása";
         }
 
         @Override
@@ -711,6 +711,38 @@ public class Test {
     }
 
     //5.3.26
+    public class SweeperClearsSnow extends TestCase {
+        private Lane l1;
+        private Lane l2;
+        private Sweeper e;
+        private Surface surf1;
+        private Surface surf2;
+        private SnowplowPlayer p;
+        
+        @Override
+        public String getName() {
+            return "Söprő fej havat takarít";
+        }
+        
+        @Override
+        public void setup() {
+            l1 = new Lane(null, null);
+            surf1 = new DeepSnow(l1);
+            l1.setSurface(surf1);
+            l2 = new Lane(null, null);
+            surf2 = new SmallSnow(l2);
+            l2.setSurface(surf2);
+            p = new SnowplowPlayer(new Junction());
+            e = new Sweeper(p);
+        }
+        
+        @Override
+        public void execute() {
+            e.use(l1);
+        }
+    }
+    
+    //5.3.27
     public class SweeperClearsIce extends TestCase {
         private Lane l1;
         private Lane l2;
@@ -721,7 +753,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SweeperClearsIce";
+            return "Söprő fej jeget takarít";
         }
 
         @Override
@@ -741,39 +773,7 @@ public class Test {
             e.use(l1);
         }
     }
-    //5.3.26
-    public class SweeperClearsSnow extends TestCase {
-        private Lane l1;
-        private Lane l2;
-        private Sweeper e;
-        private Surface surf1;
-        private Surface surf2;
-        private SnowplowPlayer p;
-
-        @Override
-        public String getName() {
-            return "SweeperClearsSnow";
-        }
-
-        @Override
-        public void setup() {
-            l1 = new Lane(null, null);
-            surf1 = new DeepSnow(l1);
-            l1.setSurface(surf1);
-            l2 = new Lane(null, null);
-            surf2 = new SmallSnow(l2);
-            l2.setSurface(surf2);
-            p = new SnowplowPlayer(new Junction());
-            e = new Sweeper(p);
-        }
-
-        @Override
-        public void execute() {
-            e.use(l1);
-        }
-    }
-
-    //5.3.27
+    //5.3.28
     public class ImpellerClearsSnow extends TestCase {
         private Lane l1;
         private Impeller e;
@@ -782,7 +782,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "ImpellerClearsSnow";
+            return "Hányó fej havat takarít";
         }
 
         @Override
@@ -800,7 +800,7 @@ public class Test {
         }
     }
 
-    //5.3.28
+    //5.3.29
     public class ImpellerClearsIce extends TestCase {
         private Lane l1;
         private Impeller e;
@@ -809,7 +809,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "ImpellerClearsIce";
+            return "Hányó fej jeget takarít";
         }
 
         @Override
@@ -827,7 +827,7 @@ public class Test {
         }
     }
 
-    //5.3.31
+    //5.3.30
     public class SalterClearsLane extends TestCase {
         private Lane l1;
         private Salter e;
@@ -836,7 +836,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "SalterClearsLane";
+            return "Sószóró fej használva van";
         }
 
         @Override
@@ -854,7 +854,7 @@ public class Test {
         }
     }
 
-    //5.3.32
+    //5.3.31
     public class DragonBladeClearsSnow extends TestCase {
         private Lane l1;
         private DragonBlade e;
@@ -863,7 +863,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "DragonBladeClearsSnow";
+            return "Sárkány fej havat takarít";
         }
 
         @Override
@@ -881,7 +881,7 @@ public class Test {
         }
     }
     
-    //5.3.33
+    //5.3.32
     public class DragonBladeClearsIce extends TestCase {
         private Lane l1;
         private DragonBlade e;
@@ -890,7 +890,7 @@ public class Test {
 
         @Override
         public String getName() {
-            return "DragonBladeClearsIce";
+            return "Sárkány fej jeget takarít";
         }
 
         @Override
