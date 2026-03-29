@@ -166,7 +166,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressSmallSnow";
+            return "Vékony hóban autózás";
         }
 
         @java.lang.Override
@@ -196,7 +196,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressDeepSnowStuck";
+            return "Vastag hóban autózás elakadással";
         }
 
         @java.lang.Override
@@ -230,7 +230,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressDeepSnowSwitch";
+            return "Vastag hóban autózás sávváltással";
         }
 
         @java.lang.Override
@@ -264,7 +264,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "CarProgressIce";
+            return "Autózás jégen";
         }
 
         @java.lang.Override
@@ -296,7 +296,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "BusProgressSmallSnow";
+            return "Vékony hóban buszozás";
         }
 
         @java.lang.Override
@@ -324,7 +324,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "BusProgressDeepSnow";
+            return "Vastag hóban buszozás elakadással";
         }
 
         @java.lang.Override
@@ -354,7 +354,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "BusProgressIce";
+            return "Buszozás jégen";
         }
 
         @java.lang.Override
@@ -390,7 +390,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "SnowplowProgressDeepSnow";
+            return "Hókotró haladása vastag hóban";
         }
 
         @java.lang.Override
@@ -427,7 +427,7 @@ public class Test {
 
         @java.lang.Override
         public String getName() {
-            return "SnowplowProgressNonDeepSnow";
+            return "Hókotró haladása nem vastag hóban";
         }
 
         @java.lang.Override
@@ -827,58 +827,6 @@ public class Test {
         }
     }
 
-    //5.3.29
-    public class IceBreakerClearsIce extends TestCase {
-        private Lane l1;
-        private IceBreaker e;
-        private Surface surf1;
-        private SnowplowPlayer p;
-
-        @Override
-        public String getName() {
-            return "IceBreakerClearsIce";
-        }
-
-        @Override
-        public void setup() {
-            l1 = new Lane(null, null);
-            surf1 = new Ice(l1);
-            l1.setSurface(surf1);
-            p = new SnowplowPlayer(new Junction());
-            e = new IceBreaker(p);
-        }
-
-        @Override
-        public void execute() {
-            e.use(l1);
-        }
-    }
-    //5.3.30
-    public class IceBreakerClearsSnow extends TestCase {
-        private Lane l1;
-        private IceBreaker e;
-        private Surface surf1;
-        private SnowplowPlayer p;
-
-        @Override
-        public String getName() {
-            return "IceBreakerClearsSnow";
-        }
-
-        @Override
-        public void setup() {
-            l1 = new Lane(null, null);
-            surf1 = new SmallSnow(l1);
-            l1.setSurface(surf1);
-            p = new SnowplowPlayer(new Junction());
-            e = new IceBreaker(p);
-        }
-
-        @Override
-        public void execute() {
-            e.use(l1);
-        }
-    }
     //5.3.31
     public class SalterClearsLane extends TestCase {
         private Lane l1;

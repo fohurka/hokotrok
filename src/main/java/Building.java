@@ -2,6 +2,11 @@ public class Building extends MapComponent {
 
     private Junction connection;
 
+    /**
+     * Constructs a new Building connected to the specified Junction.
+     *
+     * @param j The Junction this building is connected to.
+     */
     public Building(Junction j) {
         super();
         this.connection = j;
