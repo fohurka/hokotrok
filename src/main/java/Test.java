@@ -100,7 +100,7 @@ public class Test {
 
         @Override
         public void execute() {
-            int choice = Skeleton.askInt("Which lane? 0 or 1");
+            int choice = Skeleton.askInt("Melyik sáv? 0 vagy 1\t");
             p.choseDirection(choice == 0 ? dest1 : dest2, 0);
         }
     }
@@ -126,7 +126,7 @@ public class Test {
 
         @Override
         public void execute() {
-            int choice = Skeleton.askInt("Which lane? 0 or 1");
+            int choice = Skeleton.askInt("Melyik sáv? 0 vagy 1\t");
             p.choseDirection(choice == 0 ? dest1 : dest2, 0);
         }
     }
@@ -152,7 +152,7 @@ public class Test {
 
         @Override
         public void execute() {
-            int choice = Skeleton.askInt("Which lane? 0 or 1");
+            int choice = Skeleton.askInt("Melyik sáv? 0 vagy 1\t");
             p.choseDirection(choice == 0 ? dest1 : dest2, 0);
         }
     }
