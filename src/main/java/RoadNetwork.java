@@ -31,7 +31,7 @@ public class RoadNetwork {
      * @param snowAmount The amount of snow cleared.
      */
     public void laneCleared(Player p, int snowAmount) {
-        Skeleton.printFunctionCall("RoadNetwork.clearedSnow");
+        Skeleton.printFunctionCall("RoadNetwork.laneCleared");
         if (bank != null) {
             bank.pay(p, snowAmount);
         }
