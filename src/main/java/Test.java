@@ -79,8 +79,7 @@ public class Test {
     // 5.3.4
     public class JunctionChoiceCar extends TestCase {
         private CarPlayer p;
-        private Lane dest1;
-        private Lane dest2;
+        private Lane dest;
 
         @Override
         public String getName() {
@@ -94,22 +93,19 @@ public class Test {
             Building work = new Building(null);
             p = new CarPlayer(home, work);
             p.getCar().setLocation(j);
-            dest1 = new Lane(j, new Junction());
-            dest2 = new Lane(j, new Junction());
+            dest = new Lane(j, new Junction());
         }
 
         @Override
         public void execute() {
-            int choice = Skeleton.askInt("Melyik sáv? 0 vagy 1\t");
-            p.choseDirection(choice == 0 ? dest1 : dest2, 0);
+            p.choseDirection(dest, 0);
         }
     }
 
     // 5.3.5
     public class JunctionChoiceBus extends TestCase {
         private BusPlayer p;
-        private Lane dest1;
-        private Lane dest2;
+        private Lane dest;
 
         @Override
         public String getName() {
@@ -120,22 +116,19 @@ public class Test {
         public void setup() {
             Junction j = new Junction();
             p = new BusPlayer(j);
-            dest1 = new Lane(j, new Junction());
-            dest2 = new Lane(j, new Junction());
+            dest = new Lane(j, new Junction());
         }
 
         @Override
         public void execute() {
-            int choice = Skeleton.askInt("Melyik sáv? 0 vagy 1\t");
-            p.choseDirection(choice == 0 ? dest1 : dest2, 0);
+            p.choseDirection(dest, 0);
         }
     }
 
     // 5.3.6
     public class JunctionChoiceSnowplow extends TestCase {
         private SnowplowPlayer p;
-        private Lane dest1;
-        private Lane dest2;
+        private Lane dest;
 
         @Override
         public String getName() {
@@ -146,14 +139,12 @@ public class Test {
         public void setup() {
             Junction j = new Junction();
             p = new SnowplowPlayer(j);
-            dest1 = new Lane(j, new Junction());
-            dest2 = new Lane(j, new Junction());
+            dest = new Lane(j, new Junction());
         }
 
         @Override
         public void execute() {
-            int choice = Skeleton.askInt("Melyik sáv? 0 vagy 1\t");
-            p.choseDirection(choice == 0 ? dest1 : dest2, 0);
+            p.choseDirection(dest, 0);
         }
     }
 

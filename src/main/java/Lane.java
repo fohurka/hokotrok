@@ -39,7 +39,7 @@ public class Lane extends MapComponent {
      * @param p The snowplow player who performs the clearing and receives the reward.
      */
     public void cleared(SnowplowPlayer p) {
-        Skeleton.printFunctionCall("Lane.clearSnow");
+        Skeleton.printFunctionCall("Lane.cleared");
 
         int snowAmount = 1;
 
@@ -76,8 +76,9 @@ public class Lane extends MapComponent {
      */
     public boolean enterable() {
         Skeleton.printFunctionCall("Lane.enterable");
+        boolean enterable = surface.enterable();
         Skeleton.printReturn();
-        return surface.enterable();
+        return enterable;
     }
 
     /**
@@ -171,14 +172,16 @@ public class Lane extends MapComponent {
 
     public int clearSnow() {
         Skeleton.printFunctionCall("Lane.clearSnow");
+        int amount = surface.clearSnow();
         Skeleton.printReturn();
-        return surface.clearSnow();
+        return amount;
     }
 
     public int clearIce() {
         Skeleton.printFunctionCall("Lane.clearIce");
+        int amount = surface.clearIce();
         Skeleton.printReturn();
-        return surface.clearIce();
+        return amount;
     }
 
     /**
