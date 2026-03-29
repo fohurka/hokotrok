@@ -385,6 +385,8 @@ public class Test {
         private Surface surf;
         private Snowplow sn;
         private Equipment eq;
+        private SnowplowPlayer sp;
+        private Junction jun;
 
         @java.lang.Override
         public String getName() {
@@ -402,7 +404,9 @@ public class Test {
             end.addEnding(loc);
             sn = new Snowplow();
             sn.setLocation(loc);
-            eq = new Sweeper();
+            jun = new Junction();
+            sp = new SnowplowPlayer(jun);
+            eq = new Sweeper(sp);
             sn.setEquipment(eq);
         }
 
@@ -418,6 +422,8 @@ public class Test {
         private Surface surf;
         private Snowplow sn;
         private Equipment eq;
+        private SnowplowPlayer sp;
+        private Junction jun;
 
         @java.lang.Override
         public String getName() {
@@ -433,7 +439,9 @@ public class Test {
             end.addEnding(loc);
             sn = new Snowplow();
             sn.setLocation(loc);
-            eq = new Sweeper();
+            jun = new Junction();
+            sp = new SnowplowPlayer(jun);
+            eq = new Sweeper(sp);
             sn.setEquipment(eq);
         }
 
