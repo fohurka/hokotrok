@@ -19,7 +19,7 @@ public class Ice extends Surface {
     @Override
     public int calculateProgress(CivilVehicle cv) {
         Skeleton.printFunctionCall("Ice.calculateProgress");
-        boolean slip = Skeleton.askBool("Does the vehicle slip?");
+        boolean slip = Skeleton.askBool("Megcsúszik a jármű?");
         if (slip) {
             cv.slip(getLane());
             Skeleton.printReturn();
@@ -47,7 +47,7 @@ public class Ice extends Surface {
         Skeleton.printFunctionCall("Ice.tick");
         modifier.applyWeather(this);
 
-        if (Skeleton.askBool("Does the ice amount get below the threshold of the Ice state ?"))
+        if (Skeleton.askBool("Elolvadt a jég?"))
             lane.setSurface(new SmallSnow(lane, modifier));
         Skeleton.printReturn();
     }
@@ -58,7 +58,7 @@ public class Ice extends Surface {
     @Override
     protected void carPassed() {
         Skeleton.printFunctionCall("Ice.carPassed");
-        if (Skeleton.askBool("Is there any snow on the lane?"))
+        if (Skeleton.askBool("Van hó a felületen?"))
             addIce(1);
         Skeleton.printReturn();
     }

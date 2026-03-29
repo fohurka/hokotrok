@@ -91,7 +91,7 @@ public class Lane extends MapComponent {
         int prog = surface.calculateProgress(cv);
         if (prog > 0) {
 
-            boolean ending = Skeleton.askBool("Did the vehicle reach the end of the lane?");
+            boolean ending = Skeleton.askBool("A jármű elérte a sáv végét?");
             if (ending) {
                 cv.setLocation(end);
             }
@@ -107,7 +107,7 @@ public class Lane extends MapComponent {
     public void progress(Snowplow sn) {
         Skeleton.printFunctionCall("Lane.progress");
         int prog = surface.calculateProgress(sn);
-        boolean ending = Skeleton.askBool("Did the snowplow reach the end of the lane?");
+        boolean ending = Skeleton.askBool("A hókotró elérte a sáv végét?");
         if (ending) {
             sn.laneCleared(this, end);
         }

@@ -76,13 +76,13 @@ public class Warehouse extends Building {
     public boolean isAtWarehouse(Snowplow s) {
         Skeleton.printFunctionCall("Warehouse.isAtWarehouse");
         Skeleton.printReturn();
-        return Skeleton.askBool("Are you at the warehouse?");
+        return Skeleton.askBool("A raktárnál van a hókotró?");
     }
 
     public boolean isInStock(Equipment eq) {
         Skeleton.printFunctionCall("Warehouse.isInStock");
         Skeleton.printReturn();
-        return Skeleton.askBool("Is the equipment in stock?");
+        return Skeleton.askBool("A raktárban van a kotrófej?");
     }
 
     public void removeFromStock(Equipment eq) {

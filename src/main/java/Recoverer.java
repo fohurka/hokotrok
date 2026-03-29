@@ -19,7 +19,7 @@ public class Recoverer {
      */
     public void tick() {
         Skeleton.printFunctionCall("Recoverer.tick");
-        if (Skeleton.askBool("Are there any crashed cars?"))
+        if (Skeleton.askBool("Van ütközött autó?"))
         {
             for (Car c : recoveryQueue) {
                 c.recover();

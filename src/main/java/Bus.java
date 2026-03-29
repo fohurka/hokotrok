@@ -25,9 +25,9 @@ public class Bus extends CivilVehicle {
      */
     public void tick() {
         Skeleton.printFunctionCall("Bus.tick");
-        if (Skeleton.askBool("Is the bus crashed?"))
+        if (Skeleton.askBool("A busz ütközött állapotban van?"))
         {
-            if (Skeleton.askBool("Does the Bus recover successfully?"))
+            if (Skeleton.askBool("Sikerül a busznak elindulnia?"))
             {
                 loc.crashRecovered();
             }   

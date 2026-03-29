@@ -42,7 +42,7 @@ public class SmallSnow extends Surface {
     public void tick() {
         Skeleton.printFunctionCall("SmallSnow.tick");
         modifier.applyWeather(this);
-        if (Skeleton.askBool("Does the snow amount get above the threshold of the DeepSnow state?"))
+        if (Skeleton.askBool("A hó mennyiség a vékony hó mértéke fölé emelkedik?"))
             lane.setSurface(new DeepSnow(lane, modifier));
         Skeleton.printReturn();
     }
@@ -53,10 +53,10 @@ public class SmallSnow extends Surface {
     @Override
     protected void carPassed() {
         Skeleton.printFunctionCall("SmallSnow.carPassed");
-        if (Skeleton.askBool("Is there any snow on the lane?"))
+        if (Skeleton.askBool("Van hó a sávban?"))
         {
             addIce(1);
-            if (Skeleton.askBool("Does the ice amount get above the threshold of the Ice state?"))
+            if (Skeleton.askBool("A jég mennyisége a megadott határérték fölé emelkedik?"))
                 lane.setSurface(new Ice(lane, modifier));
         }
         Skeleton.printReturn();

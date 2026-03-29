@@ -59,17 +59,17 @@ public class Skeleton {
      *         response.
      */
     public static boolean askBool(String question) {
-        System.out.print(question + " (true/false):\t");
+        System.out.print(question + " (igen/nem): ");
         while (true) {
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.equals("true") || input.equals("t") || input.equals("igen") || input.equals("y")
-                    || input.equals("yes")) {
+                    || input.equals("yes") || input.equals("i"))) {
                 return true;
             } else if (input.equals("false") || input.equals("f") || input.equals("nem") || input.equals("n")
                     || input.equals("no")) {
                 return false;
             } else {
-                System.out.print("Érvénytelen bemenet! " + question + " (true/false): ");
+                System.out.print("Érvénytelen bemenet! " + question + " (igen/nem): ");
             }
         }
     }
