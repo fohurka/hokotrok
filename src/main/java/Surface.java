@@ -11,6 +11,12 @@ public abstract class Surface {
         modifier = new Unmodified();
     }
 
+    /**
+     * Calculates the movement progress for a Snowplow on this specific surface.
+     * The calculation typically considers the current snow/ice levels and any active modifiers.
+     * * @param sn The Snowplow attempting to move across the surface.
+     * @return An integer representing the distance or progress units the vehicle can cover.
+     */
     public int calculateProgress(Snowplow sn) {
         Skeleton.printFunctionCall("Surface.calculateProgress");
         Skeleton.printReturn();
@@ -35,12 +41,22 @@ public abstract class Surface {
         Skeleton.printReturn();
     }
 
+    /**
+     * Fully clears the snow from this surface.
+     * This is usually triggered by specialized equipment like an Impeller or DragonBlade.
+     * * @return The total amount of snow that was removed during the operation.
+     */
     public int clearSnow() {
         Skeleton.printFunctionCall("Surface.clearSnow");
         Skeleton.printReturn();
         return 1;
     }
-    
+
+    /**
+     * Fully clears the ice from this surface.
+     * This is usually triggered by specialized equipment like a DragonBlade.
+     * * @return The total amount of ice that was removed during the operation.
+     */
     public int clearIce() {
         Skeleton.printFunctionCall("Surface.clearIce");
         Skeleton.printReturn();
