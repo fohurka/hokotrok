@@ -63,7 +63,7 @@ public class Skeleton {
         while (true) {
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.equals("true") || input.equals("t") || input.equals("igen") || input.equals("y")
-                    || input.equals("yes") || input.equals("i"))) {
+                    || input.equals("yes") || input.equals("i")) {
                 return true;
             } else if (input.equals("false") || input.equals("f") || input.equals("nem") || input.equals("n")
                     || input.equals("no")) {
