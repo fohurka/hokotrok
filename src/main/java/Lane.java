@@ -41,7 +41,7 @@ public class Lane extends MapComponent {
     public void cleared(SnowplowPlayer p) {
         Skeleton.printFunctionCall("Lane.clearSnow");
 
-        int snowAmount = Skeleton.askInt("How much snow did the machine clear? ");
+        int snowAmount = 1;
 
         if (rn != null) {
             rn.laneCleared(p, snowAmount);
