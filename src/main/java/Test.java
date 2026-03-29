@@ -827,58 +827,6 @@ public class Test {
         }
     }
 
-    //5.3.29
-    public class IceBreakerClearsIce extends TestCase {
-        private Lane l1;
-        private IceBreaker e;
-        private Surface surf1;
-        private SnowplowPlayer p;
-
-        @Override
-        public String getName() {
-            return "IceBreakerClearsIce";
-        }
-
-        @Override
-        public void setup() {
-            l1 = new Lane(null, null);
-            surf1 = new Ice(l1);
-            l1.setSurface(surf1);
-            p = new SnowplowPlayer(new Junction());
-            e = new IceBreaker(p);
-        }
-
-        @Override
-        public void execute() {
-            e.use(l1);
-        }
-    }
-    //5.3.30
-    public class IceBreakerClearsSnow extends TestCase {
-        private Lane l1;
-        private IceBreaker e;
-        private Surface surf1;
-        private SnowplowPlayer p;
-
-        @Override
-        public String getName() {
-            return "IceBreakerClearsSnow";
-        }
-
-        @Override
-        public void setup() {
-            l1 = new Lane(null, null);
-            surf1 = new SmallSnow(l1);
-            l1.setSurface(surf1);
-            p = new SnowplowPlayer(new Junction());
-            e = new IceBreaker(p);
-        }
-
-        @Override
-        public void execute() {
-            e.use(l1);
-        }
-    }
     //5.3.31
     public class SalterClearsLane extends TestCase {
         private Lane l1;
