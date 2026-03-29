@@ -52,7 +52,7 @@ public class Main {
                 System.out.println((i + 1) + ". " + tests.get(i).getName());
             }
 
-            int choice = Skeleton.askInt("Válassz egy tesztesetet a sorszámaq alapján: ");
+            int choice = Skeleton.askInt("Válassz egy tesztesetet a sorszáma alapján: ");
 
             if (choice == 0) {
                 System.out.println("Kilépés...");
