@@ -39,6 +39,12 @@ public class Main {
         tests.add(test.new SalterClearsLane());
         tests.add(test.new DragonBladeClearsSnow());
         tests.add(test.new DragonBladeClearsIce());
+        tests.add(test.new BuyEquipment());
+        tests.add(test.new BuySnowplow());
+        tests.add(test.new RewardForClearing());
+        tests.add(test.new BusRoundComplete());
+
+
 
         while (true) {
             System.out.println("\n=== Menü ===");
