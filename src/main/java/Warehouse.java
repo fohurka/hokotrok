@@ -55,4 +55,38 @@ public class Warehouse extends Building {
         Skeleton.printReturn();
         return boughtSnowplow;
     }
+
+    public void changeEquipment(Snowplow s, Equipment eq) {
+        Skeleton.printFunctionCall("Warehouse.changeEquipment");
+        if(isAtWarehouse(s)) {
+            if(isInStock(eq)) {
+                addtoStock(s.getCurrentEquipment());
+                s.setEquipment(eq);
+                removeFromStock(eq);
+            }
+        }
+        Skeleton.printReturn();
+    }
+
+    public void addtoStock(Equipment eq) {
+        Skeleton.printFunctionCall("Warehouse.addToStock");
+        Skeleton.printReturn();
+    }
+
+    public boolean isAtWarehouse(Snowplow s) {
+        Skeleton.printFunctionCall("Warehouse.isAtWarehouse");
+        Skeleton.printReturn();
+        return Skeleton.askBool("Are you at the warehouse?");
+    }
+
+    public boolean isInStock(Equipment eq) {
+        Skeleton.printFunctionCall("Warehouse.isInStock");
+        Skeleton.printReturn();
+        return Skeleton.askBool("Is the equipment in stock?");
+    }
+
+    public void removeFromStock(Equipment eq) {
+        Skeleton.printFunctionCall("Warehouse.removeFromStock");
+        Skeleton.printReturn();
+    }
 }

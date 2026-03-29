@@ -670,6 +670,37 @@ public class Test {
             b.tick();    
         }
     }
+    
+    //5.3.25
+    public class ChangeEquipment extends TestCase {
+        private SnowplowPlayer p;
+        private Snowplow s;
+        private Sweeper e1;
+        private IceBreaker e2;
+        private Warehouse w;
+        private Junction j;
+
+        @Override
+        public String getName() {
+            return "Hókotró felszerelésének megváltoztatása";
+        }
+
+        @Override
+        public void setup() {
+            j = new Junction();
+            p = new SnowplowPlayer(j);
+            s = p.getSnowplow(0);
+            e1 = new Sweeper(p);
+            e2 = new IceBreaker(p);
+            w = new Warehouse(j);
+            s.setEquipment(e1);
+        }
+
+        @Override
+        public void execute() {
+            w.changeEquipment(s, e2);
+        }
+    }
 
     // 5.3.33
     public class BuyEquipment extends TestCase {

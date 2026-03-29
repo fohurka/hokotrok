@@ -51,4 +51,10 @@ public class Snowplow extends Vehicle {
      */
     public void crash() {
     }
+
+    public Equipment getCurrentEquipment() {
+        Skeleton.printFunctionCall("Snowplow.getCurrentEquipment");
+        Skeleton.printReturn();
+        return eq;
+    }
 }
