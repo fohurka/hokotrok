@@ -11,7 +11,9 @@ public class BusPlayer extends Player {
      * @param starter The junction where the bus initially spawns.
      */
     public BusPlayer(Junction starter) {
-        this.bus = new Bus(starter);
+        this.bus = new Bus();
+        this.bus.setOwner(this);
+        this.bus.setLocation(starter);
     }
 
     /**
@@ -24,6 +26,7 @@ public class BusPlayer extends Player {
         Skeleton.printReturn();
         return bus;
     }
+
     /**
      * Sets the single bus controlled by this player.
      * Used mainly during the skeleton test setup phase to inject a specific bus.

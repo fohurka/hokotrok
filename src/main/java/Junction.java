@@ -53,6 +53,7 @@ public class Junction extends MapComponent {
     public void addStarting(Lane lane) {
         starting.add(lane);
     }
+
     /**
      * Sets the road network that this junction is a part of.
      *
@@ -61,9 +62,11 @@ public class Junction extends MapComponent {
     public void setRoadNetwork(RoadNetwork rn) {
         this.rn = rn;
     }
+
     public void addBuilding(Building building) {
         this.buildings.add(building);
     }
+
     /**
      * Handles a bus arriving at the junction. In the skeleton, the method
      * asks the tester if the bus has reached its target destination.
@@ -84,10 +87,8 @@ public class Junction extends MapComponent {
         boolean isTarget = false;
 
         if (!buildings.isEmpty()) {
-            for (int i=0;i<buildings.size();i++)
-            {
-                if(buildings.getFirst().isTargetBusStop(bus))
-                {
+            for (int i = 0; i < buildings.size(); i++) {
+                if (buildings.get(i).isTargetBusStop(bus)) {
                     isTarget = true;
                 }
             }
