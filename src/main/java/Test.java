@@ -774,6 +774,8 @@ public class Test {
             l2 = new Lane(null, null);
             surf2 = new DeepSnow(l2);
             l2.setSurface(surf2);
+            l1.setRightNeighbor(l2);
+            l2.setLeftNeighbor(l1);
             p = new SnowplowPlayer(new Junction());
             e = new Sweeper(p);
         }
