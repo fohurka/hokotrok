@@ -1,13 +1,12 @@
 public class Bus extends CivilVehicle {
     private BusPlayer owner;
+    private boolean crashed = false;
     /**
      * Gets the player who owns and controls this vehicle.
      *
      * @return The owner Player (e.g., BusPlayer).
      */
     public BusPlayer getOwner() {
-        Skeleton.printFunctionCall("Bus.getOwner");
-        Skeleton.printReturn();
         return owner;
     }
 
@@ -23,28 +22,24 @@ public class Bus extends CivilVehicle {
     /**
      * Tries to progress at the current location or recover itself
      */
+    @Override
     public void tick() {
-        Skeleton.printFunctionCall("Bus.tick");
-        if (Skeleton.askBool("A busz ütközött állapotban van?"))
-        {
-            if (Skeleton.askBool("Sikerül a busznak elindulnia?"))
-            {
+        if (crashed) {
+            crashed = false;
+            if (loc != null) {
                 loc.crashRecovered();
-            }   
-        }
-        else
-        {
-            if(getLocation() != null)
-            {
+            }
+        } else {
+            if (getLocation() != null) {
                 getLocation().progress(this);
             }
         }
-        Skeleton.printReturn();
     }
 
     /**
      * @return whether this vehicle is pushable
      */
+    @Override
     public boolean pushable() {
         return false;
     }
@@ -56,8 +51,6 @@ public class Bus extends CivilVehicle {
      */
     @Override
     public void stuckInCurrentLane(Lane lane) {
-        Skeleton.printFunctionCall("Bus.stuckInCurrentLane");
-        Skeleton.printReturn();
     }
 
     /**
@@ -66,13 +59,11 @@ public class Bus extends CivilVehicle {
      */
     @Override
     public void slip(Lane lane) {
-        Skeleton.printFunctionCall("Bus.slip");
         Vehicle nearest = lane.getNearest(this);
         if (nearest != null) {
             nearest.crash();
             lane.crashHappened();
         }
-        Skeleton.printReturn();
     }
 
     /**
@@ -80,7 +71,6 @@ public class Bus extends CivilVehicle {
      */
     @Override
     public void crash() {
-        Skeleton.printFunctionCall("Bus.crash");
-        Skeleton.printReturn();
+        crashed = true;
     }
 }

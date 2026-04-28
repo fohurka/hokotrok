@@ -28,8 +28,6 @@ public class CarPlayer extends Player {
      * @return The car instance.
      */
     public Car getCar() {
-        Skeleton.printFunctionCall("CarPlayer.getCar");
-        Skeleton.printReturn();
         return car;
     }
 
@@ -38,25 +36,21 @@ public class CarPlayer extends Player {
      *
      * @param dest  The destination map component.
      * @param index The index of the vehicle, which must be 0 since the player
-     *              controls one car.
+     * controls one car.
      * @throws IllegalArgumentException if the index is not 0.
      */
     @Override
     public void choseDirection(MapComponent dest, int index) {
-        Skeleton.printFunctionCall("CarPlayer.choseDirection");
         if (index != 0) {
             throw new IllegalArgumentException("Car player can only control one car");
         }
         car.setLocation(dest);
-        Skeleton.printReturn();
     }
 
     /**
      * Brings the car home
      */
     public void goHome() {
-        Skeleton.printFunctionCall("CarPlayer.goHome");
         car.setLocation(home);
-        Skeleton.printReturn();
     }
 }

@@ -6,7 +6,6 @@ public class Car extends CivilVehicle {
         this.owner = owner;
     }
 
-
     public void setRecoverer(Recoverer r) {
         rec = r;
     }
@@ -15,9 +14,9 @@ public class Car extends CivilVehicle {
      * Tries to progress at the current location
      */
     public void tick() {
-        Skeleton.printFunctionCall("Car.tick");
-        getLocation().progress(this);
-        Skeleton.printReturn();
+        if (getLocation() != null) {
+            getLocation().progress(this);
+        }
     }
 
     /**
@@ -34,13 +33,10 @@ public class Car extends CivilVehicle {
      */
     @Override
     public void stuckInCurrentLane(Lane lane) {
-        Skeleton.printFunctionCall("Car.stuckInCurrentLane");
         Lane neighbor = lane.getRightNeighbor();
-        boolean enterable = neighbor.enterable();
-        if (enterable) {
+        if (neighbor != null && neighbor.enterable()) {
             setLocation(neighbor);
         }
-        Skeleton.printReturn();
     }
 
     /**
@@ -49,14 +45,12 @@ public class Car extends CivilVehicle {
      */
     @Override
     public void slip(Lane lane) {
-        Skeleton.printFunctionCall("Car.slip");
         Vehicle nearest = lane.getNearest(this);
         if (nearest != null) {
             nearest.crash();
-            rec.addToRecoveryQueue(this);
+            if (rec != null) rec.addToRecoveryQueue(this);
             lane.crashHappened();
         }
-        Skeleton.printReturn();
     }
 
     /**
@@ -64,18 +58,18 @@ public class Car extends CivilVehicle {
      */
     @Override
     public void crash() {
-        Skeleton.printFunctionCall("Car.crash");
-        rec.addToRecoveryQueue(this);
-        Skeleton.printReturn();
+        if (rec != null) {
+            rec.addToRecoveryQueue(this);
+        }
     }
 
     /**
      * Gets recovered by the Recoverer
      */
     public void recover() {
-        Skeleton.printFunctionCall("Car.recover");
-        loc.crashRecovered();
+        if (loc != null) {
+            loc.crashRecovered();
+        }
         owner.goHome();
-        Skeleton.printReturn();
     }
 }

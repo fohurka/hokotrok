@@ -1,5 +1,11 @@
+import java.util.HashMap;
+
 public class Bank {
     private Warehouse warehouse;
+    private HashMap<Player, Integer> accounts;
+    public Bank() {
+        accounts = new HashMap<>();
+    }
     /**
      * Sets the warehouse associated with the bank.
      *
@@ -15,9 +21,8 @@ public class Bank {
      * @param amount The amount of money to be paid.
      */
     public void pay(Player p, int amount) {
-        Skeleton.printFunctionCall("Bank.pay");
-        //not implemented yet
-        Skeleton.printReturn();
+        int currentAmount = accounts.getOrDefault(p, 0);
+        accounts.put(p, currentAmount + amount);
     }
 
     /**
@@ -29,11 +34,7 @@ public class Bank {
      * @return true if the player has enough money, false otherwise.
      */
     public boolean hasEnoughMoney(Player p, int amount) {
-        Skeleton.printFunctionCall("Bank.hasEnoughMoney");
-
-        boolean hasMoney = Skeleton.askBool("Van elegendo penze a jatekosnak a vasarlashoz?");
-
-        Skeleton.printReturn();
-        return hasMoney;
+        int currentAmount = accounts.getOrDefault(p, 0);
+        return currentAmount >= amount;
     }
 }

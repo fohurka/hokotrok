@@ -22,8 +22,6 @@ public class BusPlayer extends Player {
      * @return The bus instance.
      */
     public Bus getBus() {
-        Skeleton.printFunctionCall("BusPlayer.getBus");
-        Skeleton.printReturn();
         return bus;
     }
 
@@ -42,16 +40,14 @@ public class BusPlayer extends Player {
      *
      * @param dest  The destination map component.
      * @param index The index of the vehicle, which must be 0 since the player
-     *              controls one bus.
+     * controls one bus.
      * @throws IllegalArgumentException if the index is not 0.
      */
     @Override
     public void choseDirection(MapComponent dest, int index) {
-        Skeleton.printFunctionCall("BusPlayer.choseDirection");
         if (index != 0) {
             throw new IllegalArgumentException("Bus player can only control one bus");
         }
         bus.setLocation(dest);
-        Skeleton.printReturn();
     }
 }
