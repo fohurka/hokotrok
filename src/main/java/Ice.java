@@ -51,7 +51,7 @@ public class Ice extends Surface {
             amount = iceAmount;
         }
         iceAmount -= amount;
-        if (iceAmount <= iceThreshold) {
+        if (iceAmount < iceThreshold) {
             Surface newSurf = new SmallSnow(lane, modifier);
             newSurf.addSnow(iceAmount);
             lane.setSurface(newSurf);

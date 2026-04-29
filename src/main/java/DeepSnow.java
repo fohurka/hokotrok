@@ -8,6 +8,60 @@ public class DeepSnow extends Surface {
     public DeepSnow(Lane lane, Modifier mod) {
         super(lane, mod);
     }
+
+    @Override
+    public void addSnow(int amount) {
+        snowAmount += amount;
+    }
+
+    @Override
+    public void addIce(int amount) {
+        iceAmount += amount;
+        if (iceAmount >= iceThreshold) {
+            Surface newSurf = new Ice(lane, modifier);
+            newSurf.addIce(iceAmount);
+            lane.setSurface(newSurf);
+        }
+    }
+
+    @Override
+    public int removeSnow() {
+        int amount = snowAmount;
+        snowAmount = 0;
+        Surface newSurf = new SmallSnow(lane, modifier);
+        lane.setSurface(newSurf);
+        return amount;
+    }
+
+    @Override
+    public int removeSnow(int amount) {
+        if (amount > snowAmount) {
+            amount = snowAmount;
+        }
+        snowAmount -= amount;
+        if (snowAmount < snowThreshold) {
+            Surface newSurf = new SmallSnow(lane, modifier);
+            newSurf.addSnow(amount);
+            lane.setSurface(newSurf);
+        }
+        return amount;
+    }
+
+    @Override
+    public int removeIce() {
+        int amount = iceAmount;
+        iceAmount = 0;
+        return amount;
+    }
+
+    @Override
+    public int removeIce(int amount) {
+        if (iceAmount >= iceThreshold) {
+            amount = iceAmount;
+        }
+        iceAmount -= amount;
+        return amount;
+    }
     
     /**
      * Calculates the progress of a CivilVehicle
@@ -25,22 +79,15 @@ public class DeepSnow extends Surface {
      */
     @Override
     public boolean enterable() {
-        Skeleton.printFunctionCall("DeepSnow.enterable");
-        Skeleton.printReturn();
         return false;
     }
 
     /**
-     * Applies its Modifer and tries to set the new surface to SmallSnow
+     * Applies its Modifier and tries to set the new surface to SmallSnow
      */
     @Override
     public void tick() {
-        Skeleton.printFunctionCall("DeepSnow.tick");
         modifier.applyWeather(this);
-
-        if (Skeleton.askBool("A hó mennyisége a vastag hó mértéke alá csökken?"))
-            lane.setSurface(new SmallSnow(lane, modifier));
-        Skeleton.printReturn();
     }
 
     /**
@@ -48,9 +95,6 @@ public class DeepSnow extends Surface {
      */
     @Override
     protected void carPassed() {
-        Skeleton.printFunctionCall("DeepSnow.carPassed");
-        if (Skeleton.askBool("Van hó a felületen?"))
-            addIce(1);
-        Skeleton.printReturn();
+        addIce(1);
     }
 }
