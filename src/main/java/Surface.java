@@ -1,6 +1,11 @@
 public abstract class Surface {
     protected Lane lane;
-    protected Modifier modifier;
+    protected Modifier modifier = new Unmodified();
+
+    protected int snowAmount = 0;
+    protected int iceAmount = 0;
+    protected static int snowThreshold = 4;
+    protected static int iceThreshold = 4;
 
     protected Lane getLane() {
         return lane;
@@ -8,7 +13,11 @@ public abstract class Surface {
 
     public Surface(Lane lane) {
         this.lane = lane;
-        modifier = new Unmodified();
+    }
+
+    public Surface(Lane lane, Modifier modifier) {
+        this.lane = lane;
+        this.modifier = modifier;
     }
 
     /**
@@ -18,78 +27,52 @@ public abstract class Surface {
      * @return An integer representing the distance or progress units the vehicle can cover.
      */
     public int calculateProgress(Snowplow sn) {
-        Skeleton.printFunctionCall("Surface.calculateProgress");
-        Skeleton.printReturn();
         return 1;
-    }
-
-    /**
-     * Removes an amount of snow 
-     * @param amount the amount of snow
-     */
-    public void removeSnow(int amount) {
-        Skeleton.printFunctionCall("Surface.removeSnow");
-        Skeleton.printReturn();
-    }
-
-    /**
-     * Removes an amount of ice 
-     * @param amount the amount of ice
-     */
-    public void removeIce(int amount) {
-        Skeleton.printFunctionCall("Surface.removeIce");
-        Skeleton.printReturn();
     }
 
     /**
      * Fully clears the snow from this surface.
      * This is usually triggered by specialized equipment like an Impeller or DragonBlade.
-     * * @return The total amount of snow that was removed during the operation.
+     * @return The total amount of snow that was removed during the operation.
      */
-    public int clearSnow() {
-        Skeleton.printFunctionCall("Surface.clearSnow");
-        Skeleton.printReturn();
-        return 1;
-    }
+    public abstract int removeSnow();
+
+    public abstract int removeSnow(int amount);
 
     /**
      * Fully clears the ice from this surface.
      * This is usually triggered by specialized equipment like a DragonBlade.
      * * @return The total amount of ice that was removed during the operation.
      */
-    public int clearIce() {
-        Skeleton.printFunctionCall("Surface.clearIce");
-        Skeleton.printReturn();
-        return 1;
-    }
+    public abstract int removeIce();
+
+    public abstract int removeIce(int amount);
 
     /**
      * Adds an amount of snow 
      * @param amount the amount of snow
      */
-    public void addSnow(int amount) {
-        Skeleton.printFunctionCall("Surface.addSnow");
-        Skeleton.printReturn();
-    }
+    public abstract void addSnow(int amount);
 
     /**
      * Adds an amount of ice 
      * @param amount the amount of ice
      */
-    public void addIce(int amount)
-    {
-        Skeleton.printFunctionCall("Surface.addIce");
-        Skeleton.printReturn();
-    }
+    public abstract void addIce(int amount);
 
     /**
      * Changes the active Modifier to Salted
      */
     public void salt() {
-        Skeleton.printFunctionCall("Surface.salt");
         modifier = new Salted();
-        Skeleton.printReturn();
     }
+
+    public void grit() {
+        Surface newSurf = new Grit(lane, modifier);
+        lane.setSurface(newSurf);
+    }
+
+    public void removeGrit() { }
 
     protected abstract void carPassed();
     public abstract void tick();

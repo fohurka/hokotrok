@@ -1,29 +1,24 @@
-public class SmallSnow extends Surface {
-
-    public SmallSnow(Lane lane)
-    {
+public class Grit extends Surface {
+    public Grit(Lane lane) {
         super(lane);
     }
 
-    public SmallSnow(Lane lane, Modifier mod) {
-        super(lane, mod);
+    public Grit(Lane lane, Modifier modifier) {
+        super(lane, modifier);
     }
 
     @Override
     public void addSnow(int amount) {
         snowAmount += amount;
-        if (snowAmount > snowThreshold) {
-            Surface newSurf = new DeepSnow(lane, modifier);
-            newSurf.addSnow(snowAmount);
-            newSurf.addIce(iceAmount);
-            lane.setSurface(newSurf);
+        if (snowAmount >= snowThreshold) {
+            removeGrit();
         }
     }
 
     @Override
     public void addIce(int amount) {
         iceAmount += amount;
-        if (iceAmount > iceThreshold) {
+        if (iceAmount >= iceThreshold) {
             Surface newSurf = new Ice(lane, modifier);
             newSurf.addIce(iceAmount);
             lane.setSurface(newSurf);
@@ -62,39 +57,27 @@ public class SmallSnow extends Surface {
         return amount;
     }
 
-    /**
-     * Calculates the progress of a CivilVehicle
-     * @param cv the CivilVehicle that progresses
-     * @return the amount of progress the CivilVehicle made
-     */
     @Override
     public int calculateProgress(CivilVehicle cv) {
         return 1;
     }
 
-    /**
-     * @return whether the surface makes the Lane enterable
-     */
     @Override
     public boolean enterable() {
         return true;
     }
 
-    
-    /**
-     * Applies its Modifier and tries to set the new surface to DeepSnow
-     */
     @Override
     public void tick() {
         modifier.applyWeather(this);
     }
 
-    /**
-     * Tries to add ice and tries to set the new surface to Ice
-     */
     @Override
-    protected void carPassed() {
-        if (snowAmount > 0)
-            addIce(1);
+    public void carPassed() { }
+
+    @Override
+    public void removeGrit() {
+        Surface newSurf = new SmallSnow(lane, modifier);
+        lane.setSurface(newSurf);
     }
 }

@@ -19,9 +19,7 @@ public abstract class MapComponent {
      * * @param v The vehicle to be removed from the component's tracking list.
      */
     public void remove(Vehicle v) {
-        Skeleton.printFunctionCall("MapComponent.remove");
         vehicles.remove(v);
-        Skeleton.printReturn();
     }
 
     /**
@@ -30,9 +28,7 @@ public abstract class MapComponent {
      * * @param v The vehicle that has entered or arrived at this component.
      */
     public void arrived(Vehicle v) {
-        Skeleton.printFunctionCall("MapComponent.arrived");
         vehicles.add(v);
-        Skeleton.printReturn();
     }
 
     public abstract void progress(CivilVehicle cv);

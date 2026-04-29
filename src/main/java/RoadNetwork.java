@@ -1,5 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class RoadNetwork {
     private Bank bank;
+    private List<Lane> lanes;
+    private List<Junction> junctions;
 
     /**
      * Sets the bank used by the road network to pay rewards to players.
@@ -16,12 +22,10 @@ public class RoadNetwork {
      * @param p The player controlling the bus.
      */
     public void busRoundComplete(Player p) {
-        Skeleton.printFunctionCall("RoadNetwork.busRoundComplete");
         if (bank != null) {
-            int amount = 100; // Dummy reward amount for skeleton
+            int amount = 100;
             bank.pay(p, amount);
         }
-        Skeleton.printReturn();
     }
     /**
      * Notifies the network that a snowplow has successfully cleared snow from a lane.
@@ -31,10 +35,46 @@ public class RoadNetwork {
      * @param snowAmount The amount of snow cleared.
      */
     public void laneCleared(Player p, int snowAmount) {
-        Skeleton.printFunctionCall("RoadNetwork.laneCleared");
         if (bank != null) {
             bank.pay(p, snowAmount);
         }
-        Skeleton.printReturn();
+    }
+
+    private List<Junction> selectJunctions(int n) {
+        List<Junction> selected = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            Random rand = new Random();
+            Junction j = null;
+            do {
+                j = junctions.get(rand.nextInt(junctions.size()));
+            } while (selected.contains(j));
+            selected.add(j);
+        }
+        return selected;
+    }
+
+    public List<Building> generateBuildingPair() {
+        List<Building> buildings = new ArrayList<>();
+        List<Junction> junctions = selectJunctions(2);
+        for (Junction junction : junctions) {
+            Building b = new Building(junction);
+            buildings.add(b);
+            junction.addBuilding(b);
+        }
+        return buildings;
+    }
+
+    public void tick() {
+        for (Lane lane : lanes) {
+            lane.tick();
+        }
+    }
+
+    public void addLane(Lane lane) {
+        lanes.add(lane);
+    }
+
+    public void addJunction(Junction j) {
+        junctions.add(j);
     }
 }

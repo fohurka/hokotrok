@@ -5,8 +5,6 @@ public class Unmodified extends Modifier {
      */
     @Override
     protected void applyWeather(Surface s) {
-        Skeleton.printFunctionCall("Unmodified.applyWeather");
         s.addSnow(1);
-        Skeleton.printReturn();
     }
 }

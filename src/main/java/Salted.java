@@ -6,9 +6,7 @@ public class Salted extends Modifier {
      */
     @Override
     protected void applyWeather(Surface s) {
-        Skeleton.printFunctionCall("Salted.applyWeather");
         s.removeIce(1);
         s.removeSnow(1);
-        Skeleton.printReturn();
     }
 }

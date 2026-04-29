@@ -1,16 +1,23 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class Lane extends MapComponent {
-    private Surface surface;
+    private Surface surface = null;
     private final Junction start;
     private final Junction end;
     private Lane rightNeighbor;
     private Lane leftNeighbor;
     private RoadNetwork rn;
+    private int length;
+    private final HashMap<Vehicle, Integer> progress = new HashMap<>();
+    private boolean isCrashed = false;
 
-    public Lane(Junction start, Junction end) {
+    public Lane(Junction start, Junction end, int length) {
         super();
+        this.length = length;
         this.start = start;
         this.end = end;
     }
@@ -38,15 +45,10 @@ public class Lane extends MapComponent {
      *
      * @param p The snowplow player who performs the clearing and receives the reward.
      */
-    public void cleared(SnowplowPlayer p) {
-        Skeleton.printFunctionCall("Lane.cleared");
-
-        int snowAmount = 1;
-
+    public void cleared(SnowplowPlayer p, int amount) {
         if (rn != null) {
-            rn.laneCleared(p, snowAmount);
+            rn.laneCleared(p, amount);
         }
-        Skeleton.printReturn();
     }
     /**
      * Sets the neighbors of the Lane
@@ -59,14 +61,10 @@ public class Lane extends MapComponent {
     }
 
     public Lane getLeftNeighbor() {
-        Skeleton.printFunctionCall("Lane.getLeftNeighbor");
-        Skeleton.printReturn();
         return leftNeighbor;
     }
 
     public Lane getRightNeighbor() {
-        Skeleton.printFunctionCall("Lane.getRightNeighbor");
-        Skeleton.printReturn();
         return rightNeighbor;
     }
 
@@ -75,10 +73,7 @@ public class Lane extends MapComponent {
      * @return whether the Lane is enterable
      */
     public boolean enterable() {
-        Skeleton.printFunctionCall("Lane.enterable");
-        boolean enterable = surface.enterable();
-        Skeleton.printReturn();
-        return enterable;
+        return surface.enterable();
     }
 
     /**
@@ -88,20 +83,16 @@ public class Lane extends MapComponent {
      * @param cv the CivilVehicle to progress
      */
     public void progress(CivilVehicle cv) {
-        Skeleton.printFunctionCall("Lane.progress");
-        if(surface == null) {
-            Skeleton.printReturn();
-            return;
-        }
+        if (surface == null || isCrashed) return;
         int prog = surface.calculateProgress(cv);
-        if (prog > 0) {
 
-            boolean ending = Skeleton.askBool("A jármű elérte a sáv végét?");
-            if (ending) {
-                cv.setLocation(end);
-            }
+        progress.put(cv, progress.get(cv) + prog);
+
+        boolean ending = progress.get(cv) >= length;
+
+        if (ending) {
+            cv.setLocation(end);
         }
-        Skeleton.printReturn();
     }
 
     /**
@@ -110,17 +101,16 @@ public class Lane extends MapComponent {
      * @param sn the Snowplow to progress
      */
     public void progress(Snowplow sn) {
-        Skeleton.printFunctionCall("Lane.progress");
-        if(surface == null) {
-            Skeleton.printReturn();
-            return;
-        }
+        if (surface == null) return;
         int prog = surface.calculateProgress(sn);
-        boolean ending = Skeleton.askBool("A hókotró elérte a sáv végét?");
+
+        progress.put(sn, progress.get(sn) + prog);
+
+        boolean ending = progress.get(sn) >= length;
+
         if (ending) {
             sn.laneCleared(this, end);
         }
-        Skeleton.printReturn();
     }
 
     /**
@@ -129,11 +119,9 @@ public class Lane extends MapComponent {
      * @return the list of pushable Vehicles
      */
     public List<Vehicle> getPushableCars() {
-        Skeleton.printFunctionCall("Lane.getPushableCars");
         List<Vehicle> pushables = new ArrayList<>();
 
         if (surface.enterable()) {
-            Skeleton.printReturn();
             return pushables;
         }
 
@@ -142,7 +130,7 @@ public class Lane extends MapComponent {
                 pushables.add(v);
             }
         }
-        Skeleton.printReturn();
+
         return pushables;
     }
 
@@ -151,55 +139,45 @@ public class Lane extends MapComponent {
      * @return the closest Vehicle to the given CivilVehicle
      */
     public Vehicle getNearest(CivilVehicle cv) {
-        Skeleton.printFunctionCall("Lane.getNearest");
+        int minDist = Integer.MAX_VALUE;
+        Vehicle nearest = null;
+
         for (Vehicle v : getVehicles()) {
-            if (v != cv) {
-                Skeleton.printReturn();
-                return v;
+            if (v != cv && abs(progress.get(v) - progress.get(cv)) < minDist) {
+                nearest = v;
+                minDist = abs(progress.get(v) - progress.get(cv));
             }
         }
-        Skeleton.printReturn();
-        return null;
+        return nearest;
     }
 
     /**
      * Closes the Lane as a result of a crash
      */
     public void crashHappened() {
-        Skeleton.printFunctionCall("Lane.crashHappened");
-        Skeleton.printReturn();
+        isCrashed = true;
     }
 
     public int clearSnow() {
-        Skeleton.printFunctionCall("Lane.clearSnow");
-        int amount = surface.clearSnow();
-        Skeleton.printReturn();
-        return amount;
+        return surface.removeSnow();
     }
 
     public int clearIce() {
-        Skeleton.printFunctionCall("Lane.clearIce");
-        int amount = surface.clearIce();
-        Skeleton.printReturn();
-        return amount;
+        return surface.removeIce();
     }
 
     /**
      * Changes its Surfaces modifier to Salted indirectly
      */
     public void salt() {
-        Skeleton.printFunctionCall("Lane.salt");
         surface.salt();
-        Skeleton.printReturn();
     }
 
     /**
      * Notifies the Surface of a tick of time passing
      */
     public void tick() {
-        Skeleton.printFunctionCall("Lane.tick");
         surface.tick();
-        Skeleton.printReturn();
     }
 
     /**
@@ -209,10 +187,15 @@ public class Lane extends MapComponent {
     @Override
     public void remove(Vehicle vehicle)
     {
-        Skeleton.printFunctionCall("Lane.remove");
+        progress.remove(vehicle);
         vehicles.remove(vehicle);
         surface.carPassed();
-        Skeleton.printReturn();
+    }
+
+    @Override
+    public void arrived(Vehicle vehicle) {
+        progress.put(vehicle, 0);
+        vehicles.add(vehicle);
     }
 
     /**
@@ -220,25 +203,45 @@ public class Lane extends MapComponent {
      */
     public void crashRecovered()
     {
-        Skeleton.printFunctionCall("Lane.crashRecovered");
-        Skeleton.printReturn();
+        isCrashed = false;
+        //TODO: iterate over vehicles to check if there are still crashed ones remaining instead of blindly setting isCrashed to false
     }
 
+    /**
+     * Adds the specified amount of snow to the surface by calling surface.addSnow
+     * @param amount the amount of snow to be added
+     */
     public void addSnow(int amount) {
-        Skeleton.printFunctionCall("Lane.addSnow");
         surface.addSnow(amount);
-        Skeleton.printReturn();
     }
 
-    public void setRightNeighbor(Lane l2) {
-        Skeleton.printFunctionCall("Lane.setRightNeighbor");
-        this.rightNeighbor = l2;
-        Skeleton.printReturn();
+    public void setRightNeighbor(Lane l) {
+        this.rightNeighbor = l;
     }
     
-    public void setLeftNeighbor(Lane l2) {
-        Skeleton.printFunctionCall("Lane.setLeftNeighbor");
-        this.leftNeighbor = l2;
-        Skeleton.printReturn();
+    public void setLeftNeighbor(Lane l) {
+        this.leftNeighbor = l;
+    }
+
+    /**
+     * Applies grit to the surface of the lane by calling surface.grit
+     */
+    public void grit() {
+        surface.grit();
+    }
+
+    /**
+     * Clears the grit from the lane by calling removeGrit on the surface
+     */
+    public void clearGrit() {
+        surface.removeGrit();
+    }
+
+    /**
+     * Getter for length
+     * @return the length of the lane
+     */
+    public int getLength() {
+        return length;
     }
 }

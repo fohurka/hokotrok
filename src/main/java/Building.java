@@ -11,21 +11,16 @@ public class Building extends MapComponent {
         super();
         this.connection = j;
     }
+
     /**
-     * Checks if this building is the target destination for the given bus.
-     * In the skeleton, it asks the tester directly.
+     * Progresses a civil vehicle that is currently at this building.
+     * Does nothing.
      *
-     * @param bus The bus arriving at the building's junction.
-     * @return true if it is the target destination, false otherwise.
+     * @param cv The civil vehicle that is progressing.
      */
-    public boolean isTargetBusStop(Bus bus) {
-        Skeleton.printFunctionCall("Building.isTargetBusStop");
+    @Override
+    public void progress(CivilVehicle cv) { }
 
-        boolean isTarget = Skeleton.askBool("A busz a celallomasara erkezett?");
-
-        Skeleton.printReturn();
-        return isTarget;
-    }
     /**
      * Progresses a snowplow that is currently at this building.
      * Does nothing.
@@ -33,20 +28,5 @@ public class Building extends MapComponent {
      * @param sp The snowplow that is progressing.
      */
     @Override
-    public void progress(Snowplow sp) {
-        Skeleton.printFunctionCall("Building.progress");
-        Skeleton.printReturn();
-    }
-
-    /**
-     * Progresses a civil vehicle that is currently at this building.
-     * Does nothing.
-     * 
-     * @param cv The civil vehicle that is progressing.
-     */
-    @Override
-    public void progress(CivilVehicle cv) {
-        Skeleton.printFunctionCall("Building.progress");
-        Skeleton.printReturn();
-    }
+    public void progress(Snowplow sp) { }
 }

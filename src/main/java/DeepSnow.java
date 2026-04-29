@@ -6,10 +6,7 @@ public class DeepSnow extends Surface {
     }
     
     public DeepSnow(Lane lane, Modifier mod) {
-        super(lane);
-        Skeleton.printFunctionCall("DeepSnow.constructor");
-        modifier = mod;
-        Skeleton.printReturn();
+        super(lane, mod);
     }
     
     /**
@@ -19,9 +16,7 @@ public class DeepSnow extends Surface {
      */
     @Override
     public int calculateProgress(CivilVehicle cv) {
-        Skeleton.printFunctionCall("DeepSnow.calculateProgress");
-        cv.stuckInCurrentLane(getLane());
-        Skeleton.printReturn();
+        cv.stuckInCurrentLane(lane);
         return 0;
     }
 

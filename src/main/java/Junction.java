@@ -20,8 +20,6 @@ public class Junction extends MapComponent {
      */
     @Override
     public void progress(Snowplow sp) {
-        Skeleton.printFunctionCall("Junction.progress");
-        Skeleton.printReturn();
     }
 
     /**
@@ -32,8 +30,6 @@ public class Junction extends MapComponent {
      */
     @Override
     public void progress(CivilVehicle cv) {
-        Skeleton.printFunctionCall("Junction.progress");
-        Skeleton.printReturn();
     }
 
     /**
@@ -67,13 +63,10 @@ public class Junction extends MapComponent {
         this.buildings.add(building);
     }
 
-    /**
-     * Handles a bus arriving at the junction. In the skeleton, the method
-     * asks the tester if the bus has reached its target destination.
-     * If successful, it notifies the road network to pay out the reward.
-     *
-     * @param bus The bus arriving at the junction.
-     */
+    public List<Lane> getLanes() {
+        return starting;
+    }
+
     /**
      * Handles a bus arriving at the junction. It queries the attached building
      * to check if it's the target destination. If successful, it notifies
@@ -82,14 +75,13 @@ public class Junction extends MapComponent {
      * @param bus The bus arriving at the junction.
      */
     public void arrived(Bus bus) {
-        Skeleton.printFunctionCall("Junction.arrived");
-
         boolean isTarget = false;
 
-        if (!buildings.isEmpty()) {
-            for (int i = 0; i < buildings.size(); i++) {
-                if (buildings.get(i).isTargetBusStop(bus)) {
+        for (Building building : buildings) {
+            for (Building station : bus.getStations()) {
+                if (building == station) {
                     isTarget = true;
+                    break;
                 }
             }
         }
@@ -101,7 +93,5 @@ public class Junction extends MapComponent {
             }
             rn.busRoundComplete(bp);
         }
-
-        Skeleton.printReturn();
     }
 }

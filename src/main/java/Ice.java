@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Ice extends Surface {
 
     public Ice(Lane lane) {
@@ -6,9 +8,55 @@ public class Ice extends Surface {
 
     public Ice(Lane lane, Modifier mod) {
         super(lane);
-        Skeleton.printFunctionCall("Ice.constructor");
         modifier = mod;
-        Skeleton.printReturn();
+    }
+
+    @Override
+    public void addSnow(int amount) { } // can't snow on an icy surface
+
+    @Override
+    public void addIce(int amount) {
+        iceAmount += amount;
+    }
+
+    @Override
+    public int removeSnow() {
+        int amount = snowAmount;
+        snowAmount = 0;
+        return amount;
+    }
+
+    @Override
+    public int removeSnow(int amount) {
+        if (amount > snowAmount) {
+            amount = snowAmount;
+        }
+        snowAmount -= amount;
+        return amount;
+    }
+
+    @Override
+    public int removeIce() {
+        int amount = iceAmount;
+        iceAmount = 0;
+        Surface newSurf = new SmallSnow(lane, modifier);
+        newSurf.addSnow(iceAmount); // ice gets converted to snow after breaking it with icebreaker
+        lane.setSurface(newSurf);
+        return amount;
+    }
+
+    @Override
+    public int removeIce(int amount) {
+        if (amount > iceAmount) {
+            amount = iceAmount;
+        }
+        iceAmount -= amount;
+        if (iceAmount <= iceThreshold) {
+            Surface newSurf = new SmallSnow(lane, modifier);
+            newSurf.addSnow(iceAmount);
+            lane.setSurface(newSurf);
+        }
+        return amount;
     }
 
     /**
@@ -18,14 +66,12 @@ public class Ice extends Surface {
      */
     @Override
     public int calculateProgress(CivilVehicle cv) {
-        Skeleton.printFunctionCall("Ice.calculateProgress");
-        boolean slip = Skeleton.askBool("Megcsúszik a jármű?");
+        Random rand = new Random();
+        boolean slip = rand.nextInt(100) < 15; //15% chance to slip
         if (slip) {
-            cv.slip(getLane());
-            Skeleton.printReturn();
+            cv.slip(lane);
             return 0;
         }
-        Skeleton.printReturn();
         return 1;
     }
 
@@ -34,8 +80,6 @@ public class Ice extends Surface {
      */
     @Override
     public boolean enterable() {
-        Skeleton.printFunctionCall("Ice.enterable");
-        Skeleton.printReturn();
         return true;
     }
 
@@ -44,12 +88,7 @@ public class Ice extends Surface {
      */
     @Override
     public void tick() {
-        Skeleton.printFunctionCall("Ice.tick");
         modifier.applyWeather(this);
-
-        if (Skeleton.askBool("Elolvadt a jég?"))
-            lane.setSurface(new SmallSnow(lane, modifier));
-        Skeleton.printReturn();
     }
 
     /**
@@ -57,9 +96,7 @@ public class Ice extends Surface {
      */
     @Override
     protected void carPassed() {
-        Skeleton.printFunctionCall("Ice.carPassed");
-        if (Skeleton.askBool("Van hó a felületen?"))
+        if (snowAmount > 0)
             addIce(1);
-        Skeleton.printReturn();
     }
 }

@@ -1,5 +1,8 @@
+import java.util.List;
+
 public class Bus extends CivilVehicle {
     private BusPlayer owner;
+    private List<Building> stations;
     private boolean crashed = false;
     /**
      * Gets the player who owns and controls this vehicle.
@@ -8,6 +11,10 @@ public class Bus extends CivilVehicle {
      */
     public BusPlayer getOwner() {
         return owner;
+    }
+
+    public List<Building> getStations() {
+        return stations;
     }
 
     /**
