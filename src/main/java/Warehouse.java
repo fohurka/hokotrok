@@ -1,4 +1,11 @@
+import java.rmi.server.Skeleton;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Warehouse extends Building {
+    private int[] equipmentPrices = {50, 100, 150, 200, 250};
+    private int snowplowPrice = 500;
+    private List<Equipment> stock = new ArrayList<>();
     private Bank bank;
     public Warehouse(Junction junction){
         super(junction);
@@ -20,13 +27,10 @@ public class Warehouse extends Building {
      * @return The purchased Equipment object, or null if the purchase failed.
      */
     public Equipment buyEquipment(SnowplowPlayer p, int id) {
-        Skeleton.printFunctionCall("Warehouse.buyEquipment");
         Equipment boughtEquipment = null;
         
         if (bank != null) {
-            int price = 50; // Dummy price for skeleton
-            boolean success = bank.hasEnoughMoney(p, price);
-            if (success) {
+            if (bank.hasEnoughMoney(p, equipmentPrices[id - 1]);) {
                 // Here the equipment is created and given to the player (true branch)
                 switch (id) {
                 case 1:
@@ -49,7 +53,6 @@ public class Warehouse extends Building {
                 // Purchase failed (false branch)
             }
         }
-        Skeleton.printReturn();
         return boughtEquipment;
     }
 
@@ -61,19 +64,15 @@ public class Warehouse extends Building {
      * @return The new Snowplow instance, or null if the transaction was unsuccessful.
      */
     public Snowplow buySnowplow(Player p) {
-        Skeleton.printFunctionCall("Warehouse.buySnowplow");
         Snowplow boughtSnowplow = null;
         if (bank != null) {
-            int price = 500; // Dummy price for skeleton
-            boolean success = bank.hasEnoughMoney(p, price);
-            if (success) {
+            if (bank.hasEnoughMoney(p, snowplowPrice)) {
                 // Here the snowplow is created and given to the player (true branch)
                 boughtSnowplow = new Snowplow();
             } else {
                 // Purchase failed (false branch)
             }
         }
-        Skeleton.printReturn();
         return boughtSnowplow;
     }
 
@@ -86,7 +85,6 @@ public class Warehouse extends Building {
      * @param eq The specific equipment piece to be equipped.
      */
     public void changeEquipment(Snowplow s, Equipment eq) {
-        Skeleton.printFunctionCall("Warehouse.changeEquipment");
         if(isAtWarehouse(s)) {
             if(isInStock(eq)) {
                 addtoStock(s.getCurrentEquipment());
@@ -94,7 +92,6 @@ public class Warehouse extends Building {
                 removeFromStock(eq);
             }
         }
-        Skeleton.printReturn();
     }
 
     /**
@@ -104,8 +101,7 @@ public class Warehouse extends Building {
      * @param eq The equipment to add to stock.
      */
     public void addtoStock(Equipment eq) {
-        Skeleton.printFunctionCall("Warehouse.addToStock");
-        Skeleton.printReturn();
+        stock.add(eq);
     }
 
     /**
@@ -115,9 +111,7 @@ public class Warehouse extends Building {
      * @return True if the snowplow is at the warehouse, false otherwise.
      */
     public boolean isAtWarehouse(Snowplow s) {
-        Skeleton.printFunctionCall("Warehouse.isAtWarehouse");
-        Skeleton.printReturn();
-        return Skeleton.askBool("A raktárnál van a hókotró?");
+        return s.getLocation() == this;
     }
 
     /**
@@ -127,9 +121,7 @@ public class Warehouse extends Building {
      * @return True if the item is in the inventory, false otherwise.
      */
     public boolean isInStock(Equipment eq) {
-        Skeleton.printFunctionCall("Warehouse.isInStock");
-        Skeleton.printReturn();
-        return Skeleton.askBool("A raktárban van a kotrófej?");
+        return stock.contains(eq);
     }
 
     /**
@@ -139,7 +131,8 @@ public class Warehouse extends Building {
      * @param eq The equipment to remove.
      */
     public void removeFromStock(Equipment eq) {
-        Skeleton.printFunctionCall("Warehouse.removeFromStock");
-        Skeleton.printReturn();
+        if(stock.contains(eq)) {
+            stock.remove(eq);
+        }
     }
 }
