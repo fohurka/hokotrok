@@ -1,8 +1,6 @@
 public class Impeller extends Equipment {
     public Impeller(SnowplowPlayer owner) {
         super(owner);
-        Skeleton.printFunctionCall("Impeller.ctor");
-        Skeleton.printReturn();
     }
 
     /**
@@ -13,11 +11,8 @@ public class Impeller extends Equipment {
      */
     @Override
     public void use(Lane lane) {
-        Skeleton.printFunctionCall("Impeller.use");
-
         int snowAmount = lane.clearSnow();
+        lane.removeGrit();
         lane.cleared(owner);
-        
-        Skeleton.printReturn();
     }
 }
