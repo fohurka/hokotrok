@@ -244,4 +244,8 @@ public class Lane extends MapComponent {
     public int getLength() {
         return length;
     }
+
+    public Junction getStart() { return start; }
+    public Junction getEnd() { return end; }
+    public Surface getSurface() { return surface; }
 }

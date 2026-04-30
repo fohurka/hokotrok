@@ -12,6 +12,10 @@ public class Building extends MapComponent {
         this.connection = j;
     }
 
+    public Junction getConnection() {
+        return connection;
+    }
+
     /**
      * Progresses a civil vehicle that is currently at this building.
      * Does nothing.

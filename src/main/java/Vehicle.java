@@ -28,7 +28,7 @@ public abstract class Vehicle {
      * Retrieves the current map component where the vehicle is located.
      * @return The MapComponent (e.g., Lane or Junction) currently holding this vehicle.
      */
-    protected MapComponent getLocation() {
+    public MapComponent getLocation() {
         return loc;
     }
 }

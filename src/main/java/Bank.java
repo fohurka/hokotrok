@@ -37,4 +37,8 @@ public class Bank {
         int currentAmount = accounts.getOrDefault(p, 0);
         return currentAmount >= amount;
     }
+
+    public int getBalance(Player p) {
+        return accounts.getOrDefault(p, 0);
+    }
 }

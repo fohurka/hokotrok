@@ -1,3 +1,4 @@
+import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,5 +93,8 @@ public class SnowplowPlayer extends Player {
         Skeleton.printReturn();
     }
 
+    public List<Vehicle> getVehicles() {
+        return snowplows;
+    }
     
 }

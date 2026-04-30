@@ -73,6 +73,13 @@ public class Bus extends CivilVehicle {
         }
     }
 
+    public boolean isCrashed() {
+        return crashed;
+    }
+    public void setStations(List<Building> stations){
+        this.stations = stations;
+    }
+
     /**
      * Crashes the vehicle
      */

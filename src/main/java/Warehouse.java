@@ -135,4 +135,8 @@ public class Warehouse extends Building {
             stock.remove(eq);
         }
     }
+
+    public List<Equipment> getStock() {
+        return stock;
+    }
 }

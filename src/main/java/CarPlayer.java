@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Represents a player who controls a single car in the game.
  * The car is controlled by an NPC.
@@ -53,4 +55,11 @@ public class CarPlayer extends Player {
     public void goHome() {
         car.setLocation(home);
     }
+
+    public List<Vehicle> getVehicles() {
+        List<Vehicle> r = new List<Vehicle>();
+        r.add(car);
+        return new List<Vehicle>(r);
+    }
+
 }

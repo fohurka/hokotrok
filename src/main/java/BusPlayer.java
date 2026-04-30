@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Represents a player who controls a single bus in the game.
  */
@@ -49,5 +51,11 @@ public class BusPlayer extends Player {
             throw new IllegalArgumentException("Bus player can only control one bus");
         }
         bus.setLocation(dest);
+    }
+
+    public List<Vehicle> getVehicles() {
+        List<Vehicle> r = new List<Vehicle>();
+        r.add(Bus);
+        return new List<Vehicle>(r);
     }
 }

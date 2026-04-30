@@ -13,4 +13,7 @@ public abstract class Player {
      * @param index The index of the vehicle to control.
      */
     public abstract void choseDirection(MapComponent dest, int index);
+
+    public abstract List<Vehicle> getVehicles();
+
 }

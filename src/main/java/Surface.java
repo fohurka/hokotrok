@@ -60,6 +60,10 @@ public abstract class Surface {
      */
     public abstract void addIce(int amount);
 
+    public int getSnowAmount() { return snowAmount; }
+    public int getIceAmount() { return iceAmount; }
+    public Modifier getModifier() { return modifier; }
+
     /**
      * Changes the active Modifier to Salted
      */
