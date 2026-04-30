@@ -1,4 +1,3 @@
-import java.rmi.server.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ public class SnowplowPlayer extends Player {
         this.snowplows = new ArrayList<>();
         snowplows.add(new Snowplow());
         snowplows.get(0).setLocation(starter);
-        snowplows.get(0).setEquipment(new Sweeper(this));
     }
 
     /**
@@ -30,9 +28,11 @@ public class SnowplowPlayer extends Player {
      * @throws IllegalArgumentException if the index is out of bounds.
      */
     public Snowplow getSnowplow(int index) {
+        Skeleton.printFunctionCall("SnowplowPlayer.getSnowplow");
         if (index < 0 || index >= snowplows.size()) {
             throw new IllegalArgumentException("Invalid snowplow index");
         }
+        Skeleton.printReturn();
         return snowplows.get(index);
     }
 
@@ -45,10 +45,12 @@ public class SnowplowPlayer extends Player {
      */
     @Override
     public void choseDirection(MapComponent dest, int index) {
+        Skeleton.printFunctionCall("SnowplowPlayer.choseDirection");
         if (index < 0 || index >= snowplows.size()) {
             throw new IllegalArgumentException("Invalid snowplow index");
         }
         snowplows.get(index).setLocation(dest);
+        Skeleton.printReturn();
     }
     /**
      * Sets the warehouse associated with the player, from which they can purchase items.
@@ -65,12 +67,14 @@ public class SnowplowPlayer extends Player {
      * @param id The ID of the equipment to be purchased.
      */
     public void buyEquipment(int id) {
+        Skeleton.printFunctionCall("SnowplowPlayer.buyEquipment");
         if (warehouse != null) {
             Equipment newEq = warehouse.buyEquipment(this, id);
             if (newEq != null) {
-                setEquipment(newEq);
+                // Successful purchase
             }
         }
+        Skeleton.printReturn();
     }
 
     /**
@@ -78,16 +82,15 @@ public class SnowplowPlayer extends Player {
      * In the skeleton, it forwards the call to the warehouse's respective buying method.
      */
     public void buySnowplow() {
+        Skeleton.printFunctionCall("SnowplowPlayer.buySnowplow");
         if (warehouse != null) {
             Snowplow newPlow = warehouse.buySnowplow(this);
             if (newPlow != null) {
-                snowplows.add(newPlow);
+                // Successful purchase
             }
         }
+        Skeleton.printReturn();
     }
 
-    public List<Vehicle> getVehicles() {
-        return snowplows;
-    }
     
 }

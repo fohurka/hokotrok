@@ -3,7 +3,11 @@ import java.util.List;
 public class Snowplow extends Vehicle {
     private Equipment eq;
 
-    public Snowplow() {}
+    public Snowplow()
+    {
+        Skeleton.printFunctionCall("Snowplow.constructor");
+        Skeleton.printReturn();
+    }
 
     /**
      * Sets the equipment of the snowplow
@@ -18,7 +22,9 @@ public class Snowplow extends Vehicle {
      */
     @Override
     public void tick() {
+        Skeleton.printFunctionCall("Snowplow.tick");
         getLocation().progress(this);
+        Skeleton.printReturn();
     }
 
     /**
@@ -35,12 +41,14 @@ public class Snowplow extends Vehicle {
      * @param end the Junction at the end of the Lane
      */
     public void laneCleared(Lane lane, MapComponent end) {
+        Skeleton.printFunctionCall("Snowplow.laneCleared");
         List<Vehicle> pushables = lane.getPushableCars();
         for (Vehicle v : pushables) {
             v.setLocation(end);
         }
         eq.use(lane);
         setLocation(end);
+        Skeleton.printReturn();
     }
 
     /**
@@ -51,6 +59,8 @@ public class Snowplow extends Vehicle {
     }
 
     public Equipment getCurrentEquipment() {
+        Skeleton.printFunctionCall("Snowplow.getCurrentEquipment");
+        Skeleton.printReturn();
         return eq;
     }
 }

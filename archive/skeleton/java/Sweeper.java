@@ -1,6 +1,9 @@
 public class Sweeper extends Equipment {
+
     public Sweeper(SnowplowPlayer owner) {
         super(owner);
+        Skeleton.printFunctionCall("Sweeper.ctor");
+        Skeleton.printReturn();
     }
 
     /**
@@ -12,11 +15,13 @@ public class Sweeper extends Equipment {
      */
     @Override
     public void use(Lane lane) {
+        Skeleton.printFunctionCall("Sweeper.use");
+
         int snowAmount = lane.clearSnow();
-        lane.clearGrit();
-        Lane rightNeighbor = lane.getRightNeighbor();
-        rightNeighbor.addSnow(snowAmount);
-        rightNeighbor.addGrit();
+        Lane lane2 = lane.getRightNeighbor();
+        lane2.addSnow(snowAmount);
         lane.cleared(owner);
+        
+        Skeleton.printReturn();
     }
 }
