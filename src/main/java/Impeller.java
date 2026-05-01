@@ -15,4 +15,9 @@ public class Impeller extends Equipment {
         lane.removeGrit();
         lane.cleared(owner);
     }
+
+    @Override
+    public void setAmmo(int ammo) {
+        // Does nothing
+    }
 }

@@ -85,6 +85,9 @@ public class CommandParser {
             case "equip":
                 controller.equip(args);
                 break;
+            case "progress":
+                controller.progress(args);
+                break;
             default:
                 System.out.println("Unknown command: " + cmd);
         }
@@ -131,6 +134,9 @@ public class CommandParser {
                 break;
             case "busplayer":
                 controller.newBusPlayer(rest);
+                break;
+            case "surface":
+                controller.newSurface(rest);
                 break;
             default:
                 System.out.println("Unknown /new subcommand: " + args[0]);

@@ -9,6 +9,7 @@ public class Gritter extends Equipment {
         return ammo;
     }
 
+    @Override
     public void setAmmo(int ammo) {
         this.ammo = ammo;
     }

@@ -10,7 +10,8 @@ public class IceBreaker extends Equipment {
 
     /**
      * Uses the ice breaker equipment to clear ice from the specified lane.
-     * Removes the ice amount from the lane and updates its state as cleared by the owner.
+     * Removes the ice amount from the lane and updates its state as cleared by the
+     * owner.
      *
      * @param lane The lane from which ice should be removed.
      */
@@ -18,5 +19,10 @@ public class IceBreaker extends Equipment {
     public void use(Lane lane) {
         int iceAmount = lane.clearIce();
         lane.cleared(owner);
+    }
+
+    @Override
+    public void setAmmo(int ammo) {
+        // Does nothing
     }
 }

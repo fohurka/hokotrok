@@ -10,6 +10,20 @@ public class SnowplowPlayer extends Player {
     private List<Snowplow> snowplows;
     private Warehouse warehouse;
 
+    private SnowplowPlayer() {
+        this.snowplows = new ArrayList<>();
+    }
+
+    /**
+     * Creates an empty SnowplowPlayer without a default snowplow.
+     * Used exclusively by the state parser during game state load.
+     *
+     * @return A new empty SnowplowPlayer instance.
+     */
+    public static SnowplowPlayer createEmpty() {
+        return new SnowplowPlayer();
+    }
+
     /**
      * Constructs a new SnowplowPlayer and initializes a snowplow at the given
      * junction.
@@ -17,7 +31,7 @@ public class SnowplowPlayer extends Player {
      * @param starter The junction where the initial snowplow spawns.
      */
     public SnowplowPlayer(Junction starter) {
-        this.snowplows = new ArrayList<>();
+        this();
         snowplows.add(new Snowplow());
         snowplows.get(0).setLocation(starter);
         snowplows.get(0).setEquipment(new Sweeper(this));
@@ -80,6 +94,15 @@ public class SnowplowPlayer extends Player {
     }
 
     /**
+     * Adds a given snowplow to this player's fleet.
+     *
+     * @param sp The snowplow to add.
+     */
+    public void addSnowplow(Snowplow sp) {
+        snowplows.add(sp);
+    }
+
+    /**
      * The player attempts to buy a new snowplow vehicle from the warehouse.
      * In the skeleton, it forwards the call to the warehouse's respective buying
      * method.
@@ -88,7 +111,7 @@ public class SnowplowPlayer extends Player {
         if (warehouse != null) {
             Snowplow newPlow = warehouse.buySnowplow(this);
             if (newPlow != null) {
-                snowplows.add(newPlow);
+                addSnowplow(newPlow);
             }
         }
     }

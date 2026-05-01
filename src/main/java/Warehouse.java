@@ -30,7 +30,7 @@ public class Warehouse extends Building {
         Equipment boughtEquipment = null;
         
         if (bank != null) {
-            if (bank.hasEnoughMoney(p, equipmentPrices[id - 1]);) {
+            if (bank.hasEnoughMoney(p, equipmentPrices[id - 1])) {
                 // Here the equipment is created and given to the player (true branch)
                 switch (id) {
                 case 1:

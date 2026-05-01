@@ -27,6 +27,8 @@ public class GameController {
     private Bank bank;
     private Warehouse warehouse;
     private Recoverer recoverer;
+    private RoadNetwork rn;
+    private String activePlayerId;
 
     private final List<Junction> junctions = new ArrayList<>();
     private final List<Building> buildings = new ArrayList<>();
@@ -35,13 +37,84 @@ public class GameController {
     private final List<BusPlayer> busPlayers = new ArrayList<>();
     private final List<SnowplowPlayer> snowplowPlayers = new ArrayList<>();
     private final List<Equipment> allEquipments = new ArrayList<>();
+    private final List<Vehicle> vehicles = new ArrayList<>();
+
+    // -------------------------------------------------------------------------
+    // Helper ID lookups
+    // -------------------------------------------------------------------------
+
+    public Junction getJunctionById(String id) {
+        for (Junction j : junctions) if (id.equals(j.getId())) return j;
+        return null;
+    }
+
+    public Lane getLaneById(String id) {
+        for (Lane l : lanes) if (id.equals(l.getId())) return l;
+        return null;
+    }
+
+    public Building getBuildingById(String id) {
+        for (Building b : buildings) if (id.equals(b.getId())) return b;
+        return null;
+    }
+
+    public Player getPlayerById(String id) {
+        for (CarPlayer p : carPlayers) if (id.equals(p.getId())) return p;
+        for (BusPlayer p : busPlayers) if (id.equals(p.getId())) return p;
+        for (SnowplowPlayer p : snowplowPlayers) if (id.equals(p.getId())) return p;
+        return null;
+    }
+
+    public Vehicle getVehicleById(String id) {
+        for (Vehicle v : vehicles) if (id.equals(v.getId())) return v;
+        return null;
+    }
+
+    public Equipment getEquipmentById(String id) {
+        for (Equipment e : allEquipments) if (id.equals(e.getId())) return e;
+        return null;
+    }
+
+    private boolean idExists(String id) {
+        if (getJunctionById(id) != null) return true;
+        if (getLaneById(id) != null) return true;
+        if (getBuildingById(id) != null) return true;
+        if (getPlayerById(id) != null) return true;
+        if (getVehicleById(id) != null) return true;
+        if (getEquipmentById(id) != null) return true;
+        return false;
+    }
+
+    private String validateNewId(String id) {
+        if (idExists(id)) return validateNewId(id + "_new");
+        return id;
+    }
 
     // -------------------------------------------------------------------------
     // Lifecycle commands
     // -------------------------------------------------------------------------
 
-    /** Initialises the game to a clean default state. Currently a no-op. */
+    /** Initialises the game to a clean default state. */
     public void init() {
+        rn = new RoadNetwork();
+        bank = new Bank();
+        recoverer = new Recoverer();
+
+        Junction wJunc = new Junction();
+        String jid = "junc_1";
+        wJunc.setId(jid);
+        junctions.add(wJunc);
+        rn.addJunction(wJunc);
+
+        warehouse = new Warehouse(wJunc);
+        String wid = "bldg_warehouse";
+        warehouse.setId(wid);
+        buildings.add(warehouse);
+        wJunc.addBuilding(warehouse);
+
+        rn.setBank(bank);
+        bank.setWarehouse(warehouse);
+        warehouse.setBank(bank);
     }
 
     // -------------------------------------------------------------------------
@@ -100,94 +173,536 @@ public class GameController {
 
     /** Advances the simulation by one tick: moves vehicles, updates surfaces. */
     public void tick() {
+        if (rn != null) rn.tick();
+        if (recoverer != null) recoverer.tick();
+        List<Vehicle> currentVehicles = new ArrayList<>(vehicles);
+        for (Vehicle v : currentVehicles) {
+            v.tick();
+        }
     }
 
     /** Prints a human-readable description of the road network to stdout. */
     public void printRoadNetwork() {
+        for (Junction j : junctions) {
+            System.out.println("---Kereszteződések: (junctionID)---");
+            System.out.println(j.getId());
+        }
+        for (Lane l : lanes) {
+            Surface s = l.getSurface();
+            String type = s.getClass().getSimpleName();
+            String mod = s.getModifier().getClass().getSimpleName();
+            System.out.println("---Sávok: (laneID, startJunctionID, endJunctionID, length, type, modifier, snowAmount, iceAmount)---");
+            System.out.printf("%s, %s, %s, %d, %s, %s, %d, %d\n",
+                l.getId(), l.getStart() != null ? l.getStart().getId() : "null", l.getEnd() != null ? l.getEnd().getId() : "null",
+                l.getLength(), type, mod, s.getSnowAmount(), s.getIceAmount());
+        }
+        for (Junction j : junctions) {
+            System.out.println("---Kereszteződések: (junctionID)---");
+            System.out.println(j.getId());
+        }
     }
 
     /** Prints the current state of all vehicles to stdout. */
     public void printVehicles() {
+        List<Vehicle> snowplows = new ArrayList<>();
+        List<Vehicle> buses = new ArrayList<>();
+        List<Vehicle> cars = new ArrayList<>();
+        for (Vehicle v : vehicles) {
+            if (v instanceof Snowplow) snowplows.add(v);
+            else if (v instanceof Bus) buses.add(v);
+            else if (v instanceof Car) cars.add(v);
+        }
+        System.out.println("---Hókotrók: (vehicleID, laneID/junctionID)---");
+        for (Vehicle v : snowplows) printVehicle(v);
+        System.out.println("---Buszok: (vehicleID, laneID/junctionID)---");
+        for (Vehicle v : buses) printVehicle(v);
+        System.out.println("---Autók: (vehicleID, laneID/junctionID)---");
+        for (Vehicle v : cars) printVehicle(v);
+    }
+
+    private void printVehicle(Vehicle v) {
+        String vid = v.getId();
+        String locId = v.getLocation() != null ? v.getLocation().getId() : "null";
+        System.out.printf("%s, %s\n", vid, locId);
     }
 
     /** Creates and registers a new Junction in the road network. */
     public void newJunction() {
+        if (rn == null) {
+            System.out.println("Game state uninitialized");
+            return;
+        }
+        String id = validateNewId("junc_" + (junctions.size() + 1));
+        Junction j = new Junction();
+        j.setRoadNetwork(rn);
+        rn.addJunction(j);
+        j.setId(id);
+        junctions.add(j);
     }
 
     /**
      * Creates and registers a new Lane in the road network.
      *
-     * @param args start junction id, end junction id, length, etc.
+     * @param args args[2] = start junction id, args[3] = end junction id, args[4] = length
      */
     public void newLane(String[] args) {
+        if (args.length < 5) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        String startId = args[2];
+        String endId = args[3];
+        int length;
+        try {
+            length = Integer.parseInt(args[4]);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid argument format");
+            return;
+        }
+
+        Junction start = getJunctionById(startId);
+        Junction end = getJunctionById(endId);
+        if (start == null || end == null){
+            for (Junction j : junctions) {
+                System.out.println("---Kereszteződések: (junctionID)---");
+                System.out.println(j.getId());
+            }
+            return;
+        }
+
+        Lane l = new Lane(start, end, length);
+        l.setRoadNetwork(rn);
+        l.setSurface(new SmallSnow(l));
+        rn.addLane(l);
+        start.addStarting(l);
+        end.addEnding(l);
+
+        String id = validateNewId("lane_" + (lanes.size() + 1));
+        l.setId(id);
+        lanes.add(l);
     }
 
     /**
      * Creates and registers a new Building attached to a junction.
      *
-     * @param args junction id, building type, etc.
+     * @param args args[2] = junction id
      */
     public void newBuilding(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        Junction j = getJunctionById(args[2]);
+        if (j == null) {
+            for (Junction junc : junctions) {
+                System.out.println("---Kereszteződések: (junctionID)---");
+                System.out.println(junc.getId());
+            }
+            return;
+        }
+        Building b = new Building(j);
+        j.addBuilding(b);
+        String id = validateNewId("bldg_" + (buildings.size() + 1));
+        b.setId(id);
+        buildings.add(b);
     }
 
     /**
      * Creates and registers a new CarPlayer with its associated Car vehicle.
      *
-     * @param args home id, work id, etc.
+     * @param args args[2] = home id, args[3] = work id
      */
     public void newCarPlayer(String[] args) {
+        if (args.length < 4) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        Building home = getBuildingById(args[2]);
+        Building work = getBuildingById(args[3]);
+        if (home == null || work == null) {
+            for (Junction junc : junctions) { // building printer is bugged in Proto, it printed junctions
+                System.out.println("---Kereszteződések: (junctionID)---");
+                System.out.println(junc.getId());
+            }
+            return;
+        }
+        CarPlayer cp = new CarPlayer(home, work);
+        String pid = validateNewId("player_car_" + (carPlayers.size() + 1));
+        cp.setId(pid);
+        carPlayers.add(cp);
+
+        Car c = cp.getCar();
+        c.setRecoverer(recoverer);
+        c.setLocation(home.getConnection());
+
+        String vid = validateNewId("veh_car_" + (vehicles.size() + 1));
+        c.setId(vid);
+        vehicles.add(c);
     }
 
     /**
      * Creates and registers a new SnowplowPlayer with an initial Snowplow.
      *
-     * @param args starting junction id, etc.
+     * @param args args[2] = starting junction id
      */
     public void newSnowplowPlayer(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        Junction j = getJunctionById(args[2]);
+        if (j == null) {
+            for (Junction junc : junctions) {
+                System.out.println("---Kereszteződések: (junctionID)---");
+                System.out.println(junc.getId());
+            }
+            return;
+        }
+        SnowplowPlayer sp = new SnowplowPlayer(j);
+        sp.setWarehouse(warehouse);
+
+        String pid = validateNewId("player_sp_" + (snowplowPlayers.size() + 1));
+        sp.setId(pid);
+        snowplowPlayers.add(sp);
+
+        Snowplow s = sp.getSnowplow(0);
+        String cid = validateNewId("veh_sp_" + (vehicles.size() + 1));
+        s.setId(cid);
+        vehicles.add(s);
+        
+        Equipment eq = s.getCurrentEquipment();
+        if (eq != null) {
+            String eid = validateNewId("eq_" + eq.getClass().getSimpleName().toLowerCase() + "_" + (allEquipments.size() + 1));
+            eq.setId(eid);
+            allEquipments.add(eq);
+        }
     }
 
     /**
      * Creates and registers a new BusPlayer with its associated Bus vehicle.
      *
-     * @param args starting junction id, etc.
+     * @param args args[2] = b1 id, args[3] = b2 id
      */
     public void newBusPlayer(String[] args) {
+        if (args.length < 4) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        Building b1 = getBuildingById(args[2]);
+        Building b2 = getBuildingById(args[3]);
+        if (b1 == null || b2 == null) {
+            for (Junction junc : junctions) { // building printer is bugged in Proto
+                System.out.println("---Kereszteződések: (junctionID)---");
+                System.out.println(junc.getId());
+            }
+            return;
+        }
+        BusPlayer bp = new BusPlayer(b1.getConnection());
+        String pid = validateNewId("player_bus_" + (busPlayers.size() + 1));
+        bp.setId(pid);
+        busPlayers.add(bp);
+
+        Bus b = bp.getBus();
+        List<Building> stations = new ArrayList<>();
+        stations.add(b1);
+        stations.add(b2);
+        b.setStations(stations);
+
+        String vid = validateNewId("veh_bus_" + (vehicles.size() + 1));
+        b.setId(vid);
+        vehicles.add(b);
     }
 
     /**
-     * Changes the equipment currently mounted on a snowplow.
+     * Changes the active player.
      *
-     * @param args args[0] = snowplow id, args[1] = equipment id
+     * @param args args[1] = player id
      */
     public void change(String[] args) {
+        if (args.length > 1) {
+            Player p = getPlayerById(args[1]);
+            if (p != null && !(p instanceof CarPlayer))
+                activePlayerId = args[1];
+            else {
+                System.out.println("---Játékosok: (playerID)---");
+                for (BusPlayer bp : busPlayers) System.out.println(bp.getId());
+                for (SnowplowPlayer sp : snowplowPlayers) System.out.println(sp.getId());
+            }
+        }
+        else {
+            System.out.println("Not enough arguments");
+        }
     }
 
     /** Prints the current game status (scores, positions, etc.) to stdout. */
     public void status() {
+        if (activePlayerId == null) {
+            System.out.println("No active player");
+            return;
+        }
+        Player p = getPlayerById(activePlayerId);
+        if (p == null) {
+            System.out.println("No active player");
+            return;
+        }
+        int balance = bank != null ? bank.getBalance(p) : 0;
+        if (p instanceof SnowplowPlayer) {
+            SnowplowPlayer sp = (SnowplowPlayer) p;
+            System.out.print(balance);
+            for (Snowplow s : sp.getSnowplows()) {
+                String vid = s.getId();
+                String eid = s.getCurrentEquipment() != null ? s.getCurrentEquipment().getId() : "null";
+                System.out.print(", " + vid + ", " + eid );
+            }
+            System.out.println("");
+        } else if (p instanceof BusPlayer) {
+            BusPlayer bp = (BusPlayer) p;
+            Bus b = bp.getBus();
+            String vid = b.getId();
+            List<Building> stations = b.getStations();
+            String s1 = stations.size() > 0 && stations.get(0).getConnection() != null ? stations.get(0).getConnection().getId() : "null";
+            String s2 = stations.size() > 1 && stations.get(1).getConnection() != null ? stations.get(1).getConnection().getId() : "null";
+            System.out.printf("(%s, %s, %s, %d, %b)\n", vid, s1, s2, balance, b.isCrashed());
+        }
     }
 
     /**
      * Moves a vehicle to a specified destination.
      *
-     * @param args args[0] = vehicle id, args[1] = destination id
+     * @param args args[1] = destination id, optionally -v <index>
      */
     public void move(String[] args) {
+        if (activePlayerId == null) {
+            System.out.println("No active player");
+            return;
+        }
+        Player p = getPlayerById(activePlayerId);
+        if (args.length < 2) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        String destId = args[1];
+        Junction dest = getJunctionById(destId);
+        
+        int vIdx = 0;
+        if (args.length > 3 && args[2].equals("-v")) {
+            try {
+                vIdx = Integer.parseInt(args[3]);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid argument format");
+                return;
+            }
+        }
+        
+        Vehicle[] playerVehicles = p.getVehicles().toArray(new Vehicle[0]);
+        if (vIdx < 0 || vIdx >= playerVehicles.length) {
+            System.out.println("Invalid vehicle index");
+            return;
+        }
+        if (playerVehicles[vIdx].getLocation() instanceof Lane) {
+            System.out.println("In lane");
+            return;
+        }
+
+        List<Junction> available = new ArrayList<>();
+        Junction currJunc = (Junction) (playerVehicles[vIdx].getLocation());
+        for (Lane l : currJunc.getLanes()) {
+            available.add(l.getEnd());
+        }
+
+        if (!available.contains(dest)) {
+            System.out.println("---Elérhető kereszteződések: (junctionID)---");
+            for (Junction junction : available) {
+                System.out.println(junction.getId());
+            }
+        } else {
+            p.choseDirection(dest, vIdx);
+        }
     }
 
     /**
      * Processes a purchase request by a player.
      *
-     * @param args args[0] = player id, args[1] = item id
+     * @param args args[1] = item id/name
      */
     public void purchase(String[] args) {
+        if (activePlayerId == null) {
+            System.out.println("No active player");
+            return;
+        }
+        Player p = getPlayerById(activePlayerId);
+        if (!(p instanceof SnowplowPlayer)) {
+            System.out.println("No active snowplow player");
+            return;
+        }
+        SnowplowPlayer sp = (SnowplowPlayer) p;
+        
+        if (args.length < 2) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        String item = args[1];
+        if (item.equalsIgnoreCase("Snowplow")) {
+            sp.buySnowplow();
+            List<Snowplow> plows = sp.getSnowplows();
+            if (!plows.isEmpty()) {
+                Snowplow newPlow = plows.get(plows.size() - 1);
+                if (!vehicles.contains(newPlow)) {
+                    String cid = validateNewId("veh_sp_" + (vehicles.size() + 1));
+                    newPlow.setId(cid);
+                    vehicles.add(newPlow);
+                }
+            }
+        } else {
+            int id = -1;
+            if (item.equalsIgnoreCase("Sweeper")) id = 1;
+            else if (item.equalsIgnoreCase("Impeller")) id = 2;
+            else if (item.equalsIgnoreCase("Salter")) id = 3;
+            else if (item.equalsIgnoreCase("IceBreaker")) id = 4;
+            else if (item.equalsIgnoreCase("DragonBlade")) id = 5;
+
+            if (id != -1) {
+                int oldSize = warehouse.getStock().size();
+                sp.buyEquipment(id);
+                if (warehouse.getStock().size() > oldSize) {
+                    Equipment newEq = warehouse.getStock().get(warehouse.getStock().size() - 1);
+                    String eid = validateNewId("eq_" + item.toLowerCase() + "_" + (allEquipments.size() + 1));
+                    newEq.setId(eid);
+                    allEquipments.add(newEq);
+                }
+            } else {
+                System.out.println("Invalid item");
+            }
+        }
     }
 
     /**
      * Equips a piece of equipment onto a snowplow from the warehouse.
      *
-     * @param args args[0] = snowplow id, args[1] = equipment id
+     * @param args args[1] = equipment name
      */
     public void equip(String[] args) {
+        if (activePlayerId == null) {
+            System.out.println("No active player");
+            return;
+        }
+        Player p = getPlayerById(activePlayerId);
+        if (!(p instanceof SnowplowPlayer)) {
+            System.out.println("No active snowplow player");
+            return;
+        }
+        SnowplowPlayer sp = (SnowplowPlayer) p;
+
+        if (args.length < 2) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        String eqName = args[1];
+        int vIdx = 0;
+        if (args.length > 3 && args[2].equals("-v")) {
+            try {
+                vIdx = Integer.parseInt(args[3]);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid argument format");
+                return;
+            }
+        }
+        if (vIdx < 0 || vIdx >= sp.getSnowplows().size()) {
+            System.out.println("Invalid vehicle index");
+            return;
+        }
+        Snowplow plow = sp.getSnowplow(vIdx);
+
+        if(plow.getLocation() instanceof Lane || !(Junction)(plow.getLocation()).equals(warehouse.getConnection())){
+             System.out.println("A kotró nincs a raktárban");
+             return;
+        }
+        
+        Equipment toEquip = null;
+        for (Equipment eq : warehouse.getStock()) {
+            if (eq.getClass().getSimpleName().equalsIgnoreCase(eqName)) {
+                toEquip = eq;
+                break;
+            }
+        }
+        if (toEquip != null) {
+            warehouse.changeEquipment(plow, toEquip);
+        } else {
+            System.out.println("Equipment not available");
+        }
+    }
+
+    /**
+     * Creates a new surface on a given lane.
+     */
+    public void newSurface(String[] args) {
+        if (args.length < 7) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+        Lane l = getLaneById(args[2]);
+        if (l == null) {
+            for (Junction j : junctions) {
+                System.out.println("---Kereszteződések: (junctionID)---");
+                System.out.println(j.getId());
+            }
+            return;
+        }
+        String type = args[3];
+        String modStr = args[4];
+        int snow;
+        int ice;
+        try {
+            snow = Integer.parseInt(args[5]);
+            ice = Integer.parseInt(args[6]);
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid argument format");
+            return;
+        }
+
+        Modifier mod = modStr.equals("Salted") ? new Salted() : new Unmodified();
+        Surface surf;
+        switch (type) {
+            case "SmallSnow": surf = new SmallSnow(l, mod); break;
+            case "DeepSnow": surf = new DeepSnow(l, mod); break;
+            case "Ice": surf = new Ice(l, mod); break;
+            case "Grit": surf = new Grit(l, mod); break;
+            default: surf = new SmallSnow(l, mod); break;
+        }
+        surf.addSnow(snow);
+        surf.addIce(ice);
+        l.setSurface(surf);
+    }
+
+    /**
+     * Causes a vehicle to progress on its current lane.
+     */
+    public void progress(String[] args) {
+        if (activePlayerId == null) {
+            System.out.println("No active player");
+            return;
+        }
+        Player p = getPlayerById(activePlayerId);
+        int vIdx = 0;
+        if (args.length > 3 && args[2].equals("-v")) {
+            try {
+                vIdx = Integer.parseInt(args[3]);
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid argument format");
+                return;
+            }
+        }
+        Vehicle[] playerVehicles = p.getVehicles().toArray(new Vehicle[0]);
+        if (vIdx < 0 || vIdx >= playerVehicles.length) {
+            System.out.println("Invalid vehicle index");
+            return;
+        }
+        Vehicle v = playerVehicles[vIdx];
+        v.getLocation().progress(v);
     }
 
     // -------------------------------------------------------------------------
@@ -303,6 +818,10 @@ public class GameController {
         allEquipments.add(eq);
     }
 
+    public void addVehicle(Vehicle v) {
+        vehicles.add(v);
+    }
+
     /**
      * Clears all game objects and resets singleton references to null.
      * Called by StateParser at the start of a load to start from a clean slate.
@@ -315,8 +834,11 @@ public class GameController {
         busPlayers.clear();
         snowplowPlayers.clear();
         allEquipments.clear();
+        vehicles.clear();
         bank = null;
         warehouse = null;
         recoverer = null;
+        rn = null;
+        activePlayerId = null;
     }
 }

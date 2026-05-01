@@ -12,8 +12,8 @@ public class Proto {
         public void execute(String[] args);
     }
     
-    public class CommandException extends Exception{
-        public ArgumentFormatException(String s){
+    public class CommandException extends Exception {
+        public CommandException(String s) {
             super(s);
         }
     }

@@ -19,4 +19,9 @@ public class Sweeper extends Equipment {
         rightNeighbor.addGrit();
         lane.cleared(owner);
     }
+
+    @Override
+    public void setAmmo(int ammo) {
+        // Does nothing
+    }
 }
