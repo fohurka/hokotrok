@@ -1,5 +1,5 @@
 import java.util.List;
-
+import java.util.ArrayList;
 /**
  * Represents a player who controls a single bus in the game.
  */
@@ -54,8 +54,8 @@ public class BusPlayer extends Player {
     }
 
     public List<Vehicle> getVehicles() {
-        List<Vehicle> r = new List<Vehicle>();
-        r.add(Bus);
-        return new List<Vehicle>(r);
+        List<Vehicle> r = new ArrayList<>();
+        r.add(bus);
+        return r;
     }
 }

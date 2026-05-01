@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,9 +58,9 @@ public class CarPlayer extends Player {
     }
 
     public List<Vehicle> getVehicles() {
-        List<Vehicle> r = new List<Vehicle>();
+        List<Vehicle> r = new ArrayList<Vehicle>();
         r.add(car);
-        return new List<Vehicle>(r);
+        return r;
     }
 
     public Building getHome() { return home; }
