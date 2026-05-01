@@ -86,6 +86,7 @@ public class GameState {
         public String leftNeighborId; // null when no left neighbor
         public String rightNeighborId; // null when no right neighbor
         public List<Map<String, Integer>> vehicles; // vehicleId -> progressPosition
+        public boolean isCrashed;
         public SurfaceDto surface;
     }
 

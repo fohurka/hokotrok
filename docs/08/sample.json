@@ -66,6 +66,7 @@
                             "veh_sp_1": 1
                         }
                     ],
+                    "isCrashed": false,
                     "surface": {
                         "type": "SmallSnow",
                         "snowAmount": 3,
@@ -89,8 +90,8 @@
                 "id": "player_bus_1",
                 "type": "BusPlayer",
                 "vehicleId": "veh_bus_1",
-                "stop1": "null",
-                "stop2": "null"
+                "stop1": null,
+                "stop2": null
             },
             {
                 "id": "player_sp_1",
@@ -111,8 +112,7 @@
                     "type": "Lane",
                     "id": "lane_1"
                 },
-                "isCrashed": true,
-                "recovererId": "global_recoverer"
+                "isCrashed": true
             },
             {
                 "id": "veh_bus_1",
@@ -140,7 +140,9 @@
                 "id": "eq_dragonblade_1",
                 "type": "DragonBlade",
                 "ownerId": "player_sp_1",
-                "stateData": {}
+                "stateData": {
+                    "ammo": 100
+                }
             },
             {
                 "id": "eq_salter_1",

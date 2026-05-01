@@ -15,6 +15,10 @@ public class Lane extends MapComponent {
     private final HashMap<Vehicle, Integer> progress = new HashMap<>();
     private boolean isCrashed = false;
 
+    public boolean isCrashed() {
+        return isCrashed;
+    }
+
     public Lane(Junction start, Junction end, int length) {
         super();
         this.length = length;

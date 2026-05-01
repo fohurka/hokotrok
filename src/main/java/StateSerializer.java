@@ -218,6 +218,9 @@ public class StateSerializer {
         }
         w.endArray();
 
+        w.name("isCrashed");
+        w.value(l.isCrashed());
+
         // surface
         writeSurface(w, l.getSurface());
 
