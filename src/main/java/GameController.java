@@ -151,25 +151,21 @@ public class GameController {
 
     /** Prints a human-readable description of the road network to stdout. */
     public void printRoadNetwork() {
+        System.out.println("---Kereszteződések: (junctionID)---");
         for (String jid : junctions.keySet()) {
-            System.out.println("---Kereszteződések: (junctionID)---");
             System.out.println(jid);
         }
+        System.out.println(
+                "---Sávok: (laneID, startJunctionID, endJunctionID, length, type, modifier, snowAmount, iceAmount)---");
         for (Map.Entry<String, Lane> entry : lanes.entrySet()) {
             Lane l = entry.getValue();
             Surface s = l.getSurface();
             String type = s.getClass().getSimpleName();
             String mod = s.getModifier().getClass().getSimpleName();
-            System.out.println(
-                    "---Sávok: (laneID, startJunctionID, endJunctionID, length, type, modifier, snowAmount, iceAmount)---");
             System.out.printf("%s, %s, %s, %d, %s, %s, %d, %d\n",
                     entry.getKey(), l.getStart() != null ? l.getStart().getId() : "null",
                     l.getEnd() != null ? l.getEnd().getId() : "null",
                     l.getLength(), type, mod, s.getSnowAmount(), s.getIceAmount());
-        }
-        for (String jid : junctions.keySet()) {
-            System.out.println("---Kereszteződések: (junctionID)---");
-            System.out.println(jid);
         }
     }
 
@@ -219,19 +215,19 @@ public class GameController {
     /**
      * Creates and registers a new Lane in the road network.
      *
-     * @param args args[2] = start junction id, args[3] = end junction id, args[4] =
+     * @param args args[0] = start junction id, args[1] = end junction id, args[2] =
      *             length
      */
     public void newLane(String[] args) {
-        if (args.length < 5) {
+        if (args.length < 3) {
             System.out.println("Not enough arguments");
             return;
         }
-        String startId = args[2];
-        String endId = args[3];
+        String startId = args[0];
+        String endId = args[1];
         int length;
         try {
-            length = Integer.parseInt(args[4]);
+            length = Integer.parseInt(args[2]);
         } catch (NumberFormatException e) {
             System.out.println("Invalid argument format");
             return;

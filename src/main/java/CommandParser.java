@@ -3,11 +3,11 @@
  * to the appropriate GameController or TestManager method.
  *
  * System commands are prefixed with '/':
- *   /save, /load, /rand, /teststart, /testend,
- *   /init, /roadnetwork, /vehicles, /tick, /new
+ * /save, /load, /rand, /teststart, /testend,
+ * /init, /roadnetwork, /vehicles, /tick, /new
  *
  * Player commands have no prefix:
- *   change, status, move, purchase, equip
+ * change, status, move, purchase, equip
  *
  * The /new command is further dispatched to sub-commands via parseNew().
  */
@@ -98,12 +98,12 @@ public class CommandParser {
      *
      * Expected format: /new <subcommand> [args...]
      * Supported sub-commands:
-     *   junction            - creates a new Junction
-     *   lane [args]         - creates a new Lane
-     *   building [args]     - creates a new Building
-     *   carplayer [args]    - creates a new CarPlayer
-     *   snowplowplayer [args] - creates a new SnowplowPlayer
-     *   busplayer [args]    - creates a new BusPlayer
+     * junction - creates a new Junction
+     * lane [args] - creates a new Lane
+     * building [args] - creates a new Building
+     * carplayer [args] - creates a new CarPlayer
+     * snowplowplayer [args] - creates a new SnowplowPlayer
+     * busplayer [args] - creates a new BusPlayer
      *
      * @param args the arguments following /new; args[0] is the sub-command name
      */

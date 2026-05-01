@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class RoadNetwork {
     private Bank bank;
-    private List<Lane> lanes;
-    private List<Junction> junctions;
+    private List<Lane> lanes = new ArrayList<>();
+    private List<Junction> junctions = new ArrayList<>();
 
     /**
      * Sets the bank used by the road network to pay rewards to players.
