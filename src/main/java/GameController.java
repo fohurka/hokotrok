@@ -58,11 +58,27 @@ public class GameController {
         return null;
     }
 
-    public Player getPlayerById(String id) {
+    public CarPlayer getCarPlayerById(String id) {
         for (CarPlayer p : carPlayers) if (id.equals(p.getId())) return p;
+        return null;
+    }
+
+    public BusPlayer getBusPlayerById(String id) {
         for (BusPlayer p : busPlayers) if (id.equals(p.getId())) return p;
+        return null;
+    }
+
+    public SnowplowPlayer getSnowplowPlayerById(String id) {
         for (SnowplowPlayer p : snowplowPlayers) if (id.equals(p.getId())) return p;
         return null;
+    }
+
+    public Player getPlayerById(String id) {
+        Player p = getCarPlayerById(id);
+        if (p != null) return p;
+        p = getBusPlayerById(id);
+        if (p != null) return p;
+        return getSnowplowPlayerById(id);
     }
 
     public Vehicle getVehicleById(String id) {
@@ -207,11 +223,9 @@ public class GameController {
         List<Vehicle> snowplows = new ArrayList<>();
         List<Vehicle> buses = new ArrayList<>();
         List<Vehicle> cars = new ArrayList<>();
-        for (Vehicle v : vehicles) {
-            if (v instanceof Snowplow) snowplows.add(v);
-            else if (v instanceof Bus) buses.add(v);
-            else if (v instanceof Car) cars.add(v);
-        }
+        for (SnowplowPlayer sp : snowplowPlayers) snowplows.addAll(sp.getVehicles());
+        for (BusPlayer bp : busPlayers) buses.addAll(bp.getVehicles());
+        for (CarPlayer cp : carPlayers) cars.addAll(cp.getVehicles());
         System.out.println("---Hókotrók: (vehicleID, laneID/junctionID)---");
         for (Vehicle v : snowplows) printVehicle(v);
         System.out.println("---Buszok: (vehicleID, laneID/junctionID)---");
@@ -420,8 +434,7 @@ public class GameController {
      */
     public void change(String[] args) {
         if (args.length > 1) {
-            Player p = getPlayerById(args[1]);
-            if (p != null && !(p instanceof CarPlayer))
+            if (getBusPlayerById(args[1]) != null || getSnowplowPlayerById(args[1]) != null)
                 activePlayerId = args[1];
             else {
                 System.out.println("---Játékosok: (playerID)---");
@@ -440,14 +453,10 @@ public class GameController {
             System.out.println("No active player");
             return;
         }
-        Player p = getPlayerById(activePlayerId);
-        if (p == null) {
-            System.out.println("No active player");
-            return;
-        }
-        int balance = bank != null ? bank.getBalance(p) : 0;
-        if (p instanceof SnowplowPlayer) {
-            SnowplowPlayer sp = (SnowplowPlayer) p;
+        
+        SnowplowPlayer sp = getSnowplowPlayerById(activePlayerId);
+        if (sp != null) {
+            int balance = bank != null ? bank.getBalance(sp) : 0;
             System.out.print(balance);
             for (Snowplow s : sp.getSnowplows()) {
                 String vid = s.getId();
@@ -455,15 +464,22 @@ public class GameController {
                 System.out.print(", " + vid + ", " + eid );
             }
             System.out.println("");
-        } else if (p instanceof BusPlayer) {
-            BusPlayer bp = (BusPlayer) p;
+            return;
+        }
+        
+        BusPlayer bp = getBusPlayerById(activePlayerId);
+        if (bp != null) {
+            int balance = bank != null ? bank.getBalance(bp) : 0;
             Bus b = bp.getBus();
             String vid = b.getId();
             List<Building> stations = b.getStations();
             String s1 = stations.size() > 0 && stations.get(0).getConnection() != null ? stations.get(0).getConnection().getId() : "null";
             String s2 = stations.size() > 1 && stations.get(1).getConnection() != null ? stations.get(1).getConnection().getId() : "null";
             System.out.printf("(%s, %s, %s, %d, %b)\n", vid, s1, s2, balance, b.isCrashed());
+            return;
         }
+
+        System.out.println("No active player");
     }
 
     /**
@@ -500,15 +516,20 @@ public class GameController {
             System.out.println("Invalid vehicle index");
             return;
         }
-        if (playerVehicles[vIdx].getLocation() instanceof Lane) {
+        MapComponent loc = playerVehicles[vIdx].getLocation();
+        if (loc != null && getLaneById(loc.getId()) != null) {
             System.out.println("In lane");
             return;
         }
 
         List<Junction> available = new ArrayList<>();
-        Junction currJunc = (Junction) (playerVehicles[vIdx].getLocation());
-        for (Lane l : currJunc.getLanes()) {
-            available.add(l.getEnd());
+        if (loc != null) {
+            Junction currJunc = getJunctionById(loc.getId());
+            if (currJunc != null) {
+                for (Lane l : currJunc.getLanes()) {
+                    available.add(l.getEnd());
+                }
+            }
         }
 
         if (!available.contains(dest)) {
@@ -531,12 +552,11 @@ public class GameController {
             System.out.println("No active player");
             return;
         }
-        Player p = getPlayerById(activePlayerId);
-        if (!(p instanceof SnowplowPlayer)) {
+        SnowplowPlayer sp = getSnowplowPlayerById(activePlayerId);
+        if (sp == null) {
             System.out.println("No active snowplow player");
             return;
         }
-        SnowplowPlayer sp = (SnowplowPlayer) p;
         
         if (args.length < 2) {
             System.out.println("Not enough arguments");
@@ -587,12 +607,11 @@ public class GameController {
             System.out.println("No active player");
             return;
         }
-        Player p = getPlayerById(activePlayerId);
-        if (!(p instanceof SnowplowPlayer)) {
+        SnowplowPlayer sp = getSnowplowPlayerById(activePlayerId);
+        if (sp == null) {
             System.out.println("No active snowplow player");
             return;
         }
-        SnowplowPlayer sp = (SnowplowPlayer) p;
 
         if (args.length < 2) {
             System.out.println("Not enough arguments");
@@ -615,7 +634,8 @@ public class GameController {
         }
         Snowplow plow = sp.getSnowplow(vIdx);
 
-        if(plow.getLocation() instanceof Lane || !(Junction)(plow.getLocation()).equals(warehouse.getConnection())){
+        MapComponent loc = plow.getLocation();
+        if(loc == null || warehouse == null || warehouse.getConnection() == null || !loc.getId().equals(warehouse.getConnection().getId())) {
              System.out.println("A kotró nincs a raktárban");
              return;
         }
@@ -685,7 +705,7 @@ public class GameController {
             System.out.println("No active player");
             return;
         }
-        Player p = getPlayerById(activePlayerId);
+
         int vIdx = 0;
         if (args.length > 3 && args[2].equals("-v")) {
             try {
@@ -696,13 +716,34 @@ public class GameController {
                 return;
             }
         }
-        Vehicle[] playerVehicles = p.getVehicles().toArray(new Vehicle[0]);
-        if (vIdx < 0 || vIdx >= playerVehicles.length) {
-            System.out.println("Invalid vehicle index");
+
+        SnowplowPlayer sp = getSnowplowPlayerById(activePlayerId);
+        if (sp != null) {
+            if (vIdx < 0 || vIdx >= sp.getSnowplows().size()) {
+                System.out.println("Invalid vehicle index");
+                return;
+            }
+            Snowplow plow = sp.getSnowplow(vIdx);
+            if (plow.getLocation() != null) {
+                plow.getLocation().progress(plow);
+            }
             return;
         }
-        Vehicle v = playerVehicles[vIdx];
-        v.getLocation().progress(v);
+
+        BusPlayer bp = getBusPlayerById(activePlayerId);
+        if (bp != null) {
+            if (vIdx != 0) {
+                System.out.println("Invalid vehicle index");
+                return;
+            }
+            Bus bus = bp.getBus();
+            if (bus.getLocation() != null) {
+                bus.getLocation().progress(bus);
+            }
+            return;
+        }
+
+        System.out.println("No active player or invalid player type for progress");
     }
 
     // -------------------------------------------------------------------------
