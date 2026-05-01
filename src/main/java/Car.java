@@ -72,4 +72,8 @@ public class Car extends CivilVehicle {
         }
         owner.goHome();
     }
+
+    public CarPlayer getOwner() {
+        return owner;
+    }
 }

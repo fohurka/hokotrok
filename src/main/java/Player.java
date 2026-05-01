@@ -6,6 +6,15 @@
  */
 public abstract class Player {
 
+    protected String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     /**
      * Chooses the next direction(Lane or Building) for a vehicle to take.
      *

@@ -4,8 +4,8 @@ public abstract class Surface {
 
     protected int snowAmount = 0;
     protected int iceAmount = 0;
-    protected static int snowThreshold = 4;
-    protected static int iceThreshold = 4;
+    public static int snowThreshold = 4;
+    public static int iceThreshold = 4;
 
     protected Lane getLane() {
         return lane;

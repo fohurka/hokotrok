@@ -2,7 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Recoverer {
+    private String id;
     private List<Car> recoveryQueue = new ArrayList<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Adds a car to the recovery queue to be processed later.
@@ -22,5 +31,9 @@ public class Recoverer {
             Car c = recoveryQueue.remove(0);
             c.recover();
         }
+    }
+
+    public List<Car> getRecoveryQueue() {
+        return recoveryQueue;
     }
 }

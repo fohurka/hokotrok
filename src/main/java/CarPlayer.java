@@ -62,4 +62,7 @@ public class CarPlayer extends Player {
         return new List<Vehicle>(r);
     }
 
+    public Building getHome() { return home; }
+    public Building getWork() { return work; }
+
 }

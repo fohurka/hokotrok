@@ -1,4 +1,5 @@
 public abstract class Vehicle {
+    protected String id;
     protected MapComponent loc;
 
     public abstract void crash();
@@ -30,5 +31,13 @@ public abstract class Vehicle {
      */
     public MapComponent getLocation() {
         return loc;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

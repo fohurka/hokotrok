@@ -41,4 +41,8 @@ public class Bank {
     public int getBalance(Player p) {
         return accounts.getOrDefault(p, 0);
     }
+
+    public HashMap<Player, Integer> getAccounts() {
+        return accounts;
+    }
 }

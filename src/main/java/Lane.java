@@ -248,4 +248,5 @@ public class Lane extends MapComponent {
     public Junction getStart() { return start; }
     public Junction getEnd() { return end; }
     public Surface getSurface() { return surface; }
+    public HashMap<Vehicle, Integer> getProgress() { return progress; }
 }

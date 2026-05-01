@@ -2,10 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MapComponent {
+    protected String id;
     protected List<Vehicle> vehicles;
 
     protected List<Vehicle> getVehicles() {
         return vehicles;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public MapComponent() {

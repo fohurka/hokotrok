@@ -1,6 +1,16 @@
 public class DragonBlade extends Equipment {
+    private int ammo;
+
     public DragonBlade(SnowplowPlayer owner) {
         super(owner);
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
     }
 
     /**

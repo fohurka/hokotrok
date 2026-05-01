@@ -67,6 +67,10 @@ public class Junction extends MapComponent {
         return starting;
     }
 
+    public List<Lane> getStartingLanes() { return starting; }
+    public List<Lane> getEndingLanes()   { return ending; }
+    public List<Building> getBuildings() { return buildings; }
+
     /**
      * Handles a bus arriving at the junction. It queries the attached building
      * to check if it's the target destination. If successful, it notifies

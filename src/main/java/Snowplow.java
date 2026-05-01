@@ -53,4 +53,8 @@ public class Snowplow extends Vehicle {
     public Equipment getCurrentEquipment() {
         return eq;
     }
+
+    public SnowplowPlayer getOwner() {
+        return (eq != null) ? eq.owner : null;
+    }
 }
