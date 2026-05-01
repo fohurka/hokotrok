@@ -133,8 +133,14 @@ public class GameController {
     // Game commands
     // -------------------------------------------------------------------------
 
-    /** Sets the random seed used by randomised game logic. args[0] = seed. */
+    /** Sets whether the events should be random or not (true/false) */
     public void setRand(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Usage: /setRand <true/false>");
+            return;
+        }
+        boolean random = Boolean.parseBoolean(args[0]);
+        // TODO
     }
 
     /** Advances the simulation by one tick: moves vehicles, updates surfaces. */
@@ -151,12 +157,21 @@ public class GameController {
 
     /** Prints a human-readable description of the road network to stdout. */
     public void printRoadNetwork() {
-        System.out.println("---Kereszteződések: (junctionID)---");
+        printJunctions();
+        printLanes();
+        printBuildings();
+    }
+
+    public void printJunctions() {
+        System.out.println("---Kereszteződések: (junctionID) ---");
         for (String jid : junctions.keySet()) {
             System.out.println(jid);
         }
+    }
+
+    public void printLanes() {
         System.out.println(
-                "---Sávok: (laneID, startJunctionID, endJunctionID, length, type, modifier, snowAmount, iceAmount)---");
+                "---Sávok: (laneID, startJunctionID, endJunctionID, length, type, modifier, snowAmount, iceAmount) ---");
         for (Map.Entry<String, Lane> entry : lanes.entrySet()) {
             Lane l = entry.getValue();
             Surface s = l.getSurface();
@@ -166,6 +181,14 @@ public class GameController {
                     entry.getKey(), l.getStart() != null ? l.getStart().getId() : "null",
                     l.getEnd() != null ? l.getEnd().getId() : "null",
                     l.getLength(), type, mod, s.getSnowAmount(), s.getIceAmount());
+        }
+    }
+
+    public void printBuildings() {
+        System.out.println("---Épületek: (buildingID, junctionID) ---");
+        for (Map.Entry<String, Building> entry : buildings.entrySet()) {
+            Building b = entry.getValue();
+            System.out.printf("%s, %s\n", entry.getKey(), b.getConnection().getId());
         }
     }
 
@@ -195,6 +218,14 @@ public class GameController {
         String vid = v.getId();
         String locId = v.getLocation() != null ? v.getLocation().getId() : "null";
         System.out.printf("%s, %s\n", vid, locId);
+    }
+
+    public void printPlayers() {
+        System.out.println("---Játékosok: (playerID) ---");
+        for (String pid : busPlayers.keySet())
+            System.out.println(pid);
+        for (String pid : snowplowPlayers.keySet())
+            System.out.println(pid);
     }
 
     /** Creates and registers a new Junction in the road network. */
@@ -236,10 +267,7 @@ public class GameController {
         Junction start = junctions.get(startId);
         Junction end = junctions.get(endId);
         if (start == null || end == null) {
-            for (String jid : junctions.keySet()) {
-                System.out.println("---Kereszteződések: (junctionID)---");
-                System.out.println(jid);
-            }
+            printJunctions();
             return;
         }
 
@@ -268,10 +296,7 @@ public class GameController {
         }
         Junction j = junctions.get(args[2]);
         if (j == null) {
-            for (String jid : junctions.keySet()) {
-                System.out.println("---Kereszteződések: (junctionID)---");
-                System.out.println(jid);
-            }
+            printJunctions();
             return;
         }
         Building b = new Building(j);
@@ -295,10 +320,7 @@ public class GameController {
         Building home = buildings.get(args[2]);
         Building work = buildings.get(args[3]);
         if (home == null || work == null) {
-            for (String jid : junctions.keySet()) { // building printer is bugged in Proto
-                System.out.println("---Kereszteződések: (junctionID)---");
-                System.out.println(jid);
-            }
+            printBuildings();
             return;
         }
         CarPlayer cp = new CarPlayer(home, work);
@@ -329,10 +351,7 @@ public class GameController {
         }
         Junction j = junctions.get(args[2]);
         if (j == null) {
-            for (String jid : junctions.keySet()) {
-                System.out.println("---Kereszteződések: (junctionID)---");
-                System.out.println(jid);
-            }
+            printJunctions();
             return;
         }
         SnowplowPlayer sp = new SnowplowPlayer(j);
@@ -372,10 +391,7 @@ public class GameController {
         Building b1 = buildings.get(args[2]);
         Building b2 = buildings.get(args[3]);
         if (b1 == null || b2 == null) {
-            for (String jid : junctions.keySet()) { // building printer is bugged in Proto
-                System.out.println("---Kereszteződések: (junctionID)---");
-                System.out.println(jid);
-            }
+            printBuildings();
             return;
         }
         BusPlayer bp = new BusPlayer(b1.getConnection());
@@ -406,11 +422,7 @@ public class GameController {
             if (busPlayers.containsKey(args[1]) || snowplowPlayers.containsKey(args[1]))
                 activePlayerId = args[1];
             else {
-                System.out.println("---Játékosok: (playerID)---");
-                for (String pid : busPlayers.keySet())
-                    System.out.println(pid);
-                for (String pid : snowplowPlayers.keySet())
-                    System.out.println(pid);
+                printPlayers();
             }
         } else {
             System.out.println("Not enough arguments");
