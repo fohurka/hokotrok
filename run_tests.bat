@@ -39,13 +39,22 @@ for /d %%D in ("%TEST_DIR%\*") do (
     )
 )
 
-echo.
+set "fTotal=%total%                  "
+set "fTotal=%fTotal:~0,18%"
+
+set "fPassed=%passed%                  "
+set "fPassed=%fPassed:~0,18%"
+
+set "fFailed=%failed%                  "
+set "fFailed=%fFailed:~0,18%"
+
+:: Megjelenítés
 echo +-------------------------------------+
 echo ^|  TEST RESULTS SUMMARY               ^|
 echo +-------------------------------------+
-echo ^| Total Tests Run: %total%
-echo ^| Passed:          %passed%
-echo ^| Failed:          %failed%
+echo ^| Total Tests Run: %fTotal% ^|
+echo ^| Passed:          %fPassed% ^|
+echo ^| Failed:          %fFailed% ^|
 echo +-------------------------------------+
 
 if not "%failed_tests%"=="" (
