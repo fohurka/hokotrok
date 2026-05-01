@@ -12,8 +12,8 @@ public class Impeller extends Equipment {
     @Override
     public void use(Lane lane) {
         int snowAmount = lane.clearSnow();
-        lane.removeGrit();
-        lane.cleared(owner);
+        lane.clearGrit();
+        lane.cleared(owner, snowAmount);
     }
 
     @Override

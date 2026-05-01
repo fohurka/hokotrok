@@ -21,7 +21,9 @@ public class Gritter extends Equipment {
      */
     @Override
     public void use(Lane lane) {
+        int prevGritAmount = ammo;
         lane.grit();
-        lane.cleared(owner);
+        int usedGrit = prevGritAmount - ammo;
+        lane.cleared(owner, usedGrit);
     }
 }

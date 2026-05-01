@@ -16,8 +16,8 @@ public class Sweeper extends Equipment {
         lane.clearGrit();
         Lane rightNeighbor = lane.getRightNeighbor();
         rightNeighbor.addSnow(snowAmount);
-        rightNeighbor.addGrit();
-        lane.cleared(owner);
+        rightNeighbor.grit();
+        lane.cleared(owner, snowAmount);
     }
 
     @Override

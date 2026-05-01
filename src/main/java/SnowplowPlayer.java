@@ -34,7 +34,8 @@ public class SnowplowPlayer extends Player {
         this();
         snowplows.add(new Snowplow());
         snowplows.get(0).setLocation(starter);
-        snowplows.get(0).setEquipment(new Sweeper(this));
+        Equipment defaultEq = new Sweeper(this);
+        snowplows.get(0).setEquipment(defaultEq);
     }
 
     /**
@@ -87,9 +88,6 @@ public class SnowplowPlayer extends Player {
     public void buyEquipment(int id) {
         if (warehouse != null) {
             Equipment newEq = warehouse.buyEquipment(this, id);
-            if (newEq != null) {
-                setEquipment(newEq);
-            }
         }
     }
 
@@ -117,7 +115,11 @@ public class SnowplowPlayer extends Player {
     }
 
     public List<Vehicle> getVehicles() {
-        return snowplows;
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Snowplow sp : snowplows) {
+            vehicles.add(sp);
+        }
+        return vehicles;
     }
 
     public Warehouse getWarehouse() {

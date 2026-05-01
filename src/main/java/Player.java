@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Represents an abstract player in the game.
  * Players are responsible for choosing the direction of vehicles.
