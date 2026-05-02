@@ -1,0 +1,4 @@
+/teststart 6
+/change player_sp_1
+/move junc_2
+/testend

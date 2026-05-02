@@ -1,0 +1,5 @@
+/teststart 24
+/change player_sp_1
+/move junc_2
+/tick
+/testend

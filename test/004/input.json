@@ -1,0 +1,117 @@
+{
+  "gameState": {
+    "bank": {
+      "accounts": {
+        "player_car_1": 0
+      }
+    },
+    "warehouse": {
+      "id": "bldg_warehouse",
+      "stock": []
+    },
+    "recoverer": {
+      "recoveryQueue": []
+    },
+    "map": {
+      "junctions": [
+        {
+          "id": "junc_1",
+          "startingLaneIds": [
+            "lane_1",
+            "lane_2"
+          ],
+          "endingLaneIds": [],
+          "buildingIds": [
+            "bldg_warehouse"
+          ]
+        },
+        {
+          "id": "junc_2",
+          "startingLaneIds": [],
+          "endingLaneIds": [
+            "lane_1"
+          ],
+          "buildingIds": [
+            "bldg_1"
+          ]
+        },
+        {
+          "id": "junc_3",
+          "startingLaneIds": [],
+          "endingLaneIds": [
+            "lane_2"
+          ],
+          "buildingIds": []
+        }
+      ],
+      "buildings": [
+        {
+          "id": "bldg_warehouse",
+          "connectionId": "junc_1",
+          "type": "Warehouse"
+        },
+        {
+          "id": "bldg_1",
+          "connectionId": "junc_2",
+          "type": "Building"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "lane_1",
+          "length": 3,
+          "startJunctionId": "junc_1",
+          "endJunctionId": "junc_2",
+          "leftNeighborId": "null",
+          "rightNeighborId": "null",
+          "surface": {
+            "type": "SmallSnow",
+            "snowAmount": 0,
+            "iceAmount": 0,
+            "snowThreshold": 5,
+            "iceThreshold": 2,
+            "modifier": "Unmodifed"
+          }
+        },
+        {
+          "id": "lane_2",
+          "length": 3,
+          "startJunctionId": "junc_1",
+          "endJunctionId": "junc_3",
+          "leftNeighborId": "null",
+          "rightNeighborId": "null",
+          "surface": {
+            "type": "SmallSnow",
+            "snowAmount": 0,
+            "iceAmount": 0,
+            "snowThreshold": 5,
+            "iceThreshold": 2,
+            "modifier": "Unmodifed"
+          }
+        }
+      ]
+    },
+    "players": [
+      {
+        "id": "player_car_1",
+        "type": "CarPlayer",
+        "vehicleId": "veh_car_1",
+        "homeId": "bldg_warehouse",
+        "workId": "bldg_1"
+      }
+    ],
+    "vehicles": [
+      {
+        "id": "veh_car_1",
+        "type": "Car",
+        "ownerId": "player_car_1",
+        "location": {
+          "type": "Junction",
+          "id": "junc_1"
+        },
+        "isCrashed": "false"
+      }
+    ],
+    "equipments": []
+  }
+}

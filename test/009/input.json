@@ -1,0 +1,101 @@
+{
+  "gameState": {
+    "bank": {
+      "accounts": {
+        "player_car_1": 0
+      }
+    },
+    "warehouse": {
+      "id": "bldg_warehouse",
+      "stock": []
+    },
+    "recoverer": {
+      "recoveryQueue": []
+    },
+    "map": {
+      "junctions": [
+        {
+          "id": "junc_1",
+          "startingLaneIds": [
+            "lane_1"
+          ],
+          "endingLaneIds": [],
+          "buildingIds": [
+            "bldg_warehouse"
+          ]
+        },
+        {
+          "id": "junc_2",
+          "startingLaneIds": [],
+          "endingLaneIds": [
+            "lane_1"
+          ],
+          "buildingIds": []
+        }
+      ],
+      "buildings": [
+        {
+          "id": "bldg_warehouse",
+          "connectionId": "junc_1",
+          "type": "Warehouse"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "lane_1",
+          "length": 5,
+          "startJunctionId": "junc_1",
+          "endJunctionId": "junc_2",
+          "leftNeighborId": "null",
+          "rightNeighborId": "lane_2",
+          "surface": {
+            "type": "DeepSnow",
+            "snowAmount": 6,
+            "iceAmount": 0,
+            "snowThreshold": 5,
+            "iceThreshold": 2,
+            "modifier": "Unmodifed"
+          }
+        },
+        {
+          "id": "lane_2",
+          "length": 5,
+          "startJunctionId": "junc_1",
+          "endJunctionId": "junc_2",
+          "leftNeighborId": "lane_1",
+          "rightNeighborId": "null",
+          "surface": {
+            "type": "SmallSnow",
+            "snowAmount": 1,
+            "iceAmount": 0,
+            "snowThreshold": 5,
+            "iceThreshold": 2,
+            "modifier": "Unmodifed"
+          }
+        }
+      ]
+    },
+    "players": [
+      {
+        "id": "player_car_1",
+        "type": "CarPlayer",
+        "vehicleId": "veh_car_1",
+        "homeId": "null",
+        "workId": "null"
+      }
+    ],
+    "vehicles": [
+      {
+        "id": "veh_car_1",
+        "type": "Car",
+        "ownerId": "player_car_1",
+        "location": {
+          "type": "Lane",
+          "id": "lane_1"
+        },
+        "isCrashed": "false"
+      }
+    ],
+    "equipments": []
+  }
+}

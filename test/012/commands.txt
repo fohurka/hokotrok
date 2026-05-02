@@ -1,0 +1,6 @@
+/teststart 12
+/change player_bus_1
+/move junc_2
+/tick
+/tick
+/testend

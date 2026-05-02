@@ -1,0 +1,3 @@
+/teststart 7
+/tick
+/testend

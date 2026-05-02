@@ -1,0 +1,3 @@
+/teststart 41
+/purchase snowplow
+/testend

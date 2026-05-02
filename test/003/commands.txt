@@ -1,0 +1,4 @@
+/teststart 3
+/change player_sp_1
+/progress
+/testend
