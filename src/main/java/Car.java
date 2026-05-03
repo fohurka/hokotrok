@@ -17,7 +17,7 @@ public class Car extends CivilVehicle {
      * Tries to progress at the current location
      */
     public void tick() {
-        loc.progress(this);
+        if (!isCrashed) loc.progress(this);
     }
 
     /**
@@ -48,6 +48,7 @@ public class Car extends CivilVehicle {
     public void slip(Lane lane) {
         Vehicle nearest = lane.getNearest(this);
         if (nearest != null) {
+            isCrashed = true;
             nearest.crash();
             if (rec != null) rec.addToRecoveryQueue(this);
             lane.crashHappened();
@@ -62,12 +63,14 @@ public class Car extends CivilVehicle {
         if (rec != null) {
             rec.addToRecoveryQueue(this);
         }
+        isCrashed = true;
     }
 
     /**
      * Gets recovered by the Recoverer
      */
     public void recover() {
+        isCrashed = false;
         if (loc != null) {
             loc.crashRecovered();
         }

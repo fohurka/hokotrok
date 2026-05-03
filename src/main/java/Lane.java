@@ -222,7 +222,12 @@ public class Lane extends MapComponent {
     public void crashRecovered()
     {
         isCrashed = false;
-        //TODO: iterate over vehicles to check if there are still crashed ones remaining instead of blindly setting isCrashed to false
+        for (Vehicle v : getVehicles()) {
+            if (v.isCrashed()) {
+                isCrashed = true;
+                break;
+            }
+        }
     }
 
     /**
