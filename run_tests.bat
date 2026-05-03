@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 set TEST_DIR=test
-set PROGRAM_NAME=myprogramname
+set PROGRAM_NAME=hokotrok
 
 set passed=0
 set failed=0
@@ -19,15 +19,19 @@ if not exist "%TEST_DIR%" (
     exit /b 1
 )
 
+:: Make sure we have the latest compiled code in the build directory
+if not exist "build" mkdir build
+javac src/main/java/*.java -d build
+
 for /d %%D in ("%TEST_DIR%\*") do (
     set dir_name=%%~nD
     if exist "%%D\commands.txt" (
         set /a total+=1
-        set /a passed+=0
-        <nul set /p ="Running Test [!dir_name!]... "
+        <nul set /p =" Running Test [!dir_name!]... "
 
-        java %PROGRAM_NAME% < "%%D\commands.txt" > nul 2>&1
-
+        :: Run using the hokotrok wrapper and check for SUCCESS string
+        call %PROGRAM_NAME%.bat < "%%D\commands.txt" 2>&1 | findstr "SUCCESS" > nul
+        
         if !errorlevel! == 0 (
             echo [ SUCCESS ]
             set /a passed+=1
@@ -39,19 +43,18 @@ for /d %%D in ("%TEST_DIR%\*") do (
     )
 )
 
-set "fTotal=%total%                  "
-set "fTotal=%fTotal:~0,18%"
-
-set "fPassed=%passed%                  "
-set "fPassed=%fPassed:~0,18%"
-
-set "fFailed=%failed%                  "
-set "fFailed=%fFailed:~0,18%"
-
-:: Megjelenítés
+echo.
 echo +-------------------------------------+
 echo ^|  TEST RESULTS SUMMARY               ^|
 echo +-------------------------------------+
+
+set "fTotal=%total%                  "
+set "fTotal=%fTotal:~0,18%"
+set "fPassed=%passed%                  "
+set "fPassed=%fPassed:~0,18%"
+set "fFailed=%failed%                  "
+set "fFailed=%fFailed:~0,18%"
+
 echo ^| Total Tests Run: %fTotal% ^|
 echo ^| Passed:          %fPassed% ^|
 echo ^| Failed:          %fFailed% ^|
