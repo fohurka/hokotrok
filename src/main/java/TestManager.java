@@ -82,14 +82,6 @@ public class TestManager {
         } catch (IOException e) {
             System.out.println("Error during test completion: " + e.getMessage());
         } finally {
-            // Delete the temporary out.json file as per requirement
-            try {
-                if (currentTestId != null) {
-                    Files.deleteIfExists(Paths.get("test/" + currentTestId + "/out.json"));
-                }
-            } catch (IOException e) {
-                // Ignore deletion errors
-            }
             currentTestId = null; // Reset for the next test
         }
     }
