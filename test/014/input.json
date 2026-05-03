@@ -89,8 +89,7 @@
           "type": "Lane",
           "id": "lane_1"
         },
-        "isCrashed": false,
-        "recovererId": "global_recoverer"
+        "isCrashed": false
       },
       {
         "id": "veh_sp_1",

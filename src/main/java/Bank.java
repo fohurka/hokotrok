@@ -22,7 +22,7 @@ public class Bank {
      */
     public void pay(Player p, int amount) {
         int currentAmount = accounts.getOrDefault(p, 0);
-        accounts.put(p, currentAmount + amount);
+        accounts.put(p, currentAmount + amount*10);
     }
 
     /**
