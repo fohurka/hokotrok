@@ -524,77 +524,89 @@ public class StateSerializer {
      */
     private static class JsonWriter {
         private final StringBuilder sb = new StringBuilder();
-        /**
-         * Stack tracking whether the current container already wrote its first element
-         */
         private final java.util.Deque<boolean[]> stack = new java.util.ArrayDeque<>();
+        private int indentLevel = 0;
+        private boolean needsValue = false;
+        private static final String INDENT_STR = "  ";
 
         /** Open a JSON object '{' */
         public void beginObject() {
-            writeCommaIfNeeded();
+            prepareValue();
             sb.append('{');
+            indentLevel++;
             stack.push(new boolean[] { false });
         }
 
         /** Close the current JSON object '}' */
         public void endObject() {
-            stack.pop();
+            boolean[] state = stack.pop();
+            indentLevel--;
+            if (state[0]) {
+                newLine();
+            }
             sb.append('}');
             markWritten();
         }
 
         /** Open a JSON array '[' */
         public void beginArray() {
-            writeCommaIfNeeded();
+            prepareValue();
             sb.append('[');
+            indentLevel++;
             stack.push(new boolean[] { false });
         }
 
         /** Close the current JSON array ']' */
         public void endArray() {
-            stack.pop();
+            boolean[] state = stack.pop();
+            indentLevel--;
+            if (state[0]) {
+                newLine();
+            }
             sb.append(']');
             markWritten();
         }
 
-        /** Write an object key (must be followed immediately by a value call) */
+        /** Write an object key (e.g., "key": ) */
         public void name(String key) {
-            writeCommaIfNeeded();
+            if (!stack.isEmpty() && stack.peek()[0]) {
+                sb.append(',');
+            }
+            newLine();
             appendString(key);
-            sb.append(':');
-            // The name-colon doesn't count as "written" — the value does
-            // So we undo the mark that writeCommaIfNeeded caused:
-            if (!stack.isEmpty())
-                stack.peek()[0] = false;
+            sb.append(": ");
+
+            // Mark that the container has content, and signal that
+            // the next value call should not trigger a newline.
+            stack.peek()[0] = true;
+            needsValue = true;
         }
 
-        /** Write a String value, or JSON null if the value is null. */
+        /** Write a String value */
         public void value(String v) {
-            writeCommaIfNeeded();
-            if (v == null)
-                sb.append("null");
-            else
-                appendString(v);
+            prepareValue();
+            if (v == null) sb.append("null");
+            else appendString(v);
             markWritten();
         }
 
         /** Write an int value */
         public void value(int v) {
-            writeCommaIfNeeded();
+            prepareValue();
             sb.append(v);
             markWritten();
         }
 
         /** Write a boolean value */
         public void value(boolean v) {
-            writeCommaIfNeeded();
+            prepareValue();
             sb.append(v);
             markWritten();
         }
 
-        /** Write a JSON null literal. */
+        /** Write a JSON null literal */
         public void valueNull() {
-            writeCommaIfNeeded();
+            prepareValue();
             sb.append("null");
             markWritten();
         }
@@ -606,15 +618,35 @@ public class StateSerializer {
 
         // ---- internal helpers ----
 
-        private void writeCommaIfNeeded() {
-            if (!stack.isEmpty() && stack.peek()[0]) {
-                sb.append(',');
+        /**
+         * Handles commas and newlines for array elements
+         * and nested containers.
+         */
+        private void prepareValue() {
+            if (needsValue) {
+                // If we just wrote a key, don't start a new line for the value.
+                needsValue = false;
+                return;
+            }
+            if (!stack.isEmpty()) {
+                if (stack.peek()[0]) {
+                    sb.append(',');
+                }
+                newLine();
+            }
+        }
+
+        private void newLine() {
+            sb.append('\n');
+            for (int i = 0; i < indentLevel; i++) {
+                sb.append(INDENT_STR);
             }
         }
 
         private void markWritten() {
-            if (!stack.isEmpty())
+            if (!stack.isEmpty()) {
                 stack.peek()[0] = true;
+            }
         }
 
         private void appendString(String s) {
@@ -622,23 +654,12 @@ public class StateSerializer {
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
                 switch (c) {
-                    case '"':
-                        sb.append("\\\"");
-                        break;
-                    case '\\':
-                        sb.append("\\\\");
-                        break;
-                    case '\n':
-                        sb.append("\\n");
-                        break;
-                    case '\r':
-                        sb.append("\\r");
-                        break;
-                    case '\t':
-                        sb.append("\\t");
-                        break;
-                    default:
-                        sb.append(c);
+                    case '"':  sb.append("\\\""); break;
+                    case '\\': sb.append("\\\\"); break;
+                    case '\n': sb.append("\\n");  break;
+                    case '\r': sb.append("\\r");  break;
+                    case '\t': sb.append("\\t");  break;
+                    default:   sb.append(c);
                 }
             }
             sb.append('"');

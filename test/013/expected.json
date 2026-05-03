@@ -50,7 +50,7 @@
           "rightNeighborId": null,
           "surface": {
             "type": "Ice",
-            "snowAmount": 4,
+            "snowAmount": 2,
             "iceAmount": 10,
             "modifier": "Unmodified"
           },
@@ -62,7 +62,7 @@
               "veh_car_1": 0
             }
           ],
-          "isCrashed": false
+          "isCrashed": true
         }
       ]
     },
@@ -101,8 +101,7 @@
           "type": "Lane",
           "id": "lane_1"
         },
-        "isCrashed": true,
-        "recovererId": "global_recoverer"
+        "isCrashed": true
       }
     ],
     "equipments": []

@@ -2,5 +2,4 @@
 change player_bus_1
 move lane_1
 /tick
-/tick
 /testend
