@@ -13,12 +13,13 @@ public class Sweeper extends Equipment {
     @Override
     public void use(Lane lane) {
         int snowAmount = lane.clearSnow();
-        lane.clearGrit();
+        boolean wasGrit = lane.clearGrit();
         Lane rightNeighbor = lane.getRightNeighbor();
         if (rightNeighbor != null)
         {
             rightNeighbor.addSnow(snowAmount);
-            rightNeighbor.grit();
+            if (wasGrit)
+                rightNeighbor.grit();
         }
         lane.cleared(owner, snowAmount);
     }

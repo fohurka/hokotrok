@@ -64,7 +64,7 @@
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "junc_1",
+          "leftNeighborId": "lane_1",
           "rightNeighborId": null,
           "surface": {
             "type": "DeepSnow",

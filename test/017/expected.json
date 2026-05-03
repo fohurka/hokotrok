@@ -2,7 +2,7 @@
   "gameState": {
     "bank": {
       "accounts": {
-        "player_sp_1": 100
+        "player_sp_1": 110
       }
     },
     "warehouse": {
@@ -64,11 +64,11 @@
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "junc_1",
+          "leftNeighborId": "lane_1",
           "rightNeighborId": null,
           "surface": {
             "type": "DeepSnow",
-            "snowAmount": 11,
+            "snowAmount": 12,
             "iceAmount": 0,
             "modifier": "Unmodified"
           },

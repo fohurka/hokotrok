@@ -256,8 +256,8 @@ public class Lane extends MapComponent {
     /**
      * Clears the grit from the lane by calling removeGrit on the surface
      */
-    public void clearGrit() {
-        surface.removeGrit();
+    public boolean clearGrit() {
+        return surface.removeGrit();
     }
 
     /**

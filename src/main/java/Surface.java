@@ -93,7 +93,8 @@ public abstract class Surface {
         lane.setSurface(newSurf);
     }
 
-    public void removeGrit() {
+    public boolean removeGrit() {
+        return false;
     }
 
     protected abstract void carPassed();

@@ -76,8 +76,9 @@ public class Grit extends Surface {
     public void carPassed() { }
 
     @Override
-    public void removeGrit() {
+    public boolean removeGrit() {
         Surface newSurf = new SmallSnow(lane, modifier);
         lane.setSurface(newSurf);
+        return true;
     }
 }
