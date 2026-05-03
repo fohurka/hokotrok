@@ -12,7 +12,6 @@ public class CarPlayer extends Player {
     private Car car;
     private Building home;
     private Building work;
-    private Building nextDest;
 
     /**
      * Constructs a new CarPlayer with the given home and work buildings.
@@ -24,7 +23,6 @@ public class CarPlayer extends Player {
     public CarPlayer(Building home, Building work) {
         this.home = home;
         this.work = work;
-        this.nextDest = work;
         this.car = new Car(this);
     }
 
@@ -75,16 +73,16 @@ public class CarPlayer extends Player {
 
     public void NPCLogic() {
         MapComponent loc = car.getLocation();
-        if (loc == work.getConnection() && loc == nextDest.getConnection()) {
-            car.setLocation(work);
-            nextDest = home;
-        } 
-        else if (loc == home.getConnection() && loc == nextDest.getConnection()) {
-            car.setLocation(home);
-            nextDest = work;
+        if(loc == work){
+            car.setLocation(work.getConnection());
+            Building tmp = home;
+            home = work;
+            work = tmp;
+        } else if (loc == work.getConnection()) {
+            car.setLocation(work);   
         }
         else {
-            choseDirection(nextDest, 0);
+            choseDirection(work, 0);
         }
     }
 
@@ -93,7 +91,6 @@ public class CarPlayer extends Player {
      */
     public void goHome() {
         car.setLocation(home);
-        nextDest = work;
     }
 
     public List<Vehicle> getVehicles() {
