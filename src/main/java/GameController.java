@@ -781,6 +781,11 @@ public class GameController {
         return recoverer;
     }
 
+    /** Returns the RoadNetwork, or null if not set. */
+    public RoadNetwork getRoadNetwork() {
+        return rn;
+    }
+
     /** Returns the live list of all Junction objects in the network. */
     public List<Junction> getJunctions() {
         return new ArrayList<>(junctions.values());
@@ -845,6 +850,15 @@ public class GameController {
      */
     public void setRecoverer(Recoverer recoverer) {
         this.recoverer = recoverer;
+    }
+
+    /**
+     * Sets the road network singleton. Called by StateParser.
+     *
+     * @param rn the road network to set
+     */
+    public void setRoadNetwork(RoadNetwork rn) {
+        this.rn = rn;
     }
 
     public void addJunction(Junction j) {

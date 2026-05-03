@@ -286,6 +286,9 @@ public class StateParser {
     private void reconstruct(GameState.GameStateDto dto, GameController controller) {
         controller.clearAll();
 
+        RoadNetwork rn = new RoadNetwork();
+        controller.setRoadNetwork(rn);
+
         Map<String, Junction> junctionMap = new HashMap<>();
         Map<String, Building> buildingMap = new HashMap<>();
         Map<String, Lane> laneMap = new HashMap<>();
@@ -299,6 +302,8 @@ public class StateParser {
             for (GameState.JunctionDto jDto : dto.map.junctions) {
                 Junction j = new Junction();
                 j.setId(jDto.id);
+                j.setRoadNetwork(rn);
+                rn.addJunction(j);
                 junctionMap.put(j.getId(), j);
                 locationMap.put(j.getId(), j);
                 controller.addJunction(j);
@@ -332,6 +337,8 @@ public class StateParser {
                 Junction end = junctionMap.get(lDto.endJunctionId);
                 Lane l = new Lane(start, end, lDto.length);
                 l.setId(lDto.id);
+                l.setRoadNetwork(rn);
+                rn.addLane(l);
                 laneMap.put(l.getId(), l);
                 locationMap.put(l.getId(), l);
                 controller.addLane(l);
@@ -560,6 +567,7 @@ public class StateParser {
         if (dto.bank != null) {
             Bank bank = new Bank();
             controller.setBank(bank);
+            rn.setBank(bank);
             if (dto.bank.accounts != null) {
                 for (Map.Entry<String, Integer> entry : dto.bank.accounts.entrySet()) {
                     Player p = playerMap.get(entry.getKey());
