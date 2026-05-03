@@ -53,7 +53,7 @@
         {
           "id": "bldg_1",
           "connectionId": "junc_2",
-          "type": "Building"
+          "type": "Normal"
         }
       ],
       "lanes": [
@@ -62,32 +62,32 @@
           "length": 3,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "null",
-          "rightNeighborId": "null",
+          "leftNeighborId": null,
+          "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
             "snowAmount": 1,
             "iceAmount": 0,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
-            "modifier": "Unmodifed"
-          }
+            "modifier": "Unmodified"
+          },
+          "vehicles": [],
+          "isCrashed": false
         },
         {
           "id": "lane_2",
           "length": 3,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_3",
-          "leftNeighborId": "null",
-          "rightNeighborId": "null",
+          "leftNeighborId": null,
+          "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
             "snowAmount": 1,
             "iceAmount": 0,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
-            "modifier": "Unmodifed"
-          }
+            "modifier": "Unmodified"
+          },
+          "vehicles": [],
+          "isCrashed": false
         }
       ]
     },
@@ -109,7 +109,7 @@
           "type": "Lane",
           "id": "lane_1"
         },
-        "isCrashed": "false"
+        "isCrashed": false
       }
     ],
     "equipments": []

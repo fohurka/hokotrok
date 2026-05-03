@@ -47,15 +47,13 @@
           "length": 5,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "null",
-          "rightNeighborId": "null",
+          "leftNeighborId": null,
+          "rightNeighborId": null,
           "surface": {
             "type": "Ice",
             "snowAmount": 7,
             "iceAmount": 3,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
-            "modifier": "Unmodifed"
+            "modifier": "Unmodified"
           },
           "players": [
             {
@@ -85,7 +83,8 @@
               "isCrashed": "true"
             }
           ],
-          "equipments": []
+          "equipments": [],
+          "isCrashed": false
         },
         {
           "id": "veh_car_2",
@@ -95,7 +94,8 @@
             "type": "Lane",
             "id": "lane_1"
           },
-          "isCrashed": "true"
+          "isCrashed": "true",
+          "vehicles": []
         }
       ],
       "equipments": []

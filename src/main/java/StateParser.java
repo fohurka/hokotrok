@@ -76,7 +76,6 @@ public class StateParser {
         if (gs.fields.containsKey("recoverer")) {
             JObj rNode = (JObj) gs.fields.get("recoverer");
             dto.recoverer = new GameState.RecovererDto();
-            dto.recoverer.id = ((JStr) rNode.fields.get("id")).v;
             dto.recoverer.recoveryQueue = new ArrayList<>();
             JArr reqNode = (JArr) rNode.fields.get("recoveryQueue");
             if (reqNode != null) {
@@ -157,8 +156,6 @@ public class StateParser {
                         s.type = ((JStr) sNode.fields.get("type")).v;
                         s.snowAmount = (int) ((JNum) sNode.fields.get("snowAmount")).v;
                         s.iceAmount = (int) ((JNum) sNode.fields.get("iceAmount")).v;
-                        s.snowThreshold = (int) ((JNum) sNode.fields.get("snowThreshold")).v;
-                        s.iceThreshold = (int) ((JNum) sNode.fields.get("iceThreshold")).v;
                         s.modifier = ((JStr) sNode.fields.get("modifier")).v;
                         l.surface = s;
                     }
@@ -367,8 +364,6 @@ public class StateParser {
                     }
                     s.snowAmount = lDto.surface.snowAmount;
                     s.iceAmount = lDto.surface.iceAmount;
-                    Surface.snowThreshold = lDto.surface.snowThreshold;
-                    Surface.iceThreshold = lDto.surface.iceThreshold;
                     if ("Salted".equals(lDto.surface.modifier)) {
                         s.salt();
                     }
@@ -543,7 +538,6 @@ public class StateParser {
         // 7. Recoverer
         if (dto.recoverer != null) {
             Recoverer rec = new Recoverer();
-            rec.setId(dto.recoverer.id);
             controller.setRecoverer(rec);
 
             // Rebuild queue exactly

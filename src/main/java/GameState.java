@@ -104,8 +104,6 @@ public class GameState {
         public String type; // "SmallSnow", "DeepSnow", "Ice", "Grit", "Unmodified"
         public int snowAmount;
         public int iceAmount;
-        public int snowThreshold;
-        public int iceThreshold;
         public String modifier; // "Salted" or "Unmodified"
     }
 
@@ -242,7 +240,6 @@ public class GameState {
      * in queue order.
      */
     public static class RecovererDto {
-        public String id;
         public List<String> recoveryQueue; // car ids in the recovery queue
     }
 

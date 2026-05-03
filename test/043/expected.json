@@ -23,14 +23,16 @@
           ],
           "buildingIds": [
             "bldg_warehouse"
-          ]
+          ],
+          "endingLaneIds": []
         },
         {
           "id": "junc_2",
           "endingLaneIds": [
             "lane_1"
           ],
-          "buildingIds": []
+          "buildingIds": [],
+          "startingLaneIds": []
         }
       ],
       "buildings": [
@@ -42,12 +44,12 @@
         {
           "id": "stop_1",
           "connectionId": "junc_1",
-          "type": "BusStop"
+          "type": "Normal"
         },
         {
           "id": "stop_2",
           "connectionId": "junc_2",
-          "type": "BusStop"
+          "type": "Normal"
         }
       ],
       "lanes": [
@@ -56,16 +58,16 @@
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "null",
-          "rightNeighborId": "null",
+          "leftNeighborId": null,
+          "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
             "snowAmount": 4,
             "iceAmount": 0,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
             "modifier": "Salted"
-          }
+          },
+          "vehicles": [],
+          "isCrashed": false
         }
       ]
     },
@@ -87,7 +89,7 @@
           "type": "Junction",
           "id": "junc_2"
         },
-        "isCrashed": "false"
+        "isCrashed": false
       }
     ],
     "equipments": []

@@ -101,8 +101,6 @@ public class StateSerializer {
             return;
         w.name("recoverer");
         w.beginObject();
-        w.name("id");
-        w.value(rec.getId());
         w.name("recoveryQueue");
         w.beginArray();
         for (Car c : rec.getRecoveryQueue()) {
@@ -245,10 +243,6 @@ public class StateSerializer {
         w.value(s.getSnowAmount());
         w.name("iceAmount");
         w.value(s.getIceAmount());
-        w.name("snowThreshold");
-        w.value(Surface.snowThreshold);
-        w.name("iceThreshold");
-        w.value(Surface.iceThreshold);
         w.name("modifier");
         w.value(modifierName(s.getModifier()));
         w.endObject();

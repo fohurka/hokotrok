@@ -54,26 +54,26 @@
             "type": "SmallSnow",
             "snowAmount": 0,
             "iceAmount": 0,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
             "modifier": "Unmodified"
-          }
+          },
+          "vehicles": [],
+          "isCrashed": false
         },
         {
           "id": "lane_2",
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "null",
-          "rightNeighborId": "null",
+          "leftNeighborId": null,
+          "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
             "snowAmount": 4,
             "iceAmount": 0,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
             "modifier": "Unmodified"
-          }
+          },
+          "vehicles": [],
+          "isCrashed": false
         }
       ]
     },

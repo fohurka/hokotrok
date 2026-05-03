@@ -46,16 +46,16 @@
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "null",
-          "rightNeighborId": "null",
+          "leftNeighborId": null,
+          "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
             "snowAmount": 0,
             "iceAmount": 0,
-            "snowThreshold": 5,
-            "iceThreshold": 2,
-            "modifier": "Unmodifed"
-          }
+            "modifier": "Unmodified"
+          },
+          "vehicles": [],
+          "isCrashed": false
         }
       ]
     },
@@ -64,8 +64,8 @@
         "id": "player_car_1",
         "type": "CarPlayer",
         "vehicleId": "veh_car_1",
-        "homeId": "null",
-        "workId": "null"
+        "homeId": null,
+        "workId": null
       }
     ],
     "vehicles": [
@@ -77,7 +77,7 @@
           "type": "Junction",
           "id": "junc_1"
         },
-        "isCrashed": "false"
+        "isCrashed": false
       }
     ],
     "equipments": []
