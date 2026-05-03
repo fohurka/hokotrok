@@ -66,11 +66,7 @@
             "iceAmount": 0,
             "modifier": "Salted"
           },
-          "vehicles": [
-            {
-              "veh_bus_1": 0
-            }
-          ],
+          "vehicles": [],
           "isCrashed": false
         }
       ]
