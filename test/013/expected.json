@@ -10,7 +10,7 @@
       "stock": []
     },
     "recoverer": {
-      "recoveryQueue": []
+      "recoveryQueue": ["veh_car_1"]
     },
     "map": {
       "junctions": [
@@ -43,7 +43,7 @@
       "lanes": [
         {
           "id": "lane_1",
-          "length": "2",
+          "length": 2,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
           "leftNeighborId": null,
