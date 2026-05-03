@@ -7,9 +7,7 @@
     },
     "warehouse": {
       "id": "bldg_warehouse",
-      "stock": [
-        "eq_sweeper_1"
-      ]
+      "stock": []
     },
     "recoverer": {
       "recoveryQueue": []
@@ -22,7 +20,8 @@
             "lane_1"
           ],
           "buildingIds": [
-            "bldg_warehouse"
+            "bldg_warehouse",
+            "stop_1"
           ],
           "endingLaneIds": []
         },
@@ -31,7 +30,9 @@
           "endingLaneIds": [
             "lane_1"
           ],
-          "buildingIds": [],
+          "buildingIds": [
+            "stop_2"
+          ],
           "startingLaneIds": []
         }
       ],

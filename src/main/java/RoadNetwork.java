@@ -23,7 +23,7 @@ public class RoadNetwork {
      */
     public void busRoundComplete(Player p) {
         if (bank != null) {
-            int amount = 100;
+            int amount = 5;
             bank.pay(p, amount);
         }
     }

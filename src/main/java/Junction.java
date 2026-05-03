@@ -89,11 +89,9 @@ public class Junction extends MapComponent {
         boolean isTarget = false;
 
         for (Building building : buildings) {
-            for (Building station : bus.getStations()) {
-                if (building == station) {
-                    isTarget = true;
-                    break;
-                }
+            if (building == bus.getStations().get(1)) {
+                isTarget = true;
+                break;
             }
         }
 
