@@ -47,7 +47,7 @@ public class Bus extends CivilVehicle {
                 if(getLocation() instanceof Junction) {
                     Junction j = (Junction) getLocation();
                     j.arrived(this);
-                    if(j.getBuildings().contains(stations.get(1))){
+                    if (stations != null && stations.size() >= 2 && j.getBuildings().contains(stations.get(1))) {
                         Building tmp = stations.get(0);
                         stations.set(0, stations.get(1));
                         stations.set(1, tmp);
