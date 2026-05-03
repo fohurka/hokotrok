@@ -67,7 +67,7 @@ public class Ice extends Surface {
     @Override
     public int calculateProgress(CivilVehicle cv) {
         Random rand = new Random();
-        boolean slip = rand.nextInt(100) < 15; //15% chance to slip
+        boolean slip = GameController.isRandom() ? rand.nextInt(100) < 15 : true; //15% chance to slip
         if (slip) {
             cv.slip(lane);
             return 0;

@@ -30,6 +30,7 @@ public class GameController {
     // Game object collections — populated by /new commands or /load
     // -------------------------------------------------------------------------
 
+    private static boolean random;
     private Bank bank;
     private Warehouse warehouse;
     private Recoverer recoverer;
@@ -153,8 +154,11 @@ public class GameController {
             System.out.println("Usage: /setRand <true/false>");
             return;
         }
-        boolean random = Boolean.parseBoolean(args[0]);
-        // TODO
+        random = Boolean.parseBoolean(args[0]);
+    }
+
+    public static boolean isRandom() {
+        return random;
     }
 
     /** Advances the simulation by one tick: moves vehicles, updates surfaces. */
@@ -503,9 +507,9 @@ public class GameController {
         }
         String destId = args[0];
         MapComponent dest = lanes.get(destId);
-        if(dest == null)
+        if (dest == null)
             dest = junctions.get(destId);
-        if(dest == null)
+        if (dest == null)
             dest = buildings.get(destId);
 
         int vIdx = 0;
@@ -535,8 +539,7 @@ public class GameController {
             if (junctions.containsKey(id)) {
                 available.addAll(junctions.get(id).getStartingLanes());
                 available.addAll(junctions.get(id).getBuildings());
-            }
-            else if(buildings.containsKey(id))
+            } else if (buildings.containsKey(id))
                 available.add(buildings.get(id).getConnection());
         }
 

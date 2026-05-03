@@ -1,3 +1,4 @@
 /teststart 40
+change player_sp_1
 purchase impeller
 /testend
