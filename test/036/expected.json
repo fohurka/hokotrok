@@ -54,11 +54,7 @@
             "iceAmount": 1,
             "modifier": "Unmodified"
           },
-          "vehicles": [
-            {
-              "veh_car_1": 0
-            }
-          ],
+          "vehicles": [],
           "isCrashed": false
         }
       ]
@@ -78,8 +74,8 @@
         "type": "Car",
         "ownerId": "player_car_1",
         "location": {
-          "type": "Lane",
-          "id": "lane_1"
+          "type": "Junction",
+          "id": "junc_2"
         },
         "isCrashed": false
       }
