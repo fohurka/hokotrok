@@ -90,7 +90,7 @@ public class CarPlayer extends Player {
      * Brings the car home
      */
     public void goHome() {
-        car.setLocation(home);
+        car.setLocation(home.getConnection());
     }
 
     public List<Vehicle> getVehicles() {

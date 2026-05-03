@@ -4,6 +4,7 @@ public class Bus extends CivilVehicle {
     private BusPlayer owner;
     private List<Building> stations;
     private boolean crashed = false;
+    private int timer = 0;
     /**
      * Gets the player who owns and controls this vehicle.
      *
@@ -32,10 +33,14 @@ public class Bus extends CivilVehicle {
     @Override
     public void tick() {
         if (crashed) {
-            crashed = false;
-            if (loc != null) {
-                loc.crashRecovered();
+            if (timer > 3) {
+                crashed = false;
+                if (loc != null) {
+                    loc.crashRecovered();
+                }
             }
+            else
+                timer++;
         } else {
             if (getLocation() != null) {
                 getLocation().progress(this);
@@ -86,5 +91,6 @@ public class Bus extends CivilVehicle {
     @Override
     public void crash() {
         crashed = true;
+        timer = 0;
     }
 }
