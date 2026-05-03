@@ -99,10 +99,18 @@ public class GameController {
             return;
         }
         String filename = args[0];
+        if (!filename.endsWith(".json")) {
+            filename += ".json";
+        }
         try {
+            java.nio.file.Path saveDir = Paths.get("save");
+            if (!Files.exists(saveDir)) {
+                Files.createDirectories(saveDir);
+            }
+            java.nio.file.Path file = saveDir.resolve(filename);
             String json = new StateSerializer().serialize(this);
-            Files.write(Paths.get(filename), json.getBytes());
-            System.out.println("State saved to " + filename);
+            Files.write(file, json.getBytes());
+            System.out.println("State saved to " + file.toString());
         } catch (IOException e) {
             System.out.println("Error saving state: " + e.getMessage());
         }
@@ -120,10 +128,14 @@ public class GameController {
             return;
         }
         String filename = args[0];
+        if (!filename.endsWith(".json")) {
+            filename += ".json";
+        }
         try {
-            String json = new String(Files.readAllBytes(Paths.get(filename)));
+            java.nio.file.Path file = Paths.get("save").resolve(filename);
+            String json = new String(Files.readAllBytes(file));
             new StateParser().parse(json, this);
-            System.out.println("State loaded from " + filename);
+            System.out.println("State loaded from " + file.toString());
         } catch (IOException e) {
             System.out.println("Error loading state: " + e.getMessage());
         }
