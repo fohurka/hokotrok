@@ -28,7 +28,6 @@ public class Warehouse extends Building {
      */
     public Equipment buyEquipment(SnowplowPlayer p, int id) {
         Equipment boughtEquipment = null;
-        
         if (bank != null) {
             if (bank.hasEnoughMoney(p, equipmentPrices[id - 1])) {
                 // Here the equipment is created and given to the player (true branch)
@@ -53,11 +52,11 @@ public class Warehouse extends Building {
                     break;
                 }
                 bank.pay(p, -equipmentPrices[id - 1]/10); // Deduct the cost from the player's account
+                stock.add(boughtEquipment);
             } else {
                 // Purchase failed (false branch)
             }
         }
-        stock.add(boughtEquipment);
         return boughtEquipment;
     }
 
@@ -69,12 +68,14 @@ public class Warehouse extends Building {
      * @return The new Snowplow instance, or null if the transaction was unsuccessful.
      */
     public Snowplow buySnowplow(Player p) {
+        if(!(p instanceof SnowplowPlayer)) return null;
         Snowplow boughtSnowplow = null;
         if (bank != null) {
             if (bank.hasEnoughMoney(p, snowplowPrice)) {
                 // Here the snowplow is created and given to the player (true branch)
                 bank.pay(p, -snowplowPrice/10); // Deduct the cost from the player's account
                 boughtSnowplow = new Snowplow();
+                boughtSnowplow.setLocation(this);
             } else {
                 // Purchase failed (false branch)
             }
