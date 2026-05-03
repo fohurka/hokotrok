@@ -79,6 +79,7 @@ public class Grit extends Surface {
     public boolean removeGrit() {
         Surface newSurf = new SmallSnow(lane, modifier);
         lane.setSurface(newSurf);
+        newSurf.addSnow(snowAmount);
         return true;
     }
 }

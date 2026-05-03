@@ -52,7 +52,7 @@
           "rightNeighborId": "lane_2",
           "surface": {
             "type": "Grit",
-            "snowAmount": 3,
+            "snowAmount": 2,
             "iceAmount": 0,
             "modifier": "Unmodified"
           },
