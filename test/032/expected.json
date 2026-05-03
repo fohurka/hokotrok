@@ -3,10 +3,6 @@
     "bank": {
       "accounts": {}
     },
-    "warehouse": {
-      "id": "bldg_warehouse",
-      "stock": []
-    },
     "recoverer": {
       "recoveryQueue": []
     },

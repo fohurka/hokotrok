@@ -16,7 +16,8 @@ public class Gritter extends Equipment {
 
     /**
      * Activates the Gritter on a specific lane.
-     * This method applies grit to the lane and notifies the lane that it has been treated by the equipment's owner.
+     * This method applies grit to the lane and notifies the lane that it has been
+     * treated by the equipment's owner.
      * * @param lane The lane object where the treatment is performed.
      */
     @Override
@@ -25,5 +26,6 @@ public class Gritter extends Equipment {
         lane.grit();
         int usedGrit = prevGritAmount - ammo;
         lane.cleared(owner, usedGrit);
+        ammo -= 1;
     }
 }

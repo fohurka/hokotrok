@@ -6,7 +6,11 @@ public class Salted extends Modifier {
      */
     @Override
     protected void applyWeather(Surface s) {
-        s.removeIce(1);
-        s.removeSnow(1);
+        if(s.getIceAmount() > 0) {
+            s.removeIce(1);
+        }
+        if(s.getSnowAmount() > 0) {
+            s.removeSnow(1);
+        }
     }
 }

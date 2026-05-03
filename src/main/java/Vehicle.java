@@ -2,6 +2,8 @@ public abstract class Vehicle {
     protected String id;
     protected MapComponent loc;
 
+    protected boolean isCrashed;
+
     public abstract void crash();
 
     public abstract void tick();
@@ -39,5 +41,9 @@ public abstract class Vehicle {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isCrashed() {
+        return isCrashed;
     }
 }

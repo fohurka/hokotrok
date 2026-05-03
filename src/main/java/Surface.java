@@ -22,9 +22,12 @@ public abstract class Surface {
 
     /**
      * Calculates the movement progress for a Snowplow on this specific surface.
-     * The calculation typically considers the current snow/ice levels and any active modifiers.
+     * The calculation typically considers the current snow/ice levels and any
+     * active modifiers.
      * * @param sn The Snowplow attempting to move across the surface.
-     * @return An integer representing the distance or progress units the vehicle can cover.
+     * 
+     * @return An integer representing the distance or progress units the vehicle
+     *         can cover.
      */
     public int calculateProgress(Snowplow sn) {
         return 1;
@@ -32,7 +35,9 @@ public abstract class Surface {
 
     /**
      * Fully clears the snow from this surface.
-     * This is usually triggered by specialized equipment like an Impeller or DragonBlade.
+     * This is usually triggered by specialized equipment like an Impeller or
+     * DragonBlade.
+     * 
      * @return The total amount of snow that was removed during the operation.
      */
     public abstract int removeSnow();
@@ -49,20 +54,30 @@ public abstract class Surface {
     public abstract int removeIce(int amount);
 
     /**
-     * Adds an amount of snow 
+     * Adds an amount of snow
+     * 
      * @param amount the amount of snow
      */
     public abstract void addSnow(int amount);
 
     /**
-     * Adds an amount of ice 
+     * Adds an amount of ice
+     * 
      * @param amount the amount of ice
      */
     public abstract void addIce(int amount);
 
-    public int getSnowAmount() { return snowAmount; }
-    public int getIceAmount() { return iceAmount; }
-    public Modifier getModifier() { return modifier; }
+    public int getSnowAmount() {
+        return snowAmount;
+    }
+
+    public int getIceAmount() {
+        return iceAmount;
+    }
+
+    public Modifier getModifier() {
+        return modifier;
+    }
 
     /**
      * Changes the active Modifier to Salted
@@ -73,15 +88,19 @@ public abstract class Surface {
 
     public void grit() {
         Surface newSurf = new Grit(lane, modifier);
+        newSurf.iceAmount = iceAmount;
+        newSurf.snowAmount = snowAmount;
         lane.setSurface(newSurf);
     }
 
-    public void removeGrit() { }
+    public void removeGrit() {
+    }
 
     protected abstract void carPassed();
+
     public abstract void tick();
 
-
     public abstract int calculateProgress(CivilVehicle cv);
+
     public abstract boolean enterable();
 }

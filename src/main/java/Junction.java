@@ -88,10 +88,12 @@ public class Junction extends MapComponent {
     public void arrived(Bus bus) {
         boolean isTarget = false;
 
-        for (Building building : buildings) {
-            if (building == bus.getStations().get(1)) {
-                isTarget = true;
-                break;
+        if (bus.getStations() != null && bus.getStations().size() >= 2) {
+            for (Building building : buildings) {
+                if (building == bus.getStations().get(1)) {
+                    isTarget = true;
+                    break;
+                }
             }
         }
 
