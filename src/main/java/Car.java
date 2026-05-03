@@ -17,38 +17,7 @@ public class Car extends CivilVehicle {
      * Tries to progress at the current location
      */
     public void tick() {
-        MapComponent loc = getLocation();
-        if (loc != null) {
-            if(loc instanceof Lane) {
-                loc.progress(this);
-            }
-            if(loc instanceof Junction) {
-                Junction dest = owner.getNextDest().getConnection();
-                if(dest == loc) {
-                    owner.arrived();
-                    dest = owner.getNextDest().getConnection();
-                }
-                List<Junction> visited = new ArrayList<>();
-                visited.add(dest);
-                List<Junction> q = new ArrayList<>();
-                q.add(dest);
-                while (!q.isEmpty()) {
-                    Junction curr = q.remove(0);
-                    for(Lane l : curr.getLanes()) {
-                        Junction next = (l.getStart() == curr) ? l.getEnd() : l.getStart();
-                        if (!visited.contains(next) && l.enterable()) {
-                            if(next == loc) {
-                                owner.choseDirection(l);
-                                return;
-                            }
-                            visited.add(next);
-                            q.add(next);
-                        }
-                    }
-
-                }
-            }
-        }
+        loc.progress(this);
     }
 
     /**

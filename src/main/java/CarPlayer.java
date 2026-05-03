@@ -49,12 +49,42 @@ public class CarPlayer extends Player {
         if (index != 0) {
             throw new IllegalArgumentException("Car player can only control one car");
         }
-        choseDirection(dest);
+        car.setLocation(dest);
+
+
+        Junction _dest = getNextDest().getConnection();
+                MapComponent loc = car.getLocation();
+        if(_dest == loc) {
+            arrived();
+            _dest = getNextDest().getConnection();
+        }
+        List<Junction> visited = new ArrayList<>();
+        visited.add(_dest);
+        List<Junction> q = new ArrayList<>();
+        q.add(_dest);
+        while (!q.isEmpty()) {
+            Junction curr = q.remove(0);
+            for(Lane l : curr.getLanes()) {
+                Junction next = (l.getStart() == curr) ? l.getEnd() : l.getStart();
+                if (!visited.contains(next) && l.enterable()) {
+                    if(next == loc) {
+                      car.setLocation(l);
+                        return;
+                    }
+                    visited.add(next);
+                    q.add(next);
+                }
+            }
+
+        }
     }
 
-    public void choseDirection(MapComponent dest) {
+    public void NPCLogic() {
 
-        car.setLocation(dest);
+        choseDirection(null, 0);
+
+
+       
     }
 
     /**
