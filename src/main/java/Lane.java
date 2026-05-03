@@ -99,11 +99,8 @@ public class Lane extends MapComponent {
         if (surface == null || isCrashed) return;
         int prog = surface.calculateProgress(cv);
 
-        Integer currentProg = progress.get(cv);
-        if (currentProg == null) {
-            currentProg = 0;
-        }
-        progress.put(cv, currentProg + prog);
+        if (!progress.containsKey(cv)) { return; }
+        progress.put(cv, progress.get(cv) + prog);
 
         boolean ending = progress.get(cv) >= length;
 
