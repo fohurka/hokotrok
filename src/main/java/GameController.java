@@ -660,7 +660,7 @@ public class GameController {
 
         Equipment toEquip = null;
         for (Equipment eq : warehouse.getStock()) {
-            if (eq.getClass().getSimpleName().equalsIgnoreCase(eqName)) {
+            if (eq.id.equals(eqName)) {
                 toEquip = eq;
                 break;
             }
