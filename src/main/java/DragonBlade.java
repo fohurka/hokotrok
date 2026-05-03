@@ -25,5 +25,6 @@ public class DragonBlade extends Equipment {
         int iceAmount = lane.clearIce();
         int snowAmount = lane.clearSnow();
         lane.cleared(owner, iceAmount + snowAmount);
+        ammo -= 1;
     }
 }

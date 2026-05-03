@@ -50,7 +50,7 @@
           "rightNeighborId": null,
           "surface": {
             "type": "Grit",
-            "snowAmount": 1,
+            "snowAmount": 0,
             "iceAmount": 2,
             "modifier": "Unmodified"
           },

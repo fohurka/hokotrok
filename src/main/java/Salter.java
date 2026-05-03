@@ -25,6 +25,7 @@ public class Salter extends Equipment {
         int prevSaltAmount = ammo;
         lane.salt();
         int usedSalt = prevSaltAmount - ammo;
+        ammo -= 1;
         lane.cleared(owner, usedSalt);
     }
 }
