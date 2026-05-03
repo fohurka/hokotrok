@@ -54,7 +54,11 @@
             "iceAmount": 0,
             "modifier": "Unmodified"
           },
-          "vehicles": [],
+          "vehicles": [
+            {
+              "veh_car_1": 0
+            }
+          ],
           "isCrashed": false
         }
       ]

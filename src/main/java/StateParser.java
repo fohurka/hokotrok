@@ -527,7 +527,7 @@ public class StateParser {
                         for (Map.Entry<String, Integer> entry : progMap.entrySet()) {
                             Vehicle v = vehicleMap.get(entry.getKey());
                             if (v != null) {
-                                l.getProgress().put(v, entry.getValue());
+                                l.setProgress(v, entry.getValue());
                             }
                         }
                     }
