@@ -3,7 +3,6 @@ import java.util.List;
 public class Bus extends CivilVehicle {
     private BusPlayer owner;
     private List<Building> stations;
-    private boolean crashed = false;
     private int timer = 0;
     /**
      * Gets the player who owns and controls this vehicle.
@@ -32,9 +31,9 @@ public class Bus extends CivilVehicle {
      */
     @Override
     public void tick() {
-        if (crashed) {
+        if (isCrashed) {
             if (timer > 3) {
-                crashed = false;
+                isCrashed = false;
                 if (loc != null) {
                     loc.crashRecovered();
                 }
@@ -82,13 +81,14 @@ public class Bus extends CivilVehicle {
     public void slip(Lane lane) {
         Vehicle nearest = lane.getNearest(this);
         if (nearest != null) {
+            isCrashed = true;
             nearest.crash();
             lane.crashHappened();
         }
     }
 
     public boolean isCrashed() {
-        return crashed;
+        return isCrashed;
     }
     public void setStations(List<Building> stations){
         this.stations = stations;
@@ -99,7 +99,7 @@ public class Bus extends CivilVehicle {
      */
     @Override
     public void crash() {
-        crashed = true;
+        isCrashed = true;
         timer = 0;
     }
 }

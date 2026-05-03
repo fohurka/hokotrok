@@ -47,9 +47,9 @@
           "leftNeighborId": null,
           "rightNeighborId": null,
           "surface": {
-            "type": "Ice",
-            "snowAmount": 0,
-            "iceAmount": 3,
+            "type": "SmallSnow",
+            "snowAmount": 3,
+            "iceAmount": 0,
             "modifier": "Salted"
           },
           "vehicles": [],

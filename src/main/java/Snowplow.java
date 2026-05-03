@@ -3,7 +3,9 @@ import java.util.List;
 public class Snowplow extends Vehicle {
     private Equipment eq;
 
-    public Snowplow() {}
+    public Snowplow() {
+        isCrashed = false;
+    }
 
     /**
      * Sets the equipment of the snowplow
