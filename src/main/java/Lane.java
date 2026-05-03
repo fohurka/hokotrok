@@ -64,6 +64,15 @@ public class Lane extends MapComponent {
         this.rightNeighbor = rightNeighbor;
     }
 
+    /**
+     * Sets the progress of a vehicle on this lane.
+     * @param v the vehicle
+     * @param p the progress value
+     */
+    public void setProgress(Vehicle v, int p) {
+        progress.put(v, p);
+    }
+
     public Lane getLeftNeighbor() {
         return leftNeighbor;
     }
