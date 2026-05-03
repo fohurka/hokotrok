@@ -1,5 +1,4 @@
 /teststart 5
 change player_bus_1
 move junc_2
-/tick
 /testend
