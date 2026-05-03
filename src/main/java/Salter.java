@@ -22,9 +22,8 @@ public class Salter extends Equipment {
      */
     @Override
     public void use(Lane lane) {
-        int prevSaltAmount = ammo;
         lane.salt();
-        int usedSalt = prevSaltAmount - ammo;
-        lane.cleared(owner, usedSalt);
+        ammo -= lane.getLength();
+        lane.cleared(owner, lane.getLength());
     }
 }

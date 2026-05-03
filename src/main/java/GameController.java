@@ -651,12 +651,7 @@ public class GameController {
         }
         Snowplow plow = sp.getSnowplow(vIdx);
 
-        MapComponent loc = plow.getLocation();
-        if (loc == null || warehouse == null || warehouse.getConnection() == null
-                || !loc.getId().equals(warehouse.getConnection().getId())) {
-            System.out.println("A kotró nincs a raktárban");
-            return;
-        }
+
 
         Equipment toEquip = null;
         for (Equipment eq : warehouse.getStock()) {

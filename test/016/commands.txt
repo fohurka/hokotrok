@@ -1,8 +1,9 @@
 /teststart 16
 change player_sp_1
 equip eq_salter_1
-/eq_dragonblade_1#a fej nincs a raktárban, sikertelen művelet
+equip dragonblade_1    #a fej nincs a raktárban, sikertelen művelet
+move junc_1
 move lane_1
 /tick
-equip eq_sweeper_1 #a jármű nincs a raktárban, sikertelen művelet
+equip eq_sweeper_1      #a jármű nincs a raktárban, sikertelen művelet
 /testend

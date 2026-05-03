@@ -77,8 +77,8 @@
         "type": "Snowplow",
         "ownerId": "player_sp_1",
         "location": {
-          "type": "Junction",
-          "id": "junc_1"
+          "type": "Building",
+          "id": "bldg_warehouse"
         },
         "equipmentId": "eq_sweeper_1"
       }
@@ -87,7 +87,7 @@
       {
         "id": "eq_salter_1",
         "type": "Salter",
-        "ownerId": "null",
+        "ownerId": "player_sp_1",
         "stateData": {
           "ammo": 50
         }

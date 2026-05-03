@@ -2,7 +2,7 @@
   "gameState": {
     "bank": {
       "accounts": {
-        "player_sp_1": 0
+        "player_sp_1": 10
       }
     },
     "warehouse": {
@@ -52,8 +52,8 @@
           "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
-            "snowAmount": 0,
-            "iceAmount": 0,
+            "snowAmount": 1,
+            "iceAmount": 1,
             "modifier": "Salted"
           },
           "vehicles": [],
@@ -95,7 +95,7 @@
       {
         "id": "eq_sweeper_1",
         "type": "Sweeper",
-        "ownerId": "null",
+        "ownerId": "player_sp_1",
         "stateData": {}
       }
     ]
