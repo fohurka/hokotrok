@@ -20,6 +20,7 @@
             "lane_1"
           ],
           "buildingIds": [
+            "bldg_home_1",
             "bldg_warehouse"
           ],
           "endingLaneIds": []

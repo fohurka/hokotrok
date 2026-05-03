@@ -2,7 +2,7 @@
   "gameState": {
     "bank": {
       "accounts": {
-        "player_sp_1": 5000
+        "player_sp_1": 5010
       }
     },
     "warehouse": {
