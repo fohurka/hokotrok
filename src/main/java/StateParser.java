@@ -122,45 +122,53 @@ public class StateParser {
             if (lArr != null) {
                 for (Node n : lArr.elems) {
                     JObj lo = (JObj) n;
-                    GameState.LaneDto l = new GameState.LaneDto();
-                    l.id = ((JStr) lo.fields.get("id")).v;
-                    l.length = (int) ((JNum) lo.fields.get("length")).v;
-                    l.startJunctionId = ((JStr) lo.fields.get("startJunctionId")).v;
-                    l.endJunctionId = ((JStr) lo.fields.get("endJunctionId")).v;
-                    l.leftNeighborId = lo.fields.get("leftNeighborId") instanceof JStr
-                            ? ((JStr) lo.fields.get("leftNeighborId")).v
-                            : null;
-                    l.rightNeighborId = lo.fields.get("rightNeighborId") instanceof JStr
-                            ? ((JStr) lo.fields.get("rightNeighborId")).v
-                            : null;
+                    Node idNode = lo.fields.get("id");
+                    if (idNode instanceof JStr && lo.fields.get("length") instanceof JNum && lo.fields.get("startJunctionId") instanceof JStr && lo.fields.get("endJunctionId") instanceof JStr) {
+                        GameState.LaneDto l = new GameState.LaneDto();
+                        l.id = ((JStr) idNode).v;
+                        l.length = (int) ((JNum) lo.fields.get("length")).v;
+                        l.startJunctionId = ((JStr) lo.fields.get("startJunctionId")).v;
+                        l.endJunctionId = ((JStr) lo.fields.get("endJunctionId")).v;
+                        l.leftNeighborId = lo.fields.get("leftNeighborId") instanceof JStr
+                                ? ((JStr) lo.fields.get("leftNeighborId")).v
+                                : null;
+                        l.rightNeighborId = lo.fields.get("rightNeighborId") instanceof JStr
+                                ? ((JStr) lo.fields.get("rightNeighborId")).v
+                                : null;
 
-                    l.vehicles = new ArrayList<>();
-                    JArr vArr = (JArr) lo.fields.get("vehicles");
-                    if (vArr != null) {
-                        for (Node vn : vArr.elems) {
-                            JObj vObj = (JObj) vn;
-                            Map<String, Integer> prog = new HashMap<>();
-                            String vk = vObj.keyOrder.get(0);
-                            prog.put(vk, (int) ((JNum) vObj.fields.get(vk)).v);
-                            l.vehicles.add(prog);
+                        l.vehicles = new ArrayList<>();
+                        JArr vArr = (JArr) lo.fields.get("vehicles");
+                        if (vArr != null) {
+                            for (Node vn : vArr.elems) {
+                                JObj vObj = (JObj) vn;
+                                Map<String, Integer> prog = new HashMap<>();
+                                for (String vk : vObj.keyOrder) {
+                                    Node val = vObj.fields.get(vk);
+                                    if (val instanceof JNum) {
+                                        prog.put(vk, (int) ((JNum) val).v);
+                                    }
+                                }
+                                if (!prog.isEmpty()) {
+                                    l.vehicles.add(prog);
+                                }
+                            }
                         }
-                    }
 
-                    if (lo.fields.containsKey("isCrashed")) {
-                        l.isCrashed = ((JBool) lo.fields.get("isCrashed")).v;
-                    }
+                        if (lo.fields.containsKey("isCrashed") && lo.fields.get("isCrashed") instanceof JBool) {
+                            l.isCrashed = ((JBool) lo.fields.get("isCrashed")).v;
+                        }
 
-                    JObj sNode = (JObj) lo.fields.get("surface");
-                    if (sNode != null) {
-                        GameState.SurfaceDto s = new GameState.SurfaceDto();
-                        s.type = ((JStr) sNode.fields.get("type")).v;
-                        s.snowAmount = (int) ((JNum) sNode.fields.get("snowAmount")).v;
-                        s.iceAmount = (int) ((JNum) sNode.fields.get("iceAmount")).v;
-                        s.modifier = ((JStr) sNode.fields.get("modifier")).v;
-                        l.surface = s;
+                        JObj sNode = (JObj) lo.fields.get("surface");
+                        if (sNode != null && sNode.fields.get("type") instanceof JStr && sNode.fields.get("snowAmount") instanceof JNum && sNode.fields.get("iceAmount") instanceof JNum && sNode.fields.get("modifier") instanceof JStr) {
+                            GameState.SurfaceDto s = new GameState.SurfaceDto();
+                            s.type = ((JStr) sNode.fields.get("type")).v;
+                            s.snowAmount = (int) ((JNum) sNode.fields.get("snowAmount")).v;
+                            s.iceAmount = (int) ((JNum) sNode.fields.get("iceAmount")).v;
+                            s.modifier = ((JStr) sNode.fields.get("modifier")).v;
+                            l.surface = s;
+                        }
+                        dto.map.lanes.add(l);
                     }
-                    dto.map.lanes.add(l);
-                }
             }
         }
 
@@ -255,7 +263,7 @@ public class StateParser {
                 dto.equipments.add(e);
             }
         }
-
+        }
         return dto;
     }
 
