@@ -11,6 +11,7 @@ public class CarPlayer extends Player {
     private Car car;
     private Building home;
     private Building work;
+    private Building nextDest;
 
     /**
      * Constructs a new CarPlayer with the given home and work buildings.
@@ -22,6 +23,7 @@ public class CarPlayer extends Player {
     public CarPlayer(Building home, Building work) {
         this.home = home;
         this.work = work;
+        this.nextDest = work;
         this.car = new Car(this);
     }
 
@@ -63,7 +65,16 @@ public class CarPlayer extends Player {
         return r;
     }
 
+    public void arrived(){
+        if (nextDest == work) {
+            nextDest = home;
+        } else {
+            nextDest = work;
+        }
+    }
+
     public Building getHome() { return home; }
     public Building getWork() { return work; }
+    public Building getNextDest() { return nextDest; }
 
 }
