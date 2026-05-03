@@ -35,9 +35,11 @@ public class Snowplow extends Vehicle {
      * @param end the Junction at the end of the Lane
      */
     public void laneCleared(Lane lane, MapComponent end) {
-        List<Vehicle> pushables = lane.getPushableCars();
-        for (Vehicle v : pushables) {
-            v.setLocation(end);
+        if (!lane.getSurface().enterable()) {
+            List<Vehicle> pushables = lane.getPushableCars();
+            for (Vehicle v : pushables) {
+                v.setLocation(end);
+            }
         }
         eq.use(lane);
         setLocation(end);

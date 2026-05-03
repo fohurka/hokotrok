@@ -43,20 +43,21 @@
       "lanes": [
         {
           "id": "lane_1",
-          "length": 1,
+          "length": 2,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
           "leftNeighborId": null,
           "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
-            "snowAmount": 4,
+            "snowAmount": 2,
             "iceAmount": 0,
             "modifier": "Unmodified"
           },
           "vehicles": [
             {
-              "veh_car_1": 0
+              "veh_car_1": 0,
+              "veh_sp_1": 1
             }
           ],
           "isCrashed": false
@@ -96,8 +97,8 @@
         "type": "Snowplow",
         "ownerId": "player_sp_1",
         "location": {
-          "type": "Junction",
-          "id": "junc_1"
+          "type": "Lane",
+          "id": "lane_1"
         },
         "equipmentId": "eq_sweeper_1"
       }
