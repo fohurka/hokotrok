@@ -86,6 +86,7 @@ public class CommandParser {
                 controller.equip(args);
                 break;
             case "progress":
+            case "/progress":
                 controller.progress(args);
                 break;
             default:

@@ -177,8 +177,8 @@ public class StateParser {
                     GameState.CarPlayerDto cp = new GameState.CarPlayerDto();
                     cp.id = ((JStr) po.fields.get("id")).v;
                     cp.vehicleId = ((JStr) po.fields.get("vehicleId")).v;
-                    cp.homeId = ((JStr) po.fields.get("homeId")).v;
-                    cp.workId = ((JStr) po.fields.get("workId")).v;
+                    cp.homeId = po.fields.get("homeId") instanceof JStr ? ((JStr) po.fields.get("homeId")).v : null;
+                    cp.workId = po.fields.get("workId") instanceof JStr ? ((JStr) po.fields.get("workId")).v : null;
                     dto.carPlayers.add(cp);
                 } else if ("BusPlayer".equals(type)) {
                     GameState.BusPlayerDto bp = new GameState.BusPlayerDto();
