@@ -11,7 +11,10 @@
       "stock": []
     },
     "recoverer": {
-      "recoveryQueue": []
+      "recoveryQueue": [
+        "veh_car_2",
+        "veh_car_1"
+      ]
     },
     "map": {
       "junctions": [
@@ -51,7 +54,7 @@
           "rightNeighborId": null,
           "surface": {
             "type": "Ice",
-            "snowAmount": 7,
+            "snowAmount": 6,
             "iceAmount": 3,
             "modifier": "Unmodified"
           },
@@ -63,7 +66,7 @@
               "veh_car_2": 0
             }
           ],
-          "isCrashed": false
+          "isCrashed": true
         }
       ]
     },
