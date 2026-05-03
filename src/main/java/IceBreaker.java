@@ -18,6 +18,7 @@ public class IceBreaker extends Equipment {
     @Override
     public void use(Lane lane) {
         int iceAmount = lane.clearIce();
+        lane.addSnow(iceAmount);
         lane.cleared(owner, iceAmount);
     }
 

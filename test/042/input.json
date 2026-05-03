@@ -70,8 +70,7 @@
         "id": "player_sp_1",
         "type": "SnowplowPlayer",
         "vehicleIds": [
-          "veh_sp_1",
-          "veh_sp_2"
+          "veh_sp_1"
         ],
         "warehouseId": "bldg_warehouse"
       }
