@@ -30,6 +30,9 @@ public class Junction extends MapComponent {
      */
     @Override
     public void progress(CivilVehicle cv) {
+        if (cv instanceof Car)  {
+            ((Car)cv).getOwner().NPCLogic();
+        }
     }
 
     /**

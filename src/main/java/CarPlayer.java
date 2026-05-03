@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Represents a player who controls a single car in the game.
  * The car is controlled by an NPC.
@@ -49,15 +50,9 @@ public class CarPlayer extends Player {
         if (index != 0) {
             throw new IllegalArgumentException("Car player can only control one car");
         }
-        car.setLocation(dest);
 
-
-        Junction _dest = getNextDest().getConnection();
-                MapComponent loc = car.getLocation();
-        if(_dest == loc) {
-            arrived();
-            _dest = getNextDest().getConnection();
-        }
+        Junction _dest = ((Building)dest).getConnection();
+        MapComponent loc = car.getLocation();
         List<Junction> visited = new ArrayList<>();
         visited.add(_dest);
         List<Junction> q = new ArrayList<>();
@@ -75,16 +70,21 @@ public class CarPlayer extends Player {
                     q.add(next);
                 }
             }
-
         }
     }
 
     public void NPCLogic() {
-
-        choseDirection(null, 0);
-
-
-       
+        MapComponent loc = car.getLocation();
+        if (loc == work.getConnection()) {
+            car.setLocation(work);
+            nextDest = home;
+        } else if (loc == home.getConnection()) {
+            car.setLocation(home);
+            nextDest = work;
+        }
+        else {
+            choseDirection(nextDest, 0);
+        }
     }
 
     /**
@@ -92,6 +92,7 @@ public class CarPlayer extends Player {
      */
     public void goHome() {
         car.setLocation(home);
+        nextDest = work;
     }
 
     public List<Vehicle> getVehicles() {
@@ -100,16 +101,6 @@ public class CarPlayer extends Player {
         return r;
     }
 
-    public void arrived(){
-        if (nextDest == work) {
-            nextDest = home;
-        } else {
-            nextDest = work;
-        }
-    }
-
     public Building getHome() { return home; }
     public Building getWork() { return work; }
-    public Building getNextDest() { return nextDest; }
-
 }
