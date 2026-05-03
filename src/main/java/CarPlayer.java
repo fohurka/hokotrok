@@ -75,10 +75,11 @@ public class CarPlayer extends Player {
 
     public void NPCLogic() {
         MapComponent loc = car.getLocation();
-        if (loc == work.getConnection()) {
+        if (loc == work.getConnection() && loc == nextDest.getConnection()) {
             car.setLocation(work);
             nextDest = home;
-        } else if (loc == home.getConnection()) {
+        } 
+        else if (loc == home.getConnection() && loc == nextDest.getConnection()) {
             car.setLocation(home);
             nextDest = work;
         }

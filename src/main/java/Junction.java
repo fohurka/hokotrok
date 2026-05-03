@@ -30,9 +30,11 @@ public class Junction extends MapComponent {
      */
     @Override
     public void progress(CivilVehicle cv) {
-        if (cv instanceof Car)  {
-            ((Car)cv).getOwner().NPCLogic();
-        }
+    }
+
+    @Override
+    public void progress(Car c) {
+        c.getOwner().NPCLogic();
     }
 
     /**
@@ -67,7 +69,9 @@ public class Junction extends MapComponent {
     }
 
     public List<Lane> getLanes() {
-        return starting;
+        List<Lane> r = new ArrayList<>();
+        r.addAll(starting); r.addAll(ending);
+        return r;
     }
 
     public List<Lane> getStartingLanes() { return starting; }

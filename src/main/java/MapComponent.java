@@ -44,5 +44,9 @@ public abstract class MapComponent {
 
     public abstract void progress(Snowplow sp);
 
+    public void progress(Car c){
+        progress((CivilVehicle)c);
+    }
+
     public void crashRecovered() {}
 }
