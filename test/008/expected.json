@@ -17,7 +17,8 @@
         {
           "id": "junc_1",
           "startingLaneIds": [
-            "lane_1"
+            "lane_1",
+            "lane_2"
           ],
           "endingLaneIds": [],
           "buildingIds": [
@@ -28,7 +29,8 @@
           "id": "junc_2",
           "startingLaneIds": [],
           "endingLaneIds": [
-            "lane_1"
+            "lane_1",
+            "lane_2"
           ],
           "buildingIds": []
         }

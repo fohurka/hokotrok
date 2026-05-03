@@ -55,50 +55,56 @@
             "iceAmount": 3,
             "modifier": "Unmodified"
           },
-          "players": [
-            {
-              "id": "player_car_1",
-              "type": "CarPlayer",
-              "vehicleId": "veh_car_1",
-              "homeId": "null",
-              "workId": "null"
-            },
-            {
-              "id": "player_car_2",
-              "type": "CarPlayer",
-              "vehicleId": "veh_car_2",
-              "homeId": "null",
-              "workId": "null"
-            }
-          ],
           "vehicles": [
             {
-              "id": "veh_car_1",
-              "type": "Car",
-              "ownerId": "player_car_1",
-              "location": {
-                "type": "Lane",
-                "id": "lane_1"
-              },
-              "isCrashed": "false"
+              "veh_car_1": 0
+            },
+            {
+              "veh_car_2": 0
             }
           ],
-          "equipments": [],
           "isCrashed": false
-        },
-        {
-          "id": "veh_car_2",
-          "type": "Car",
-          "ownerId": "player_car_2",
-          "location": {
-            "type": "Lane",
-            "id": "lane_1"
-          },
-          "isCrashed": "false",
-          "vehicles": []
         }
-      ],
-      "equipments": []
-    }
+      ]
+    },
+    "players": [
+      {
+        "id": "player_car_1",
+        "type": "CarPlayer",
+        "vehicleId": "veh_car_1",
+        "homeId": "null",
+        "workId": "null"
+      },
+      {
+        "id": "player_car_2",
+        "type": "CarPlayer",
+        "vehicleId": "veh_car_2",
+        "homeId": "null",
+        "workId": "null"
+      }
+    ],
+    "vehicles": [
+      {
+        "id": "veh_car_1",
+        "type": "Car",
+        "ownerId": "player_car_1",
+        "location": {
+          "type": "Lane",
+          "id": "lane_1"
+        },
+        "isCrashed": false
+      },
+      {
+        "id": "veh_car_2",
+        "type": "Car",
+        "ownerId": "player_car_2",
+        "location": {
+          "type": "Lane",
+          "id": "lane_1"
+        },
+        "isCrashed": false
+      }
+    ],
+    "equipments": []
   }
 }
