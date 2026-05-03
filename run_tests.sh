@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TEST_DIR="test"
-PROGRAM_NAME="myprogramname"
+PROGRAM_NAME="hokotrok"
 
 passed=0
 failed=0
@@ -18,6 +18,9 @@ if [ ! -d "$TEST_DIR" ]; then
     exit 1
 fi
 
+# Make sure we have the latest compiled code in the build directory
+javac src/main/java/*.java -d build
+
 for dir in "$TEST_DIR"/*/; do
     dir_name=$(basename "$dir")
     
@@ -26,10 +29,10 @@ for dir in "$TEST_DIR"/*/; do
         # Using printf to keep the dots and brackets aligned
         printf " Running Test %-15s " "[$dir_name]..."
         
-        # Run java
-        java "$PROGRAM_NAME" < "$dir/commands.txt" > /dev/null 2>&1
+        # Run using the hokotrok wrapper and capture output
+        output=$(./$PROGRAM_NAME < "$dir/commands.txt" 2>&1)
         
-        if [ $? -eq 0 ]; then
+        if echo "$output" | grep -q "SUCCESS"; then
             echo "[ SUCCESS ]"
             ((passed++))
         else

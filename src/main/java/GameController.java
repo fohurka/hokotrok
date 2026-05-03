@@ -430,9 +430,9 @@ public class GameController {
      * @param args args[1] = player id
      */
     public void change(String[] args) {
-        if (args.length > 1) {
-            if (busPlayers.containsKey(args[1]) || snowplowPlayers.containsKey(args[1]))
-                activePlayerId = args[1];
+        if (args.length >= 1) {
+            if (busPlayers.containsKey(args[0]) || snowplowPlayers.containsKey(args[0]))
+                activePlayerId = args[0];
             else {
                 printPlayers();
             }
@@ -496,17 +496,17 @@ public class GameController {
         if (p == null)
             p = snowplowPlayers.get(activePlayerId);
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.out.println("Not enough arguments");
             return;
         }
-        String destId = args[1];
+        String destId = args[0];
         Junction dest = junctions.get(destId);
 
         int vIdx = 0;
-        if (args.length > 3 && args[2].equals("-v")) {
+        if (args.length >= 3 && args[1].equals("-v")) {
             try {
-                vIdx = Integer.parseInt(args[3]);
+                vIdx = Integer.parseInt(args[2]);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid argument format");
                 return;
@@ -560,11 +560,11 @@ public class GameController {
             return;
         }
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.out.println("Not enough arguments");
             return;
         }
-        String item = args[1];
+        String item = args[0];
         if (item.equalsIgnoreCase("Snowplow")) {
             sp.buySnowplow();
             List<Snowplow> plows = sp.getSnowplows();
@@ -622,15 +622,15 @@ public class GameController {
             return;
         }
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.out.println("Not enough arguments");
             return;
         }
-        String eqName = args[1];
+        String eqName = args[0];
         int vIdx = 0;
-        if (args.length > 3 && args[2].equals("-v")) {
+        if (args.length >= 3 && args[1].equals("-v")) {
             try {
-                vIdx = Integer.parseInt(args[3]);
+                vIdx = Integer.parseInt(args[2]);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid argument format");
                 return;
@@ -724,43 +724,42 @@ public class GameController {
             return;
         }
 
+        Player p = carPlayers.get(activePlayerId);
+        if (p == null)
+            p = busPlayers.get(activePlayerId);
+        if (p == null)
+            p = snowplowPlayers.get(activePlayerId);
+
+        if (p == null) {
+            System.out.println("No active player found");
+            return;
+        }
+
         int vIdx = 0;
-        if (args.length > 3 && args[2].equals("-v")) {
+        if (args.length >= 2 && args[0].equals("-v")) {
             try {
-                vIdx = Integer.parseInt(args[3]);
+                vIdx = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid argument format");
                 return;
             }
         }
 
-        SnowplowPlayer sp = snowplowPlayers.get(activePlayerId);
-        if (sp != null) {
-            if (vIdx < 0 || vIdx >= sp.getSnowplows().size()) {
-                System.out.println("Invalid vehicle index");
-                return;
-            }
-            Snowplow plow = sp.getSnowplow(vIdx);
-            if (plow.getLocation() != null) {
-                plow.getLocation().progress(plow);
-            }
+        List<Vehicle> pVehicles = p.getVehicles();
+        if (vIdx < 0 || vIdx >= pVehicles.size()) {
+            System.out.println("Invalid vehicle index");
             return;
         }
 
-        BusPlayer bp = busPlayers.get(activePlayerId);
-        if (bp != null) {
-            if (vIdx != 0) {
-                System.out.println("Invalid vehicle index");
-                return;
+        Vehicle v = pVehicles.get(vIdx);
+        MapComponent loc = v.getLocation();
+        if (loc != null) {
+            if (v instanceof Snowplow) {
+                loc.progress((Snowplow) v);
+            } else if (v instanceof CivilVehicle) {
+                loc.progress((CivilVehicle) v);
             }
-            Bus bus = bp.getBus();
-            if (bus.getLocation() != null) {
-                bus.getLocation().progress(bus);
-            }
-            return;
         }
-
-        System.out.println("No active player or invalid player type for progress");
     }
 
     // -------------------------------------------------------------------------
