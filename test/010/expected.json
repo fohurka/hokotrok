@@ -72,15 +72,15 @@
         "id": "player_car_1",
         "type": "CarPlayer",
         "vehicleId": "veh_car_1",
-        "homeId": "null",
-        "workId": "null"
+        "homeId": null,
+        "workId": null
       },
       {
         "id": "player_car_2",
         "type": "CarPlayer",
         "vehicleId": "veh_car_2",
-        "homeId": "null",
-        "workId": "null"
+        "homeId": null,
+        "workId": null
       }
     ],
     "vehicles": [
