@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Warehouse extends Building {
-    private int[] equipmentPrices = {50, 100, 150, 200, 250};
-    private int snowplowPrice = 500;
+    private int[] equipmentPrices = {2000, 2500, 3000, 2750, 3500, 3000};
+    private int snowplowPrice = 10000;
     private List<Equipment> stock = new ArrayList<>();
     private Bank bank;
     public Warehouse(Junction junction){
@@ -45,8 +45,11 @@ public class Warehouse extends Building {
                 case 4:
                     boughtEquipment = new IceBreaker(p);
                     break;
-                default:
+                case 5:
                     boughtEquipment = new DragonBlade(p);
+                    break;
+                default:
+                    boughtEquipment = new Gritter(p);
                     break;
                 }
                 bank.pay(p, -equipmentPrices[id - 1]); // Deduct the cost from the player's account
