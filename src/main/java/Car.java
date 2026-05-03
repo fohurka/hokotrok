@@ -25,7 +25,7 @@ public class Car extends CivilVehicle {
             if(loc instanceof Junction) {
                 Junction dest = owner.getNextDest().getConnection();
                 if(dest == loc) {
-                    arrived();
+                    owner.arrived();
                     dest == owner.getNextDest().getConnection();
                 }
                 List<Junction> visited = new ArrayList<>();
