@@ -49,6 +49,11 @@ public class CarPlayer extends Player {
         if (index != 0) {
             throw new IllegalArgumentException("Car player can only control one car");
         }
+        choseDirection(dest);
+    }
+
+    public void choseDirection(MapComponent dest) {
+
         car.setLocation(dest);
     }
 

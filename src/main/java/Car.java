@@ -25,8 +25,8 @@ public class Car extends CivilVehicle {
             if(loc instanceof Junction) {
                 Junction dest = owner.getNextDest().getConnection();
                 if(dest == loc) {
-                    arrived();
-                    dest == owner.getNextDest().getConnection();
+                    owner.arrived();
+                    dest = owner.getNextDest().getConnection();
                 }
                 List<Junction> visited = new ArrayList<>();
                 visited.add(dest);
@@ -38,7 +38,7 @@ public class Car extends CivilVehicle {
                         Junction next = (l.getStart() == curr) ? l.getEnd() : l.getStart();
                         if (!visited.contains(next) && l.enterable()) {
                             if(next == loc) {
-                                chooseDirection(l, 0);
+                                owner.choseDirection(l);
                                 return;
                             }
                             visited.add(next);
