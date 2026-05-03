@@ -428,6 +428,12 @@ public class StateSerializer {
         } else if (loc instanceof Junction) {
             w.name("type");
             w.value("Junction");
+        } else if (loc instanceof Warehouse) {
+            w.name("type");
+            w.value("Warehouse");
+        } else if (loc instanceof Building) {
+            w.name("type");
+            w.value("Building");
         } else {
             w.name("type");
             w.value("Unknown");

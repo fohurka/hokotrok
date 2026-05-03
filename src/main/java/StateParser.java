@@ -323,6 +323,7 @@ public class StateParser {
                 }
                 b.setId(bDto.id);
                 buildingMap.put(b.getId(), b);
+                locationMap.put(b.getId(), b);
                 controller.addBuilding(b);
                 if (conn != null)
                     conn.addBuilding(b);
@@ -582,6 +583,13 @@ public class StateParser {
         if (dto.warehouse != null) {
             Warehouse wh = (Warehouse) buildingMap.get(dto.warehouse.id);
             if (wh != null) {
+                // Wire Bank and Warehouse
+                Bank bank = controller.getBank();
+                if (bank != null) {
+                    wh.setBank(bank);
+                    bank.setWarehouse(wh);
+                }
+
                 if (dto.warehouse.stock != null) {
                     for (String eqId : dto.warehouse.stock) {
                         Equipment eq = equipmentMap.get(eqId);
