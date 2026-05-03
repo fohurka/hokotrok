@@ -32,7 +32,7 @@ public class Bus extends CivilVehicle {
     @Override
     public void tick() {
         if (isCrashed) {
-            if (timer > 3) {
+            if (timer > 2) {
                 isCrashed = false;
                 if (loc != null) {
                     loc.crashRecovered();

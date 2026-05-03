@@ -1,4 +1,6 @@
 /teststart 39
 /tick
 /tick
+/tick
+/tick
 /testend

@@ -56,7 +56,7 @@
           "rightNeighborId": null,
           "surface": {
             "type": "DeepSnow",
-            "snowAmount": 8,
+            "snowAmount": 10,
             "iceAmount": 0,
             "modifier": "Unmodified"
           },
