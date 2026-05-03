@@ -1,3 +1,3 @@
 /teststart 40
-/purchase impeller
+purchase impeller
 /testend

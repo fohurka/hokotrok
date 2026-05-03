@@ -1,4 +1,4 @@
 /teststart 2
-/change player_bus_1
+change player_bus_1
 /progress
 /testend

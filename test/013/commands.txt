@@ -1,6 +1,6 @@
 /teststart 13
-/change player_bus_1
-/move junc_2
+change player_bus_1
+move junc_2
 /tick
 /tick
 /testend
