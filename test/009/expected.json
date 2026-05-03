@@ -32,7 +32,9 @@
             "lane_1",
             "lane_2"
           ],
-          "buildingIds": []
+          "buildingIds": [
+            "bldg_home"
+          ]
         }
       ],
       "buildings": [
@@ -40,6 +42,11 @@
           "id": "bldg_warehouse",
           "connectionId": "junc_1",
           "type": "Warehouse"
+        },
+        {
+          "id": "bldg_home",
+          "connectionId": "junc_2",
+          "type": "Normal"
         }
       ],
       "lanes": [

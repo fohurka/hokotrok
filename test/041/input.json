@@ -78,7 +78,7 @@
         "type": "Snowplow",
         "ownerId": "player_sp_1",
         "location": {
-          "type": "Building",
+          "type": "Warehouse",
           "id": "bldg_warehouse"
         },
         "equipmentId": "eq_sweeper_1"

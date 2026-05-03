@@ -78,7 +78,7 @@
         "type": "Snowplow",
         "ownerId": "player_sp_1",
         "location": {
-          "type": "Building",
+          "type": "Warehouse",
           "id": "bldg_warehouse"
         },
         "equipmentId": "eq_sweeper_1"
@@ -88,21 +88,15 @@
         "type": "Snowplow",
         "ownerId": "player_sp_1",
         "location": {
-          "type": "Building",
+          "type": "Warehouse",
           "id": "bldg_warehouse"
         },
-        "equipmentId": "eq_sweeper_2"
+        "equipmentId": null
       }
     ],
     "equipments": [
       {
         "id": "eq_sweeper_1",
-        "type": "Sweeper",
-        "ownerId": "player_sp_1",
-        "stateData": {}
-      },
-      {
-        "id": "eq_sweeper_2",
         "type": "Sweeper",
         "ownerId": "player_sp_1",
         "stateData": {}
