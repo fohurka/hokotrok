@@ -57,6 +57,7 @@ public class Warehouse extends Building {
                 // Purchase failed (false branch)
             }
         }
+        stock.add(boughtEquipment);
         return boughtEquipment;
     }
 
