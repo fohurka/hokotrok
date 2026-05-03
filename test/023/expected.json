@@ -51,7 +51,7 @@
           "surface": {
             "type": "SmallSnow",
             "snowAmount": 4,
-            "iceAmount": 0,
+            "iceAmount": 1,
             "modifier": "Unmodified"
           },
           "vehicles": [],

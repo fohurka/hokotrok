@@ -50,8 +50,8 @@
           "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
-            "snowAmount": 3,
-            "iceAmount": 0,
+            "snowAmount": 2,
+            "iceAmount": 1,
             "modifier": "Unmodified"
           },
           "vehicles": [],
