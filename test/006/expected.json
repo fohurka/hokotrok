@@ -70,7 +70,11 @@
             "iceAmount": 0,
             "modifier": "Unmodified"
           },
-          "vehicles": [],
+          "vehicles": [
+            {
+              "veh_sp_1": 0
+            }
+          ],
           "isCrashed": false
         },
         {
