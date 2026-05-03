@@ -1,3 +1,5 @@
+import static java.lang.Math.nextUp;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -490,9 +492,8 @@ public class GameController {
             System.out.println("No active player");
             return;
         }
-        Player p = carPlayers.get(activePlayerId);
-        if (p == null)
-            p = busPlayers.get(activePlayerId);
+
+        Player p = busPlayers.get(activePlayerId);
         if (p == null)
             p = snowplowPlayers.get(activePlayerId);
 
@@ -501,7 +502,11 @@ public class GameController {
             return;
         }
         String destId = args[0];
-        Junction dest = junctions.get(destId);
+        MapComponent dest = lanes.get(destId);
+        if(dest == null)
+            dest = junctions.get(destId);
+        if(dest == null)
+            dest = buildings.get(destId);
 
         int vIdx = 0;
         if (args.length >= 3 && args[1].equals("-v")) {
@@ -519,25 +524,26 @@ public class GameController {
             return;
         }
         MapComponent loc = playerVehicles[vIdx].getLocation();
-        if (loc != null && lanes.containsKey(loc.getId())) {
+        String id = loc.getId();
+        if (loc != null && lanes.containsKey(id)) {
             System.out.println("In lane");
             return;
         }
 
-        List<Junction> available = new ArrayList<>();
+        List<MapComponent> available = new ArrayList<>();
         if (loc != null) {
-            Junction currJunc = junctions.get(loc.getId());
-            if (currJunc != null) {
-                for (Lane l : currJunc.getLanes()) {
-                    available.add(l.getEnd());
-                }
+            if (junctions.containsKey(id)) {
+                available.addAll(junctions.get(id).getStartingLanes());
+                available.addAll(junctions.get(id).getBuildings());
             }
+            else if(buildings.containsKey(id))
+                available.add(buildings.get(id).getConnection());
         }
 
         if (!available.contains(dest)) {
-            System.out.println("---Elérhető kereszteződések: (junctionID)---");
-            for (Junction junction : available) {
-                System.out.println(junction.getId());
+            System.out.println("---Elérhető pálya elemek: (ID)---");
+            for (MapComponent a : available) {
+                System.out.println(a.getId());
             }
         } else {
             p.choseDirection(dest, vIdx);
