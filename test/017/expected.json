@@ -48,7 +48,7 @@
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": "lane_1",
+          "leftNeighborId": null,
           "rightNeighborId": "lane_2",
           "surface": {
             "type": "SmallSnow",
@@ -64,7 +64,7 @@
           "length": 1,
           "startJunctionId": "junc_1",
           "endJunctionId": "junc_2",
-          "leftNeighborId": null,
+          "leftNeighborId": "junc_1",
           "rightNeighborId": null,
           "surface": {
             "type": "DeepSnow",

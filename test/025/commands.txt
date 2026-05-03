@@ -1,5 +1,5 @@
 /teststart 25
 change player_sp_1
-move junc_2
+move lane_1
 /tick
 /testend
