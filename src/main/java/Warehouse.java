@@ -48,7 +48,8 @@ public class Warehouse extends Building {
                 default:
                     boughtEquipment = new DragonBlade(p);
                     break;
-            }
+                }
+                bank.pay(p, -equipmentPrices[id - 1]); // Deduct the cost from the player's account
             } else {
                 // Purchase failed (false branch)
             }
@@ -68,6 +69,7 @@ public class Warehouse extends Building {
         if (bank != null) {
             if (bank.hasEnoughMoney(p, snowplowPrice)) {
                 // Here the snowplow is created and given to the player (true branch)
+                bank.pay(p, -snowplowPrice); // Deduct the cost from the player's account
                 boughtSnowplow = new Snowplow();
             } else {
                 // Purchase failed (false branch)
