@@ -263,7 +263,7 @@ public class StateParser {
                 dto.equipments.add(e);
             }
         }
-
+        }
         return dto;
     }
 
