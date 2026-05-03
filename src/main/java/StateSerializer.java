@@ -265,9 +265,9 @@ public class StateSerializer {
             w.name("vehicleId");
             w.value(p.getCar().getId());
             w.name("homeId");
-            w.value(p.getHome().getId());
+            w.value(p.getHome() != null ? p.getHome().getId() : null);
             w.name("workId");
-            w.value(p.getWork().getId());
+            w.value(p.getWork() != null ? p.getWork().getId() : null);
             w.endObject();
         }
 
