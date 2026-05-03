@@ -2,7 +2,7 @@
   "gameState": {
     "bank": {
       "accounts": {
-        "player_sp_1": 12530
+        "player_sp_1": 12520
       }
     },
     "warehouse": {
@@ -52,15 +52,11 @@
           "rightNeighborId": null,
           "surface": {
             "type": "SmallSnow",
-            "snowAmount": 4,
+            "snowAmount": 0,
             "iceAmount": 0,
             "modifier": "Salted"
           },
-          "vehicles": [
-            {
-              "veh_sp_1": 0
-            }
-          ],
+          "vehicles": [],
           "isCrashed": false
         }
       ]
@@ -70,8 +66,7 @@
         "id": "player_sp_1",
         "type": "SnowplowPlayer",
         "vehicleIds": [
-          "veh_sp_1",
-          "veh_sp_2"
+          "veh_sp_1"
         ],
         "warehouseId": "bldg_warehouse"
       }
@@ -82,8 +77,8 @@
         "type": "Snowplow",
         "ownerId": "player_sp_1",
         "location": {
-          "type": "Lane",
-          "id": "lane_1"
+          "type": "Junction",
+          "id": "junc_2"
         },
         "equipmentId": "eq_sweeper_1"
       }
