@@ -1,5 +1,3 @@
-import static java.lang.Math.nextUp;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -456,6 +454,7 @@ public class GameController {
 
         SnowplowPlayer sp = snowplowPlayers.get(activePlayerId);
         if (sp != null) {
+            System.out.println("---Aktív hókotrójátékos: (balance, [vehicleID, equipmentID])---");
             int balance = bank != null ? bank.getBalance(sp) : 0;
             System.out.print(balance);
             for (Snowplow s : sp.getSnowplows()) {
@@ -469,6 +468,7 @@ public class GameController {
 
         BusPlayer bp = busPlayers.get(activePlayerId);
         if (bp != null) {
+            System.out.println("---Aktív buszjátékos: (vehicleID, end1JunctionID, end2JunctionID, balance, isCrashed)---");
             int balance = bank != null ? bank.getBalance(bp) : 0;
             Bus b = bp.getBus();
             String vid = b.getId();
