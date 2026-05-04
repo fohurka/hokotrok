@@ -72,7 +72,9 @@ public class CarPlayer extends Player {
 
     public void NPCLogic() {
         MapComponent loc = car.getLocation();
-        if (loc == work) {
+        if(loc == home) {
+            car.setLocation(home.getConnection());
+        } else if (loc == work) {
             car.setLocation(work.getConnection());
             Building tmp = home;
             home = work;
