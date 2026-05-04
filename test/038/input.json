@@ -31,14 +31,16 @@
           "endingLaneIds": [
             "lane_1"
           ],
-          "buildingIds": [],
+          "buildingIds": [
+            "bldg_home_1"
+          ],
           "startingLaneIds": []
         }
       ],
       "buildings": [
         {
           "id": "bldg_home_1",
-          "connectionId": "junc_1",
+          "connectionId": "junc_2",
           "type": "Normal"
         },
         {
@@ -76,7 +78,7 @@
         "type": "CarPlayer",
         "vehicleId": "veh_car_1",
         "homeId": "bldg_home_1",
-        "workId": null
+        "workId": "bldg_warehouse"
       }
     ],
     "vehicles": [
@@ -88,8 +90,7 @@
           "type": "Lane",
           "id": "lane_1"
         },
-        "isCrashed": true,
-        "recovererId": "global_recoverer"
+        "isCrashed": true
       }
     ],
     "equipments": []

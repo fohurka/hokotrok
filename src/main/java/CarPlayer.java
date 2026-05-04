@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Represents a player who controls a single car in the game.
  * The car is controlled by an NPC.
@@ -40,7 +39,7 @@ public class CarPlayer extends Player {
      *
      * @param dest  The destination map component.
      * @param index The index of the vehicle, which must be 0 since the player
-     * controls one car.
+     *              controls one car.
      * @throws IllegalArgumentException if the index is not 0.
      */
     @Override
@@ -49,7 +48,7 @@ public class CarPlayer extends Player {
             throw new IllegalArgumentException("Car player can only control one car");
         }
 
-        Junction _dest = ((Building)dest).getConnection();
+        Junction _dest = ((Building) dest).getConnection();
         MapComponent loc = car.getLocation();
         List<Junction> visited = new ArrayList<>();
         visited.add(_dest);
@@ -57,11 +56,11 @@ public class CarPlayer extends Player {
         q.add(_dest);
         while (!q.isEmpty()) {
             Junction curr = q.remove(0);
-            for(Lane l : curr.getLanes()) {
+            for (Lane l : curr.getLanes()) {
                 Junction next = (l.getStart() == curr) ? l.getEnd() : l.getStart();
                 if (!visited.contains(next) && l.enterable()) {
-                    if(next == loc) {
-                      car.setLocation(l);
+                    if (next == loc) {
+                        car.setLocation(l);
                         return;
                     }
                     visited.add(next);
@@ -73,15 +72,14 @@ public class CarPlayer extends Player {
 
     public void NPCLogic() {
         MapComponent loc = car.getLocation();
-        if(loc == work){
+        if (loc == work) {
             car.setLocation(work.getConnection());
             Building tmp = home;
             home = work;
             work = tmp;
         } else if (loc == work.getConnection()) {
-            car.setLocation(work);   
-        }
-        else {
+            car.setLocation(work);
+        } else {
             choseDirection(work, 0);
         }
     }
@@ -90,7 +88,7 @@ public class CarPlayer extends Player {
      * Brings the car home
      */
     public void goHome() {
-        car.setLocation(home.getConnection());
+        car.setLocation(home);
     }
 
     public List<Vehicle> getVehicles() {
@@ -99,6 +97,11 @@ public class CarPlayer extends Player {
         return r;
     }
 
-    public Building getHome() { return home; }
-    public Building getWork() { return work; }
+    public Building getHome() {
+        return home;
+    }
+
+    public Building getWork() {
+        return work;
+    }
 }
