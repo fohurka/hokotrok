@@ -20,7 +20,6 @@ if not exist "%TEST_DIR%" (
 )
 
 :: Make sure we have the latest compiled code in the build directory
-if not exist "build" mkdir build
 javac src/main/java/*.java -d build
 
 for /d %%D in ("%TEST_DIR%\*") do (
