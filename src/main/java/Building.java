@@ -25,6 +25,11 @@ public class Building extends MapComponent {
     @Override
     public void progress(CivilVehicle cv) { }
 
+    @Override
+    public void progress(Car c) {
+        c.getOwner().NPCLogic();
+    }
+
     /**
      * Progresses a snowplow that is currently at this building.
      * Does nothing.
