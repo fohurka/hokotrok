@@ -29,14 +29,16 @@
           "endingLaneIds": [
             "lane_1"
           ],
-          "buildingIds": [],
+          "buildingIds": [
+            "bldg_home_1"
+          ],
           "startingLaneIds": []
         }
       ],
       "buildings": [
         {
           "id": "bldg_home_1",
-          "connectionId": "junc_1",
+          "connectionId": "junc_2",
           "type": "Normal"
         },
         {
@@ -56,7 +58,7 @@
           "surface": {
             "type": "DeepSnow",
             "snowAmount": 11,
-            "iceAmount": 0,
+            "iceAmount": 1,
             "modifier": "Unmodified"
           },
           "vehicles": [],
@@ -70,7 +72,7 @@
         "type": "CarPlayer",
         "vehicleId": "veh_car_1",
         "homeId": "bldg_home_1",
-        "workId": null
+        "workId": "bldg_warehouse"
       }
     ],
     "vehicles": [
@@ -82,8 +84,7 @@
           "type": "Building",
           "id": "bldg_home_1"
         },
-        "isCrashed": false,
-        "recovererId": "global_recoverer"
+        "isCrashed": false
       }
     ],
     "equipments": []
