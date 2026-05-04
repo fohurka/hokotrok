@@ -6,6 +6,11 @@ public class TestManager {
     private final GameController controller;
     private String currentTestId;
 
+    /**
+     * Constructs a TestManager with the given game controller.
+     *
+     * @param controller the game controller to manage tests for
+     */
     public TestManager(GameController controller) {
         this.controller = controller;
     }

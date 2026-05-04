@@ -32,6 +32,15 @@ public class StateParser {
     // Phase 1: AST to DTO
     // =========================================================================
 
+    /**
+     * Phase 1: Converts the JSON string into a {@link GameState.GameStateDto} hierarchy.
+     * This method first parses the JSON into a simple AST of {@link Node}s and then
+     * maps those nodes to DTO fields.
+     *
+     * @param json the JSON string representing the game state
+     * @return a DTO representation of the game state
+     * @throws RuntimeException if the JSON is malformed or missing required top-level fields
+     */
     private GameState.GameStateDto parseJsonToDto(String json) {
         Node rootNode = new JsonParser(json).parse();
         if (!(rootNode instanceof JObj)) {
@@ -267,6 +276,12 @@ public class StateParser {
         return dto;
     }
 
+    /**
+     * Helper to convert a {@link JArr} of strings into a {@link List} of {@link String}.
+     *
+     * @param arr the JSON array node containing strings
+     * @return a list of strings, or an empty list if {@code arr} is null
+     */
     private List<String> parseStringList(JArr arr) {
         List<String> list = new ArrayList<>();
         if (arr != null) {
@@ -277,6 +292,12 @@ public class StateParser {
         return list;
     }
 
+    /**
+     * Helper to parse a location object into a {@link GameState.LocationDto}.
+     *
+     * @param locNode the JSON node representing the location
+     * @return the location DTO, or {@code null} if the node is not an object
+     */
     private GameState.LocationDto parseLocation(Node locNode) {
         if (!(locNode instanceof JObj))
             return null;
@@ -291,6 +312,15 @@ public class StateParser {
     // Phase 2: DTO to Domain Objects
     // =========================================================================
 
+    /**
+     * Phase 2: Reconstructs the full domain object graph from the DTOs and
+     * injects them into the provided {@link GameController}.
+     * This involves creating junctions, buildings, lanes, players, equipment,
+     * and vehicles, and wiring their references together.
+     *
+     * @param dto        the game state DTO hierarchy
+     * @param controller the controller to populate with reconstructed domain objects
+     */
     private void reconstruct(GameState.GameStateDto dto, GameController controller) {
         controller.clearAll();
 
@@ -625,63 +655,132 @@ public class StateParser {
     // Minimal JSON AST & Parser (Zero Dependencies)
     // =========================================================================
 
+    /**
+     * Base class for all JSON AST nodes.
+     */
     abstract static class Node {
     }
 
+    /**
+     * Represents a JSON {@code null} value.
+     */
     static class JNull extends Node {
+        /** Singleton instance of JNull. */
         static final JNull I = new JNull();
     }
 
+    /**
+     * Represents a JSON boolean value.
+     */
     static class JBool extends Node {
+        /** The boolean value. */
         final boolean v;
 
+        /**
+         * Constructs a new JBool.
+         *
+         * @param v the boolean value
+         */
         JBool(boolean v) {
             this.v = v;
         }
     }
 
+    /**
+     * Represents a JSON numeric value.
+     */
     static class JNum extends Node {
+        /** The numeric value as a double. */
         final double v;
 
+        /**
+         * Constructs a new JNum.
+         *
+         * @param v the numeric value
+         */
         JNum(double v) {
             this.v = v;
         }
     }
 
+    /**
+     * Represents a JSON string value.
+     */
     static class JStr extends Node {
+        /** The string value. */
         final String v;
 
+        /**
+         * Constructs a new JStr.
+         *
+         * @param v the string value
+         */
         JStr(String v) {
             this.v = v;
         }
     }
 
+    /**
+     * Represents a JSON array.
+     */
     static class JArr extends Node {
+        /** The list of elements in the array. */
         final List<Node> elems;
 
+        /**
+         * Constructs a new JArr.
+         *
+         * @param e the list of elements
+         */
         JArr(List<Node> e) {
             elems = e;
         }
     }
 
+    /**
+     * Represents a JSON object.
+     */
     static class JObj extends Node {
+        /** The order of keys as they appeared in the JSON. */
         final List<String> keyOrder;
+        /** A map from keys to their corresponding JSON nodes. */
         final Map<String, Node> fields;
 
+        /**
+         * Constructs a new JObj.
+         *
+         * @param ko the key order list
+         * @param f  the fields map
+         */
         JObj(List<String> ko, Map<String, Node> f) {
             keyOrder = ko;
             fields = f;
         }
     }
 
+    /**
+     * A simple recursive-descent parser for JSON.
+     */
     private static class JsonParser {
+        /** The JSON string to parse. */
         private final String s;
+        /** The current position in the string. */
         private int pos;
 
+        /**
+         * Constructs a new JsonParser for the given string.
+         *
+         * @param s the JSON string
+         */
         JsonParser(String s) {
             this.s = s;
         }
 
+        /**
+         * Parses the entire JSON string into an AST.
+         *
+         * @return the root node of the AST
+         */
         Node parse() {
             skipWs();
             Node n = parseValue();
@@ -689,6 +788,11 @@ public class StateParser {
             return n;
         }
 
+        /**
+         * Parses a single JSON value (object, array, string, boolean, null, or number).
+         *
+         * @return the parsed node
+         */
         private Node parseValue() {
             char c = s.charAt(pos);
             if (c == '{')
@@ -704,6 +808,11 @@ public class StateParser {
             return parseNumber();
         }
 
+        /**
+         * Parses a JSON object starting at the current position.
+         *
+         * @return the parsed JObj
+         */
         private JObj parseObject() {
             consume('{');
             List<String> keyOrder = new ArrayList<>();
@@ -733,6 +842,11 @@ public class StateParser {
             return new JObj(keyOrder, fields);
         }
 
+        /**
+         * Parses a JSON array starting at the current position.
+         *
+         * @return the parsed JArr
+         */
         private JArr parseArray() {
             consume('[');
             List<Node> elems = new ArrayList<>();
@@ -755,6 +869,11 @@ public class StateParser {
             return new JArr(elems);
         }
 
+        /**
+         * Parses a JSON string starting at the current position.
+         *
+         * @return the parsed JStr
+         */
         private JStr parseString() {
             consume('"');
             StringBuilder sb = new StringBuilder();
@@ -793,6 +912,11 @@ public class StateParser {
             return new JStr(sb.toString());
         }
 
+        /**
+         * Parses a JSON boolean starting at the current position.
+         *
+         * @return the parsed JBool
+         */
         private JBool parseBool() {
             if (s.startsWith("true", pos)) {
                 pos += 4;
@@ -802,11 +926,21 @@ public class StateParser {
             return new JBool(false);
         }
 
+        /**
+         * Parses a JSON null starting at the current position.
+         *
+         * @return the singleton JNull instance
+         */
         private JNull parseNull() {
             pos += 4;
             return JNull.I;
         }
 
+        /**
+         * Parses a JSON number starting at the current position.
+         *
+         * @return the parsed JNum
+         */
         private JNum parseNumber() {
             int start = pos;
             if (peek() == '-')
@@ -828,15 +962,29 @@ public class StateParser {
             return new JNum(Double.parseDouble(s.substring(start, pos)));
         }
 
+        /**
+         * Skips whitespace characters at the current position.
+         */
         private void skipWs() {
             while (pos < s.length() && s.charAt(pos) <= ' ')
                 pos++;
         }
 
+        /**
+         * Returns the character at the current position without advancing.
+         *
+         * @return the current character, or 0 if at the end of the string
+         */
         private char peek() {
             return pos < s.length() ? s.charAt(pos) : 0;
         }
 
+        /**
+         * Consumes the expected character at the current position.
+         *
+         * @param c the expected character
+         * @throws RuntimeException if the current character does not match
+         */
         private void consume(char c) {
             if (pos >= s.length() || s.charAt(pos) != c)
                 throw new RuntimeException("Expected '" + c + "' at pos " + pos);

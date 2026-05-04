@@ -49,6 +49,13 @@ public class GameController {
     // Helper ID lookups
     // -------------------------------------------------------------------------
 
+    /**
+     * Validates a new ID to ensure it is unique within the game state.
+     * If the ID is already in use, it appends "_new" to the ID and recursively validates it.
+     *
+     * @param id the candidate ID to validate
+     * @return a unique ID based on the candidate
+     */
     private String validateNewId(String id) {
         if (idMap.containsValue(id))
             return validateNewId(id + "_new");
@@ -59,7 +66,10 @@ public class GameController {
     // Lifecycle commands
     // -------------------------------------------------------------------------
 
-    /** Initialises the game to a clean default state. */
+    /**
+     * Initializes the game to a clean default state.
+     * Resets the road network, bank, and recoverer, and sets up a default warehouse at a junction.
+     */
     public void init() {
         rn = new RoadNetwork();
         bank = new Bank();
@@ -155,6 +165,11 @@ public class GameController {
         random = Boolean.parseBoolean(args[0]);
     }
 
+    /**
+     * Checks if the game events are currently set to be random.
+     *
+     * @return true if random mode is enabled, false otherwise
+     */
     public static boolean isRandom() {
         return random;
     }
@@ -178,6 +193,9 @@ public class GameController {
         printBuildings();
     }
 
+    /**
+     * Prints a human-readable description of all junctions to stdout.
+     */
     public void printJunctions() {
         System.out.println("---Kereszteződések: (junctionID) ---");
         for (String jid : junctions.keySet()) {
@@ -185,6 +203,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Prints a human-readable description of all lanes to stdout, including their
+     * endpoints, length, surface type, modifier, and snow/ice amounts.
+     */
     public void printLanes() {
         System.out.println(
                 "---Sávok: (laneID, startJunctionID, endJunctionID, length, type, modifier, snowAmount, iceAmount) ---");
@@ -200,6 +222,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Prints a human-readable description of all buildings to stdout, including
+     * their ID and the junction they are connected to.
+     */
     public void printBuildings() {
         System.out.println("---Épületek: (buildingID, junctionID) ---");
         for (Map.Entry<String, Building> entry : buildings.entrySet()) {
@@ -230,12 +256,20 @@ public class GameController {
             printVehicle(v);
     }
 
+    /**
+     * Prints the ID and location ID of a specific vehicle to stdout.
+     *
+     * @param v the vehicle to print
+     */
     private void printVehicle(Vehicle v) {
         String vid = v.getId();
         String locId = v.getLocation() != null ? v.getLocation().getId() : "null";
         System.out.printf("%s, %s\n", vid, locId);
     }
 
+    /**
+     * Prints the IDs of all players currently in the game.
+     */
     public void printPlayers() {
         System.out.println("---Játékosok: (playerID) ---");
         for (String pid : busPlayers.keySet())
@@ -666,7 +700,9 @@ public class GameController {
     }
 
     /**
-     * Creates a new surface on a given lane.
+     * Creates a new surface on a given lane based on the provided arguments.
+     *
+     * @param args arguments specifying the lane, surface type, modifier, snow amount, and ice amount
      */
     public void newSurface(String[] args) {
         if (args.length < 7) {
@@ -719,6 +755,8 @@ public class GameController {
 
     /**
      * Causes a vehicle to progress on its current lane.
+     *
+     * @param args arguments specifying the vehicle index
      */
     public void progress(String[] args) {
         if (activePlayerId == null) {
@@ -863,41 +901,81 @@ public class GameController {
         this.rn = rn;
     }
 
+    /**
+     * Registers a junction in the controller.
+     *
+     * @param j the junction to add
+     */
     public void addJunction(Junction j) {
         junctions.put(j.getId(), j);
         idMap.put(j, j.getId());
     }
 
+    /**
+     * Registers a building in the controller.
+     *
+     * @param b the building to add
+     */
     public void addBuilding(Building b) {
         buildings.put(b.getId(), b);
         idMap.put(b, b.getId());
     }
 
+    /**
+     * Registers a lane in the controller.
+     *
+     * @param l the lane to add
+     */
     public void addLane(Lane l) {
         lanes.put(l.getId(), l);
         idMap.put(l, l.getId());
     }
 
+    /**
+     * Registers a car player in the controller.
+     *
+     * @param p the car player to add
+     */
     public void addCarPlayer(CarPlayer p) {
         carPlayers.put(p.getId(), p);
         idMap.put(p, p.getId());
     }
 
+    /**
+     * Registers a bus player in the controller.
+     *
+     * @param p the bus player to add
+     */
     public void addBusPlayer(BusPlayer p) {
         busPlayers.put(p.getId(), p);
         idMap.put(p, p.getId());
     }
 
+    /**
+     * Registers a snowplow player in the controller.
+     *
+     * @param p the snowplow player to add
+     */
     public void addSnowplowPlayer(SnowplowPlayer p) {
         snowplowPlayers.put(p.getId(), p);
         idMap.put(p, p.getId());
     }
 
+    /**
+     * Registers an equipment piece in the controller.
+     *
+     * @param eq the equipment to add
+     */
     public void addEquipment(Equipment eq) {
         equipments.put(eq.getId(), eq);
         idMap.put(eq, eq.getId());
     }
 
+    /**
+     * Registers a vehicle in the controller.
+     *
+     * @param v the vehicle to add
+     */
     public void addVehicle(Vehicle v) {
         vehicles.put(v.getId(), v);
         idMap.put(v, v.getId());

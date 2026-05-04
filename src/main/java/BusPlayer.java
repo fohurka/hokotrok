@@ -53,6 +53,12 @@ public class BusPlayer extends Player {
         bus.setLocation(dest);
     }
 
+    /**
+     * Retrieves the list of vehicles controlled by this player.
+     * For a BusPlayer, this list contains only the bus.
+     *
+     * @return A list containing the bus controlled by the player.
+     */
     public List<Vehicle> getVehicles() {
         List<Vehicle> r = new ArrayList<>();
         r.add(bus);

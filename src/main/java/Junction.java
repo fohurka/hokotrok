@@ -7,6 +7,9 @@ public class Junction extends MapComponent {
     private RoadNetwork rn;
     private List<Building> buildings = new ArrayList<>();
 
+    /**
+     * Constructs a new Junction with empty lists of starting and ending lanes.
+     */
     public Junction() {
         starting = new ArrayList<Lane>();
         ending = new ArrayList<Lane>();
@@ -32,6 +35,12 @@ public class Junction extends MapComponent {
     public void progress(CivilVehicle cv) {
     }
 
+    /**
+     * Progresses a car that is currently at this junction.
+     * Triggers the car owner's NPC logic.
+     *
+     * @param c The car that is progressing.
+     */
     @Override
     public void progress(Car c) {
         c.getOwner().NPCLogic();
@@ -64,18 +73,45 @@ public class Junction extends MapComponent {
         this.rn = rn;
     }
 
+    /**
+     * Adds a building to the junction.
+     *
+     * @param building The building to be added.
+     */
     public void addBuilding(Building building) {
         this.buildings.add(building);
     }
 
+    /**
+     * Returns a combined list of all starting and ending lanes at this junction.
+     *
+     * @return A list containing all lanes connected to this junction.
+     */
     public List<Lane> getLanes() {
         List<Lane> r = new ArrayList<>();
         r.addAll(starting); r.addAll(ending);
         return r;
     }
 
+    /**
+     * Returns the list of lanes that start at this junction.
+     *
+     * @return The list of starting lanes.
+     */
     public List<Lane> getStartingLanes() { return starting; }
+
+    /**
+     * Returns the list of lanes that end at this junction.
+     *
+     * @return The list of ending lanes.
+     */
     public List<Lane> getEndingLanes()   { return ending; }
+
+    /**
+     * Returns the list of buildings attached to this junction.
+     *
+     * @return The list of attached buildings.
+     */
     public List<Building> getBuildings() { return buildings; }
 
     /**

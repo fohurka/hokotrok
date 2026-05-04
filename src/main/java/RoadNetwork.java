@@ -40,6 +40,12 @@ public class RoadNetwork {
         }
     }
 
+    /**
+     * Randomly selects a specified number of unique junctions from the road network.
+     *
+     * @param n The number of unique junctions to select.
+     * @return A list of the selected junctions.
+     */
     private List<Junction> selectJunctions(int n) {
         List<Junction> selected = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -53,6 +59,11 @@ public class RoadNetwork {
         return selected;
     }
 
+    /**
+     * Selects two unique junctions and attaches a new building to each of them.
+     *
+     * @return A list containing the two newly created buildings.
+     */
     public List<Building> generateBuildingPair() {
         List<Building> buildings = new ArrayList<>();
         List<Junction> junctions = selectJunctions(2);
@@ -64,16 +75,29 @@ public class RoadNetwork {
         return buildings;
     }
 
+    /**
+     * Advances the state of all lanes in the road network by one time step.
+     */
     public void tick() {
         for (Lane lane : lanes) {
             lane.tick();
         }
     }
 
+    /**
+     * Adds a lane to the road network.
+     *
+     * @param lane The lane to be added.
+     */
     public void addLane(Lane lane) {
         lanes.add(lane);
     }
 
+    /**
+     * Adds a junction to the road network.
+     *
+     * @param j The junction to be added.
+     */
     public void addJunction(Junction j) {
         junctions.add(j);
     }

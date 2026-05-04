@@ -12,6 +12,11 @@ public class Building extends MapComponent {
         this.connection = j;
     }
 
+    /**
+     * Retrieves the Junction to which this building is connected.
+     *
+     * @return The connected Junction.
+     */
     public Junction getConnection() {
         return connection;
     }
@@ -25,6 +30,12 @@ public class Building extends MapComponent {
     @Override
     public void progress(CivilVehicle cv) { }
 
+    /**
+     * Progresses a car that is currently at this building.
+     * Triggers the NPC logic for the car's owner.
+     *
+     * @param c The car that is progressing.
+     */
     @Override
     public void progress(Car c) {
         c.getOwner().NPCLogic();

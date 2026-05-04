@@ -13,6 +13,11 @@ import java.util.Map;
  */
 public class StateSerializer {
 
+    /**
+     * Default constructor for StateSerializer.
+     */
+    public StateSerializer() {}
+
     // =========================================================================
     // Public API
     // =========================================================================
@@ -50,6 +55,9 @@ public class StateSerializer {
      * Writes the "bank" section: an object whose "accounts" key maps
      * each player's id to their current balance.
      * Skipped entirely if the controller has no bank.
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writeBank(JsonWriter w, GameController ctrl) {
         Bank bank = ctrl.getBank();
@@ -71,6 +79,9 @@ public class StateSerializer {
      * Writes the "warehouse" section: id plus the list of equipment IDs
      * currently in stock.
      * Skipped entirely if the controller has no warehouse.
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writeWarehouse(JsonWriter w, GameController ctrl) {
         Warehouse wh = ctrl.getWarehouse();
@@ -93,6 +104,9 @@ public class StateSerializer {
      * Writes the "recoverer" section: id plus the ordered list of crashed
      * car IDs waiting for recovery.
      * Skipped entirely if the controller has no recoverer.
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writeRecoverer(JsonWriter w, GameController ctrl) {
         Recoverer rec = ctrl.getRecoverer();
@@ -112,6 +126,9 @@ public class StateSerializer {
     /**
      * Writes the "map" section containing three sub-arrays:
      * "junctions", "buildings", and "lanes".
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writeMap(JsonWriter w, GameController ctrl) {
         w.name("map");
@@ -177,6 +194,7 @@ public class StateSerializer {
      * Writes a single lane object including its surface and the progress
      * positions of all vehicles currently on the lane.
      *
+     * @param w    the JsonWriter to write to
      * @param l    the lane to serialise
      * @param ctrl the controller (currently unused but kept for consistency)
      */
@@ -228,6 +246,9 @@ public class StateSerializer {
      * Writes the "surface" key with the surface's type discriminator,
      * snow/ice amounts, thresholds, and active modifier.
      * Writes JSON null if the surface is null.
+     *
+     * @param w the JsonWriter to write to
+     * @param s the surface to serialize
      */
     private void writeSurface(JsonWriter w, Surface s) {
         w.name("surface");
@@ -250,6 +271,9 @@ public class StateSerializer {
     /**
      * Writes the "players" array in order: all CarPlayers, then BusPlayers,
      * then SnowplowPlayers. Each entry includes a "type" discriminator field.
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writePlayers(JsonWriter w, GameController ctrl) {
         w.name("players");
@@ -319,6 +343,9 @@ public class StateSerializer {
      * Buses (via BusPlayers), and Snowplows (via SnowplowPlayers).
      * For Cars, isCrashed is derived from the recoverer's queue rather
      * than from a dedicated field on Car.
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writeVehicles(JsonWriter w, GameController ctrl) {
         Recoverer rec = ctrl.getRecoverer();
@@ -383,6 +410,9 @@ public class StateSerializer {
      * Writes the "equipments" array, one entry per equipment piece regardless
      * of whether it is equipped or in the warehouse.
      * Each entry includes a type discriminator and a "stateData" object.
+     *
+     * @param w    the JsonWriter to write to
+     * @param ctrl the GameController to read from
      */
     private void writeEquipments(JsonWriter w, GameController ctrl) {
         w.name("equipments");
@@ -413,6 +443,9 @@ public class StateSerializer {
      * Writes the "location" key with a sub-object containing "type"
      * ("Lane" or "Junction") and "id".
      * Writes JSON null if loc is null.
+     *
+     * @param w   the JsonWriter to write to
+     * @param loc the MapComponent location to serialize
      */
     private void writeLocation(JsonWriter w, MapComponent loc) {
         w.name("location");
@@ -446,6 +479,9 @@ public class StateSerializer {
      * Writes the "stateData" object for an equipment piece.
      * Salter, DragonBlade, and Gritter emit {"ammo": <int>}.
      * All other types emit an empty object {}.
+     *
+     * @param w  the JsonWriter to write to
+     * @param eq the equipment piece whose state data is to be serialized
      */
     private void writeEquipmentStateData(JsonWriter w, Equipment eq) {
         w.beginObject();
@@ -470,6 +506,9 @@ public class StateSerializer {
     /**
      * Returns the JSON type discriminator string for the given Surface.
      * One of: "SmallSnow", "DeepSnow", "Ice", "Grit", "Unmodified".
+     *
+     * @param s the surface to identify
+     * @return the type name as a string
      */
     private String surfaceTypeName(Surface s) {
         if (s instanceof SmallSnow)
@@ -485,6 +524,9 @@ public class StateSerializer {
 
     /**
      * Returns the JSON name of the active Modifier: "Salted" or "Unmodified".
+     *
+     * @param m the modifier to identify
+     * @return the modifier name as a string
      */
     private String modifierName(Modifier m) {
         if (m instanceof Salted)
@@ -496,6 +538,9 @@ public class StateSerializer {
      * Returns the JSON type discriminator string for the given Equipment.
      * One of: "Salter", "DragonBlade", "Gritter", "Sweeper", "Impeller",
      * "IceBreaker", or "Unknown" for unrecognised types.
+     *
+     * @param eq the equipment to identify
+     * @return the equipment type name as a string
      */
     private String equipmentTypeName(Equipment eq) {
         if (eq instanceof Salter)
@@ -528,7 +573,14 @@ public class StateSerializer {
         private boolean needsValue = false;
         private static final String INDENT_STR = "  ";
 
-        /** Open a JSON object '{' */
+        /**
+         * Default constructor for JsonWriter.
+         */
+        public JsonWriter() {}
+
+        /**
+         * Open a JSON object '{'.
+         */
         public void beginObject() {
             prepareValue();
             sb.append('{');
@@ -536,7 +588,9 @@ public class StateSerializer {
             stack.push(new boolean[] { false });
         }
 
-        /** Close the current JSON object '}' */
+        /**
+         * Close the current JSON object '}'.
+         */
         public void endObject() {
             boolean[] state = stack.pop();
             indentLevel--;
@@ -547,7 +601,9 @@ public class StateSerializer {
             markWritten();
         }
 
-        /** Open a JSON array '[' */
+        /**
+         * Open a JSON array '['.
+         */
         public void beginArray() {
             prepareValue();
             sb.append('[');
@@ -555,7 +611,9 @@ public class StateSerializer {
             stack.push(new boolean[] { false });
         }
 
-        /** Close the current JSON array ']' */
+        /**
+         * Close the current JSON array ']'.
+         */
         public void endArray() {
             boolean[] state = stack.pop();
             indentLevel--;
@@ -566,7 +624,11 @@ public class StateSerializer {
             markWritten();
         }
 
-        /** Write an object key (e.g., "key": ) */
+        /**
+         * Write an object key (e.g., "key": ).
+         *
+         * @param key the name of the object member
+         */
         public void name(String key) {
             if (!stack.isEmpty() && stack.peek()[0]) {
                 sb.append(',');
@@ -581,7 +643,11 @@ public class StateSerializer {
             needsValue = true;
         }
 
-        /** Write a String value */
+        /**
+         * Write a String value.
+         *
+         * @param v the string value to write
+         */
         public void value(String v) {
             prepareValue();
             if (v == null) sb.append("null");
@@ -589,27 +655,42 @@ public class StateSerializer {
             markWritten();
         }
 
-        /** Write an int value */
+        /**
+         * Write an int value.
+         *
+         * @param v the integer value to write
+         */
         public void value(int v) {
             prepareValue();
             sb.append(v);
             markWritten();
         }
 
-        /** Write a boolean value */
+        /**
+         * Write a boolean value.
+         *
+         * @param v the boolean value to write
+         */
         public void value(boolean v) {
             prepareValue();
             sb.append(v);
             markWritten();
         }
 
-        /** Write a JSON null literal */
+        /**
+         * Write a JSON null literal.
+         */
         public void valueNull() {
             prepareValue();
             sb.append("null");
             markWritten();
         }
 
+        /**
+         * Returns the accumulated JSON string.
+         *
+         * @return the serialized JSON string
+         */
         @Override
         public String toString() {
             return sb.toString();
@@ -635,6 +716,9 @@ public class StateSerializer {
             }
         }
 
+        /**
+         * Appends a newline and correct indentation based on the current level.
+         */
         private void newLine() {
             sb.append('\n');
             for (int i = 0; i < indentLevel; i++) {
@@ -642,12 +726,20 @@ public class StateSerializer {
             }
         }
 
+        /**
+         * Marks the current container as having content.
+         */
         private void markWritten() {
             if (!stack.isEmpty()) {
                 stack.peek()[0] = true;
             }
         }
 
+        /**
+         * Escapes and appends a string to the output, surrounded by quotes.
+         *
+         * @param s the string to append
+         */
         private void appendString(String s) {
             sb.append('"');
             for (int i = 0; i < s.length(); i++) {

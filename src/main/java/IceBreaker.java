@@ -1,3 +1,7 @@
+/**
+ * Represents an ice breaker equipment that can be mounted on a snowplow.
+ * It is used to break ice into snow on lanes.
+ */
 public class IceBreaker extends Equipment {
     /**
      * Constructs a new IceBreaker equipment assigned to a snowplow player.
@@ -10,7 +14,7 @@ public class IceBreaker extends Equipment {
 
     /**
      * Uses the ice breaker equipment to clear ice from the specified lane.
-     * Removes the ice amount from the lane and updates its state as cleared by the
+     * Removes the ice amount from the lane, adds it as snow, and updates its state as cleared by the
      * owner.
      *
      * @param lane The lane from which ice should be removed.
@@ -22,6 +26,12 @@ public class IceBreaker extends Equipment {
         lane.cleared(owner, iceAmount);
     }
 
+    /**
+     * Sets the ammo for the ice breaker. This equipment does not use ammo,
+     * so this method has no effect.
+     * 
+     * @param ammo The ammo amount to set (ignored).
+     */
     @Override
     public void setAmmo(int ammo) {
         // Does nothing

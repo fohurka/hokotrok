@@ -15,10 +15,22 @@ public class Lane extends MapComponent {
     private final HashMap<Vehicle, Integer> progress = new HashMap<>();
     private boolean isCrashed = false;
 
+    /**
+     * Checks if the lane is currently blocked due to a crash.
+     *
+     * @return true if the lane is crashed, false otherwise.
+     */
     public boolean isCrashed() {
         return isCrashed;
     }
 
+    /**
+     * Constructs a new Lane connecting two junctions with a specified length.
+     *
+     * @param start  The starting junction of the lane.
+     * @param end    The ending junction of the lane.
+     * @param length The length of the lane.
+     */
     public Lane(Junction start, Junction end, int length) {
         super();
         this.length = length;
@@ -48,6 +60,7 @@ public class Lane extends MapComponent {
      * this information to the road network to credit the reward.
      *
      * @param p The snowplow player who performs the clearing and receives the reward.
+     * @param amount The amount of snow cleared.
      */
     public void cleared(SnowplowPlayer p, int amount) {
         if (rn != null) {
@@ -56,8 +69,8 @@ public class Lane extends MapComponent {
     }
     /**
      * Sets the neighbors of the Lane
-     * @param leftNeighbor
-     * @param rightNeighbor
+     * @param leftNeighbor the lane to the left
+     * @param rightNeighbor the lane to the right
      */
     public void addNeighbors(Lane leftNeighbor, Lane rightNeighbor) {
         this.leftNeighbor = leftNeighbor;
@@ -73,10 +86,20 @@ public class Lane extends MapComponent {
         progress.put(v, p);
     }
 
+    /**
+     * Returns the left neighbor of this lane.
+     *
+     * @return The left neighbor lane, or null if none.
+     */
     public Lane getLeftNeighbor() {
         return leftNeighbor;
     }
 
+    /**
+     * Returns the right neighbor of this lane.
+     *
+     * @return The right neighbor lane, or null if none.
+     */
     public Lane getRightNeighbor() {
         return rightNeighbor;
     }
@@ -153,6 +176,8 @@ public class Lane extends MapComponent {
     }
 
     /**
+     * Returns the nearest vehicle to the given civil vehicle on this lane.
+     *
      * @param cv the CivilVehicle to check the closest Vehicle to
      * @return the closest Vehicle to the given CivilVehicle
      */
@@ -176,10 +201,20 @@ public class Lane extends MapComponent {
         isCrashed = true;
     }
 
+    /**
+     * Removes snow from the surface of the lane.
+     *
+     * @return The amount of snow removed.
+     */
     public int clearSnow() {
         return surface.removeSnow();
     }
 
+    /**
+     * Removes ice from the surface of the lane.
+     *
+     * @return The amount of ice removed.
+     */
     public int clearIce() {
         return surface.removeIce();
     }
@@ -200,7 +235,7 @@ public class Lane extends MapComponent {
 
     /**
      * Removes a Vehicle from the Lane and notifies the Surface of a Vehicle passing through
-     * @param vehicle
+     * @param vehicle the vehicle to remove
      */
     @Override
     public void remove(Vehicle vehicle)
@@ -210,6 +245,11 @@ public class Lane extends MapComponent {
         surface.carPassed();
     }
 
+    /**
+     * Notifies the lane that a vehicle has arrived.
+     *
+     * @param vehicle The vehicle that arrived.
+     */
     @Override
     public void arrived(Vehicle vehicle) {
         progress.put(vehicle, 0);
@@ -238,10 +278,20 @@ public class Lane extends MapComponent {
         surface.addSnow(amount);
     }
 
+    /**
+     * Sets the right neighbor of this lane.
+     *
+     * @param l The lane to set as the right neighbor.
+     */
     public void setRightNeighbor(Lane l) {
         this.rightNeighbor = l;
     }
     
+    /**
+     * Sets the left neighbor of this lane.
+     *
+     * @param l The lane to set as the left neighbor.
+     */
     public void setLeftNeighbor(Lane l) {
         this.leftNeighbor = l;
     }
@@ -255,6 +305,8 @@ public class Lane extends MapComponent {
 
     /**
      * Clears the grit from the lane by calling removeGrit on the surface
+     *
+     * @return true if grit was removed, false otherwise.
      */
     public boolean clearGrit() {
         return surface.removeGrit();
@@ -268,8 +320,31 @@ public class Lane extends MapComponent {
         return length;
     }
 
+    /**
+     * Returns the starting junction of the lane.
+     *
+     * @return The starting junction.
+     */
     public Junction getStart() { return start; }
+
+    /**
+     * Returns the ending junction of the lane.
+     *
+     * @return The ending junction.
+     */
     public Junction getEnd() { return end; }
+
+    /**
+     * Returns the surface of the lane.
+     *
+     * @return The surface object.
+     */
     public Surface getSurface() { return surface; }
+
+    /**
+     * Returns the progress map of vehicles on this lane.
+     *
+     * @return A map of vehicles to their progress positions.
+     */
     public HashMap<Vehicle, Integer> getProgress() { return progress; }
 }

@@ -26,50 +26,104 @@ public class StateComparator {
     // Minimal JSON tree
     // =========================================================================
 
+    /**
+     * Base class for all JSON nodes.
+     */
     abstract static class Node {
     }
 
+    /**
+     * Represents a JSON null value.
+     */
     static class JNull extends Node {
+        /** The singleton instance of JNull. */
         static final JNull I = new JNull();
     }
 
+    /**
+     * Represents a JSON boolean value.
+     */
     static class JBool extends Node {
+        /** The boolean value. */
         final boolean v;
 
+        /**
+         * Constructs a JBool node.
+         *
+         * @param v the boolean value
+         */
         JBool(boolean v) {
             this.v = v;
         }
     }
 
+    /**
+     * Represents a JSON number value.
+     */
     static class JNum extends Node {
+        /** The double-precision floating-point value. */
         final double v;
 
+        /**
+         * Constructs a JNum node.
+         *
+         * @param v the double value
+         */
         JNum(double v) {
             this.v = v;
         }
     }
 
+    /**
+     * Represents a JSON string value.
+     */
     static class JStr extends Node {
+        /** The string value. */
         final String v;
 
+        /**
+         * Constructs a JStr node.
+         *
+         * @param v the string value
+         */
         JStr(String v) {
             this.v = v;
         }
     }
 
+    /**
+     * Represents a JSON array.
+     */
     static class JArr extends Node {
+        /** The list of nodes in the array. */
         final List<Node> elems;
 
+        /**
+         * Constructs a JArr node.
+         *
+         * @param e the list of nodes
+         */
         JArr(List<Node> e) {
             elems = e;
         }
     }
 
-    /** keys and values maintain insertion order; keyOrder mirrors field order */
+    /**
+     * Represents a JSON object.
+     * keys and values maintain insertion order; keyOrder mirrors field order
+     */
     static class JObj extends Node {
+        /** The order of keys in the object. */
         final List<String> keyOrder;
+        /** The map of field names to nodes. */
         final Map<String, Node> fields;
 
+        /**
+         * Constructs a JObj node.
+         *
+         * @param ko the list of keys in order
+         * @param f  the map of fields
+         */
         JObj(List<String> ko, Map<String, Node> f) {
             keyOrder = ko;
             fields = f;
@@ -112,6 +166,12 @@ public class StateComparator {
     // ID collection — walks tree1, records values of every "id" key
     // =========================================================================
 
+    /**
+     * Recursively walks the given node and collects all string values associated with the "id" key
+     * into the {@code knownIds} set.
+     *
+     * @param node the node to start collecting IDs from
+     */
     private void collectIds(Node node) {
         if (node instanceof JObj) {
             JObj obj = (JObj) node;
@@ -135,8 +195,11 @@ public class StateComparator {
     /**
      * Compares two nodes.
      *
+     * @param n1  the first node to compare
+     * @param n2  the second node to compare
      * @param key the JSON key under which these nodes appear (used to decide
      *            if an array is ordered or unordered); may be null
+     * @return true if the nodes are equivalent, false otherwise
      */
     private boolean compareNodes(Node n1, Node n2, String key) {
         if (n1 instanceof JNull && n2 instanceof JNull)
@@ -156,6 +219,14 @@ public class StateComparator {
 
     // --- string comparison with ID mapping ---
 
+    /**
+     * Compares two strings. If the first string is a known ID, it uses the ID mapping rules.
+     * Otherwise, it performs an exact string comparison.
+     *
+     * @param s1 the first string
+     * @param s2 the second string
+     * @return true if the strings match under the comparison rules
+     */
     private boolean compareStrings(String s1, String s2) {
         if (!knownIds.contains(s1)) {
             // Plain string: exact match
@@ -176,6 +247,14 @@ public class StateComparator {
 
     // --- object comparison ---
 
+    /**
+     * Compares two JObj nodes. Handles both normal and ID-keyed objects.
+     *
+     * @param o1        the first object node
+     * @param o2        the second object node
+     * @param parentKey the key under which this object appears in its parent
+     * @return true if the objects are equivalent
+     */
     private boolean compareObjects(JObj o1, JObj o2, String parentKey) {
         if (o1.keyOrder.size() != o2.keyOrder.size())
             return false;
@@ -203,6 +282,10 @@ public class StateComparator {
      * Compares two objects whose keys are IDs (like bank.accounts {"player_1": 100}
      * or lane.vehicles [{"veh_car_1": 2}]).
      * Uses backtracking to find a consistent pairing of key-value entries.
+     *
+     * @param o1 the first ID-keyed object
+     * @param o2 the second ID-keyed object
+     * @return true if a consistent mapping exists
      */
     private boolean compareIdKeyedObjects(JObj o1, JObj o2) {
         List<String> keys1 = o1.keyOrder;
@@ -211,6 +294,18 @@ public class StateComparator {
         return matchIdKeyedEntries(o1, o2, keys1, keys2, 0, used);
     }
 
+    /**
+     * Helper for {@link #compareIdKeyedObjects(JObj, JObj)} that uses backtracking to match
+     * entries of ID-keyed objects.
+     *
+     * @param o1    the first object
+     * @param o2    the second object
+     * @param keys1 the keys of the first object
+     * @param keys2 the keys of the second object
+     * @param idx   the current index in keys1 being matched
+     * @param used  tracks which keys in keys2 have already been paired
+     * @return true if a valid matching is found from the current state
+     */
     private boolean matchIdKeyedEntries(JObj o1, JObj o2,
             List<String> keys1, List<String> keys2, int idx, boolean[] used) {
         if (idx == keys1.size())
@@ -257,8 +352,14 @@ public class StateComparator {
     // --- array comparison ---
 
     /**
+     * Compares two JArr nodes.
      * "recoveryQueue" is the only strictly ordered array. Everything else is
      * unordered.
+     *
+     * @param a1  the first array node
+     * @param a2  the second array node
+     * @param key the key under which this array appears
+     * @return true if the arrays are equivalent
      */
     private boolean compareArrays(JArr a1, JArr a2, String key) {
         if (a1.elems.size() != a2.elems.size())
@@ -274,6 +375,15 @@ public class StateComparator {
         return matchUnordered(a1.elems, a2.elems, 0, new boolean[a2.elems.size()]);
     }
 
+    /**
+     * Uses backtracking to match elements of two unordered arrays.
+     *
+     * @param l1   the first list of nodes
+     * @param l2   the second list of nodes
+     * @param idx  the current index in l1 being matched
+     * @param used tracks which nodes in l2 have already been paired
+     * @return true if a valid matching is found
+     */
     private boolean matchUnordered(List<Node> l1, List<Node> l2, int idx, boolean[] used) {
         if (idx == l1.size())
             return true;
@@ -299,6 +409,12 @@ public class StateComparator {
     // Helpers
     // =========================================================================
 
+    /**
+     * Creates a shallow copy of the given map.
+     *
+     * @param m the map to snapshot
+     * @return a new map containing the same entries
+     */
     private static Map<String, String> snapshot(Map<String, String> m) {
         return new HashMap<>(m);
     }
@@ -307,14 +423,29 @@ public class StateComparator {
     // Minimal JSON parser
     // =========================================================================
 
+    /**
+     * A simple, recursive-descent JSON parser that builds a tree of {@link Node}s.
+     */
     private static class JsonParser {
+        /** The JSON string being parsed. */
         private final String s;
+        /** The current position in the string. */
         private int pos;
 
+        /**
+         * Constructs a JsonParser.
+         *
+         * @param s the JSON string to parse
+         */
         JsonParser(String s) {
             this.s = s;
         }
 
+        /**
+         * Parses the entire JSON string.
+         *
+         * @return the root node of the parsed JSON tree
+         */
         Node parse() {
             skipWs();
             Node n = parseValue();
@@ -322,6 +453,11 @@ public class StateComparator {
             return n;
         }
 
+        /**
+         * Parses a single JSON value.
+         *
+         * @return the node representing the parsed value
+         */
         private Node parseValue() {
             char c = s.charAt(pos);
             if (c == '{')
@@ -337,6 +473,11 @@ public class StateComparator {
             return parseNumber();
         }
 
+        /**
+         * Parses a JSON object.
+         *
+         * @return the {@link JObj} node
+         */
         private JObj parseObject() {
             consume('{');
             List<String> keyOrder = new ArrayList<>();
@@ -366,6 +507,11 @@ public class StateComparator {
             return new JObj(keyOrder, fields);
         }
 
+        /**
+         * Parses a JSON array.
+         *
+         * @return the {@link JArr} node
+         */
         private JArr parseArray() {
             consume('[');
             List<Node> elems = new ArrayList<>();
@@ -388,6 +534,11 @@ public class StateComparator {
             return new JArr(elems);
         }
 
+        /**
+         * Parses a JSON string, including escaped characters.
+         *
+         * @return the {@link JStr} node
+         */
         private JStr parseString() {
             consume('"');
             StringBuilder sb = new StringBuilder();
@@ -426,6 +577,11 @@ public class StateComparator {
             return new JStr(sb.toString());
         }
 
+        /**
+         * Parses a JSON boolean (true/false).
+         *
+         * @return the {@link JBool} node
+         */
         private JBool parseBool() {
             if (s.startsWith("true", pos)) {
                 pos += 4;
@@ -435,11 +591,21 @@ public class StateComparator {
             return new JBool(false);
         }
 
+        /**
+         * Parses a JSON null value.
+         *
+         * @return the singleton {@link JNull} instance
+         */
         private JNull parseNull() {
             pos += 4;
             return JNull.I;
         }
 
+        /**
+         * Parses a JSON number, supporting decimal and exponential notation.
+         *
+         * @return the {@link JNum} node
+         */
         private JNum parseNumber() {
             int start = pos;
             if (peek() == '-')
@@ -461,15 +627,29 @@ public class StateComparator {
             return new JNum(Double.parseDouble(s.substring(start, pos)));
         }
 
+        /**
+         * Skips whitespace characters at the current position.
+         */
         private void skipWs() {
             while (pos < s.length() && s.charAt(pos) <= ' ')
                 pos++;
         }
 
+        /**
+         * Returns the character at the current position without advancing.
+         *
+         * @return the character at {@code pos}, or 0 if EOF
+         */
         private char peek() {
             return pos < s.length() ? s.charAt(pos) : 0;
         }
 
+        /**
+         * Asserts that the current character matches {@code c} and advances.
+         *
+         * @param c the character to expect
+         * @throws RuntimeException if the current character does not match
+         */
         private void consume(char c) {
             if (pos >= s.length() || s.charAt(pos) != c)
                 throw new RuntimeException(

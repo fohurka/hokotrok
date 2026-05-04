@@ -9,6 +9,9 @@ public class SnowplowPlayer extends Player {
     private List<Snowplow> snowplows;
     private Warehouse warehouse;
 
+    /**
+     * Private constructor for SnowplowPlayer that initializes the snowplows list.
+     */
     private SnowplowPlayer() {
         this.snowplows = new ArrayList<>();
     }
@@ -113,6 +116,11 @@ public class SnowplowPlayer extends Player {
         }
     }
 
+    /**
+     * Returns a list of all snowplows controlled by this player, cast as vehicles.
+     *
+     * @return A list of vehicles controlled by this player.
+     */
     public List<Vehicle> getVehicles() {
         List<Vehicle> vehicles = new ArrayList<>();
         for (Snowplow sp : snowplows) {
@@ -121,10 +129,20 @@ public class SnowplowPlayer extends Player {
         return vehicles;
     }
 
+    /**
+     * Returns the warehouse associated with this player.
+     *
+     * @return The warehouse.
+     */
     public Warehouse getWarehouse() {
         return warehouse;
     }
 
+    /**
+     * Returns the list of all snowplows controlled by this player.
+     *
+     * @return The list of snowplows.
+     */
     public List<Snowplow> getSnowplows() {
         return snowplows;
     }

@@ -1,11 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Warehouse building in the game.
+ * The Warehouse stores equipment and snowplows that players can purchase.
+ * It also allows players to change equipment on their snowplows.
+ */
 public class Warehouse extends Building {
     private int[] equipmentPrices = {2000, 2500, 3000, 2750, 3500, 3000};
     private int snowplowPrice = 10000;
     private List<Equipment> stock = new ArrayList<>();
     private Bank bank;
+
+    /**
+     * Constructs a Warehouse at the specified junction.
+     *
+     * @param junction the junction where the warehouse is located
+     */
     public Warehouse(Junction junction){
         super(junction);
     }
@@ -142,6 +153,11 @@ public class Warehouse extends Building {
         }
     }
 
+    /**
+     * Returns the list of equipment currently in the warehouse stock.
+     *
+     * @return a list of Equipment objects in stock
+     */
     public List<Equipment> getStock() {
         return stock;
     }

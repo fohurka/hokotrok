@@ -1,14 +1,31 @@
 public class SmallSnow extends Surface {
 
+    /**
+     * Constructs a SmallSnow surface for a given lane.
+     *
+     * @param lane The lane this surface belongs to.
+     */
     public SmallSnow(Lane lane)
     {
         super(lane);
     }
 
+    /**
+     * Constructs a SmallSnow surface for a given lane with a specific modifier.
+     *
+     * @param lane The lane this surface belongs to.
+     * @param mod  The surface modifier to apply.
+     */
     public SmallSnow(Lane lane, Modifier mod) {
         super(lane, mod);
     }
 
+    /**
+     * Adds a specified amount of snow to the surface. If the snow amount exceeds
+     * the threshold, the surface transforms into DeepSnow.
+     *
+     * @param amount The amount of snow to add.
+     */
     @Override
     public void addSnow(int amount) {
         snowAmount += amount;
@@ -20,6 +37,12 @@ public class SmallSnow extends Surface {
         }
     }
 
+    /**
+     * Adds a specified amount of ice to the surface. If the ice amount exceeds
+     * the threshold, the surface transforms into Ice.
+     *
+     * @param amount The amount of ice to add.
+     */
     @Override
     public void addIce(int amount) {
         iceAmount += amount;
@@ -30,6 +53,11 @@ public class SmallSnow extends Surface {
         }
     }
 
+    /**
+     * Removes all snow from the surface.
+     *
+     * @return The amount of snow removed.
+     */
     @Override
     public int removeSnow() {
         int amount = snowAmount;
@@ -37,6 +65,12 @@ public class SmallSnow extends Surface {
         return amount;
     }
 
+    /**
+     * Removes up to a specified amount of snow from the surface.
+     *
+     * @param amount The maximum amount of snow to remove.
+     * @return The actual amount of snow removed.
+     */
     @Override
     public int removeSnow(int amount) {
         if (amount > snowAmount) {
@@ -46,6 +80,11 @@ public class SmallSnow extends Surface {
         return amount;
     }
 
+    /**
+     * Removes all ice from the surface.
+     *
+     * @return The amount of ice removed.
+     */
     @Override
     public int removeIce() {
         int amount = iceAmount;
@@ -53,6 +92,12 @@ public class SmallSnow extends Surface {
         return amount;
     }
 
+    /**
+     * Removes up to a specified amount of ice from the surface.
+     *
+     * @param amount The maximum amount of ice to remove.
+     * @return The actual amount of ice removed.
+     */
     @Override
     public int removeIce(int amount) {
         if (amount > iceAmount) {
@@ -63,7 +108,8 @@ public class SmallSnow extends Surface {
     }
 
     /**
-     * Calculates the progress of a CivilVehicle
+     * Calculates the progress of a CivilVehicle on this surface.
+     *
      * @param cv the CivilVehicle that progresses
      * @return the amount of progress the CivilVehicle made
      */
@@ -73,16 +119,17 @@ public class SmallSnow extends Surface {
     }
 
     /**
-     * @return whether the surface makes the Lane enterable
+     * Checks if the surface allows vehicles to enter the lane.
+     *
+     * @return true if the lane is enterable, false otherwise.
      */
     @Override
     public boolean enterable() {
         return true;
     }
 
-    
     /**
-     * Applies its Modifier and tries to set the new surface to DeepSnow
+     * Performs time-step updates, including applying weather effects from the modifier.
      */
     @Override
     public void tick() {
@@ -90,7 +137,7 @@ public class SmallSnow extends Surface {
     }
 
     /**
-     * Tries to add ice and tries to set the new surface to Ice
+     * Handles the event of a car passing over the surface, potentially adding ice if snow is present.
      */
     @Override
     protected void carPassed() {

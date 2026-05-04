@@ -4,17 +4,29 @@ public class Car extends CivilVehicle {
     private Recoverer rec;
     private CarPlayer owner;
 
+    /**
+     * Constructs a new Car with the specified owner.
+     *
+     * @param owner The CarPlayer who owns this car.
+     */
     public Car(CarPlayer owner) {
         this.owner = owner;
     }
 
+    /**
+     * Sets the recoverer responsible for this car.
+     *
+     * @param r The Recoverer object.
+     */
     public void setRecoverer(Recoverer r) {
         rec = r;
     }
 
     /**
-     * Tries to progress at the current location
+     * Tries to progress at the current location.
+     * If not crashed, it calls the progress method of its current location.
      */
+    @Override
     public void tick() {
         if (!isCrashed) loc.progress(this);
     }
@@ -22,6 +34,7 @@ public class Car extends CivilVehicle {
     /**
      * @return whether this vehicle is pushable
      */
+    @Override
     public boolean pushable() {
         return true;
     }
@@ -76,6 +89,11 @@ public class Car extends CivilVehicle {
         owner.goHome();
     }
 
+    /**
+     * Retrieves the owner of the car.
+     *
+     * @return The CarPlayer object representing the owner.
+     */
     public CarPlayer getOwner() {
         return owner;
     }

@@ -13,6 +13,11 @@ public class Bus extends CivilVehicle {
         return owner;
     }
 
+    /**
+     * Retrieves the list of stations (buildings) the bus visits.
+     *
+     * @return A list of Building objects representing the stations.
+     */
     public List<Building> getStations() {
         return stations;
     }
@@ -87,9 +92,20 @@ public class Bus extends CivilVehicle {
         }
     }
 
+    /**
+     * Checks if the bus is currently crashed.
+     *
+     * @return true if the bus is crashed, false otherwise.
+     */
     public boolean isCrashed() {
         return isCrashed;
     }
+
+    /**
+     * Sets the stations for the bus.
+     *
+     * @param stations The list of Building objects to set as stations.
+     */
     public void setStations(List<Building> stations){
         this.stations = stations;
     }

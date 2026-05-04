@@ -70,6 +70,10 @@ public class CarPlayer extends Player {
         }
     }
 
+    /**
+     * Executes the NPC logic for the car.
+     * Determines the next movement of the car based on its current location relative to home and work.
+     */
     public void NPCLogic() {
         MapComponent loc = car.getLocation();
         if(loc == home) {
@@ -93,16 +97,32 @@ public class CarPlayer extends Player {
         car.setLocation(home);
     }
 
+    /**
+     * Retrieves the list of vehicles controlled by this player.
+     * For a CarPlayer, this list contains only the car.
+     *
+     * @return A list containing the car controlled by the player.
+     */
     public List<Vehicle> getVehicles() {
         List<Vehicle> r = new ArrayList<Vehicle>();
         r.add(car);
         return r;
     }
 
+    /**
+     * Retrieves the home building of the player.
+     *
+     * @return The home Building.
+     */
     public Building getHome() {
         return home;
     }
 
+    /**
+     * Retrieves the work building of the player.
+     *
+     * @return The work Building.
+     */
     public Building getWork() {
         return work;
     }

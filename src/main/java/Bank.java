@@ -3,6 +3,9 @@ import java.util.HashMap;
 public class Bank {
     private Warehouse warehouse;
     private HashMap<Player, Integer> accounts;
+    /**
+     * Constructs a new Bank with an empty map of accounts.
+     */
     public Bank() {
         accounts = new HashMap<>();
     }
@@ -38,10 +41,21 @@ public class Bank {
         return currentAmount >= amount;
     }
 
+    /**
+     * Retrieves the balance of a specific player.
+     *
+     * @param p The player whose balance is to be retrieved.
+     * @return The balance of the player.
+     */
     public int getBalance(Player p) {
         return accounts.getOrDefault(p, 0);
     }
 
+    /**
+     * Retrieves all accounts managed by the bank.
+     *
+     * @return A map of players and their respective balances.
+     */
     public HashMap<Player, Integer> getAccounts() {
         return accounts;
     }
