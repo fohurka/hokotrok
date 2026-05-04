@@ -19,20 +19,20 @@
           "startingLaneIds": [
             "lane_1"
           ],
+          "endingLaneIds": [],
           "buildingIds": [
             "bldg_warehouse"
-          ],
-          "endingLaneIds": []
+          ]
         },
         {
           "id": "junc_2",
+          "startingLaneIds": [],
           "endingLaneIds": [
             "lane_1"
           ],
           "buildingIds": [
             "bldg_home_1"
-          ],
-          "startingLaneIds": []
+          ]
         }
       ],
       "buildings": [
@@ -55,14 +55,14 @@
           "endJunctionId": "junc_2",
           "leftNeighborId": null,
           "rightNeighborId": null,
+          "vehicles": [],
+          "isCrashed": false,
           "surface": {
             "type": "DeepSnow",
             "snowAmount": 11,
             "iceAmount": 1,
             "modifier": "Unmodified"
-          },
-          "vehicles": [],
-          "isCrashed": false
+          }
         }
       ]
     },
@@ -81,8 +81,8 @@
         "type": "Car",
         "ownerId": "player_car_1",
         "location": {
-          "type": "Building",
-          "id": "bldg_home_1"
+          "type": "Junction",
+          "id": "junc_2"
         },
         "isCrashed": false
       }
