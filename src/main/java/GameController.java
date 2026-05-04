@@ -434,14 +434,12 @@ public class GameController {
      * @param args args[1] = player id
      */
     public void change(String[] args) {
-        if (args.length >= 1) {
+        if (args.length >= 1 &&  (busPlayers.containsKey(args[0]) || snowplowPlayers.containsKey(args[0]))) {
             if (busPlayers.containsKey(args[0]) || snowplowPlayers.containsKey(args[0]))
                 activePlayerId = args[0];
-            else {
-                printPlayers();
-            }
+ 
         } else {
-            System.out.println("Not enough arguments");
+                printPlayers();
         }
     }
 
@@ -479,7 +477,7 @@ public class GameController {
             String s2 = stations.size() > 1 && stations.get(1).getConnection() != null
                     ? stations.get(1).getConnection().getId()
                     : "null";
-            System.out.printf("(%s, %s, %s, %d, %b)\n", vid, s1, s2, balance, b.isCrashed());
+            System.out.printf("%s, %s, %s, %d, %b\n", vid, s1, s2, balance, b.isCrashed());
             return;
         }
 
